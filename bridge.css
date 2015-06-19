@@ -1,0 +1,30 @@
+body {
+	text-align: center;
+	background: #EEEEEE;
+	margin: auto;
+	width: 70%;
+}
+
+h1 {
+	font-size: 3em;
+}
+
+table, fieldset {
+	width: 70%;
+	background: #DDDD99;
+	margin: auto;
+	border-radius: 10px;
+}
+
+td {
+	padding: auto;
+}
+
+legend {
+}
+
+#logs {
+	text-align: center;
+	font-size: 1.3em;
+	color: #993300;
+}
