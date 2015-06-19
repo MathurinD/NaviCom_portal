@@ -4,6 +4,7 @@
 		<title>NaviCom</title>
 		<link type="text/css" rel="stylesheet" href="./bridge.css"/>
 		<script type="text/javascript" src="./bridge.js"></script>
+		<script type="text/javascript" src="jscolor/jscolor.js"></script>
 	</head>
 	<body>
 		<noscript>
@@ -25,7 +26,8 @@
 		<p>
 			Welcome to NaviCom web service, a link between cBioPortal database and NaviCell web service.<br/>
 			Select a study from which you want to fetch data, the map on which you want it to be displayed and the type of display you want to see.<br/>
-			NaviCom uses the display function defined in the <a href="https://github.com/MathurinD/navicom">navicom</a> python package.
+			NaviCom uses the display function defined in the <a href="https://github.com/MathurinD/navicom">navicom</a> python package.<br/>
+			Note that downloading data from cBioPortal and exporting them to NaviCell can take some time.<br/>
 		</p>
 
 		<!--
@@ -81,21 +83,25 @@
 		<h2>Possibility 2</h2>
 		-->
 
-		<form id="nc_config">
+		<form id="nc_config" target="_blank">
 			<table>
 				<fieldset>
 				<legend for="study_selection">Study:</legend>
 				<select id="study_selection">
 					<option value="empty" selected="selected">&nbsp;</option>
 				</select>
-				or <input type="file">
+				<!--or <input type="file" id="study_file">-->
 				</fieldset>
 
 				<fieldset>
 				<legend for="map_selection">Map:</legend>
 				<select id="map_selection">
 					<option value="acsn" title="The global map of ACSN">ACSN global map</option>
+					<option value="apoptosis" title="Apoptosis and mitochondria metabolism map">Apoptosis map</option>
+					<option value="survival" title="Cell survival map">Cell survival map</option>
+					<option value="emtcellmobility" title="Epithelial-to-mesenchymal transition and cell mobitility map">EMT and cell mobility map</option>
 					<option value="cellcycle" title="Cell cycle map">Cell cycle map</option>
+					<option value="dnarepair" title="DNA repair map">DNA repair map</option>
 				</select>
 				or <input type="text" title="URL of a NaviCell map" id="map_url">
 				</fieldset>
@@ -105,18 +111,31 @@
 				<legend for="display_selection">Display mode:</legend>
 				<select id="display_selection">
 					<option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
-					<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>
-					<option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export</option>
+					<!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
+					<!--<option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export</option>-->
+					<option value="displayMethylome" title="">Display methylation data</option>
+					<option value="displayMutations">Display mutations data</option>
 				</select>
 				</fieldset>
 
-				<button id="nc_perform" onclick="exec_navicom()">Perform display</button><br/>
+				<!--<fieldset id="samples_selection">-->
+					<!--<legend></legend>-->
+					<!--Choose groups to display-->
+				<!--</fieldset>-->
 
-				<label for="display_config">Display configuration</label>
+				<fieldset>
+					<legend>Display configuration</legend>
+					<!--TODO write a selection-->
+					Color for lowest values: <input class="color" id="low_color" value="00FF00"/><br/>
+					Color for highest values: <input class="color" id="high_color" value="FF0000"/><br/>
+					Color for zero (if present): <input class="color" id="zero_color" value"FFFFFF"><br/>
+				</fieldset>
+
+				<button id="nc_perform" onclick="exec_navicom()" type="button">Perform display</button><br/>
 		</form>
 
 		<section id="logs">
-			<?php echo $_GET["log_msg"] ?>
+			<!--<?php echo $_GET["log_msg"] ?>-->
 		</section>
 	</body>
 </html>

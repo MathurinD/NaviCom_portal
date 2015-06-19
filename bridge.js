@@ -52,11 +52,15 @@ function exec_navicom() {
 	}
 	// TODO Control that the url is valid
 	log(url);
-	var session_id = "@navicom" + String(Math.ceil(Math.random() * 1000000000));
-	//window.open(url + "?id=" + session_id);
 
 	// Transfert data to the NaviCom server
 	var form = document.getElementById("nc_config");
+	nvSession(form, url);
+}
+
+function nvSession(form, url) {
+	var session_id = "@navicom" + String(Math.ceil(Math.random() * 1000000000));
+	//window.open(url + "?id=" + session_id);
 	var url_post = document.createElement("input");
 	url_post.setAttribute("type", "hidden");
 	url_post.setAttribute("value", url);
@@ -68,7 +72,8 @@ function exec_navicom() {
 	id_post.setAttribute("id", "id");
 	form.appendChild(id_post)
 	form.setAttribute("method", "post");
-	//form.setAttribute("action", "http://navicom.curie.fr/navicom_cgi.py");
+	form.setAttribute("action", "http://navicom.curie.fr/navicom_cgi.py");
+	log("All set");
 	//form.submit()
 }
 
