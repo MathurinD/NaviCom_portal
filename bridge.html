@@ -3,8 +3,9 @@
 	<head>
 		<title>NaviCom</title>
 		<link type="text/css" rel="stylesheet" href="./bridge.css"/>
-		<script type="text/javascript" src="./bridge.js"></script>
 		<script type="text/javascript" src="jscolor/jscolor.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="./bridge.js"></script>
 	</head>
 	<body>
 		<noscript>
@@ -92,6 +93,7 @@
 				</select>
 				<!--or <input type="file" id="study_file">-->
 				</fieldset>
+				<button id="download_data" onclick="download_data()" type="button">Download cBioPortal data</button>
 
 				<fieldset>
 				<legend for="map_selection">Map:</legend>
@@ -113,7 +115,7 @@
 					<option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
 					<!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
 					<!--<option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export</option>-->
-					<option value="displayMethylome" title="">Display methylation data</option>
+					<option value="displayMethylome" title="Display methylation data on top of ">Display methylation data</option>
 					<option value="displayMutations">Display mutations data</option>
 				</select>
 				</fieldset>
@@ -134,6 +136,9 @@
 				<button id="nc_perform" onclick="exec_navicom()" type="button">Perform display</button><br/>
 		</form>
 
+		<p>
+			<img src="./ajax-loader.gif" id="loading_spinner"/>
+		</p>
 		<section id="logs">
 			<!--<?php echo $_GET["log_msg"] ?>-->
 		</section>

@@ -28,3 +28,7 @@ legend {
 	font-size: 1.3em;
 	color: #993300;
 }
+
+#loading_spinner {
+	display:none;
+}
