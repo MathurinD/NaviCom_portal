@@ -9,18 +9,8 @@
 	</head>
 	<body>
 		<noscript>
-		This page relies on javascript to perform its functions. You must allow javascript in your browser for it to work.
+		This page relies on javascript to perform its functions. You must allow javascript in your browser to be able to use i.
 		</noscript>
-		<!--
-		<?php
-		$studies = array();
-		exec("Rscript listStudies.R", $studies, $return);
-
-		if ($return != 0) {
-			echo("<p>An error occured while listing the studies</p>")
-		}
-		?>
-		-->
 
 		<h1>NaviCom</h1>
 
@@ -84,16 +74,30 @@
 		<h2>Possibility 2</h2>
 		-->
 
+		<?php
+		echo("Hello body");
+		?>
 		<form id="nc_config" target="_blank">
 			<table>
 				<fieldset>
 				<legend for="study_selection">Study:</legend>
 				<select id="study_selection">
 					<option value="empty" selected="selected">&nbsp;</option>
+<?php
+$studies = array();
+exec("Rscript listStudies.R", $studies, $return);
+
+echo("Hello $return");
+if ($return != 0) {
+	echo("<p>An error occured while listing the studies</p>");
+} else {
+	echo('<option value="non">Nothing</option>');
+}
+?>
 				</select>
 				<!--or <input type="file" id="study_file">-->
 				</fieldset>
-				<button id="download_data" onclick="download_data()" type="button">Download cBioPortal data</button>
+				<button id="data_download" onclick="download_data()" type="button">Download cBioPortal data</button>
 
 				<fieldset>
 				<legend for="map_selection">Map:</legend>
