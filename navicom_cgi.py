@@ -4,10 +4,11 @@
 import os, sys
 sys.path.append("/home/ubuntu/bin/binPython") # Access to the downloaded curie.navicell
 import re, time
+import random
 import cgi
 import cgitb
 cgitb.enable() # Debug for development
-sys.tracebacklimit=0
+#sys.tracebacklimit=0
 
 from navicom import *
 
@@ -27,31 +28,32 @@ log(form)
 
 # Die if the fields set by the javascript are not present
 # Other solution would be to use Location: error page
-if "study_selection" in form:
+if ("study_selection" in form):
     study_id = form["study_selection"].value
-    dname = os.popen("Rscript getData.R " + study_id) # TODO maybe, use the gmt file from the map
+    # Use an id because os.popen does not finish the R script (receives a return signal before the end)
+    # TODO make a cronjob to regularly delete those unique files (else every dataset will be replicated 100000 times)
+    rand_id = str(int(random.randint(0, 100000) + time.time()) % 100000)
+    os.popen("Rscript ./getData.R " + study_id + " " + rand_id).readlines() # TODO maybe, use the gmt file from the map
+    fname = os.popen("ls *" + rand_id + "*").readlines()[0]
 else:
     print("Content-type: text/html;charset=utf-8\n\n")
     raise ValueError("Error: no study selected\n")
 
-if "action" in form:
+if ("action" in form):
     action = form["action"].value
-    for ll in dname.readlines():
-        if (re.match("^FNAME:", ll)):
-            fname = re.sub("^FNAME: ", ll)
-            break
 else:
     action = "none"
     print("Content-type: text/html;charset=utf-8\n\n")
     raise ValueError("Error: no action selected\n")
 
 # Headers
-#print("Content-type: text/plain;charset=utf-8\n\n")
-#print(headers)
+plain_header = "Content-type: text/plain;charset=utf-8\n\n"
 
 if (action == "download"):
-    #print "Content-type:application/octet-stream; name=\"FileName\"\r\n";
+    #print "Content-type: application/octet-stream; name=\"FileName\"\r\n";
     #print "Content-Disposition: attachment; filename=\"FileName\"\r\n\n";
+    print(plain_header)
+    print("Download finished")
     print(fname)
 elif (action == "display"):
     displayMethod = form["display_selection"].value
@@ -74,6 +76,6 @@ elif (action == "display"):
         nc.displayMutations()
     print(fname)
 else:
-    print("Invalid action")
-
+    print(plain_header)
+    print("Invalid action: " + action)
 
