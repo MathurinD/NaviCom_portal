@@ -1,3 +1,7 @@
+<?php
+define("LOG_FILE", "./navicom_log");
+define("DEST_LOGFILE", "3");
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -74,27 +78,36 @@
 		<h2>Possibility 2</h2>
 		-->
 
-		<?php
-		echo("Hello body");
-		?>
 		<form id="nc_config" target="_blank">
 			<table>
 				<fieldset>
 				<legend for="study_selection">Study:</legend>
 				<select id="study_selection">
-					<option value="empty" selected="selected">&nbsp;</option>
-<?php
-$studies = array();
-exec("Rscript listStudies.R", $studies, $return);
+					<option value="empty" selected>&nbsp;</option>
+					<?php
+					$studies = array();
+					exec("Rscript listStudies.R", $studies, $return);
 
-echo("Hello $return");
-if ($return != 0) {
-	echo("<p>An error occured while listing the studies</p>");
-} else {
-	echo('<option value="non">Nothing</option>');
-}
-?>
+					if ($return != 0) {
+						echo('<option value="laml_tcga_pub">Acute Myeloid Leukemia</option>');
+						echo('<option value="acc_tcga">Adenoid Cystic Carcinoma</option>');
+					} else {
+						for ($ii=1; $ii <=count($studies)-1; $ii++) {
+							$line = preg_split("/ +/", $studies[$ii]);
+							$name = "";
+							for ($jj=2; $jj <= count($line); $jj++) {
+								$name .= " " . $line[$jj];
+							}
+							echo("<option value='{$line[1]}'>{$name}</option>");
+							}
+						}
+					?>
 				</select>
+				<?php
+				if ($return != 0) {
+					echo("<p>An error occured while listing the studies (RETURN STATUS: $return)</p>");
+				}
+				?>
 				<!--or <input type="file" id="study_file">-->
 				</fieldset>
 				<button id="data_download" onclick="download_data()" type="button">Download cBioPortal data</button>
@@ -109,7 +122,7 @@ if ($return != 0) {
 					<option value="cellcycle" title="Cell cycle map">Cell cycle map</option>
 					<option value="dnarepair" title="DNA repair map">DNA repair map</option>
 				</select>
-				or <input type="text" title="URL of a NaviCell map" id="map_url">
+				or <input type="text" title="URL of a NaviCell map" id="map_url" placeholder="Alternative map URL"/>
 				</fieldset>
 				<!-- TODO input fields to specify local data or another map -->
 
@@ -137,14 +150,18 @@ if ($return != 0) {
 					Color for zero (if present): <input class="color" id="zero_color" value"FFFFFF"><br/>
 				</fieldset>
 
+				<section id="logs">
+					<?php
+						if (isset($_GET["log_msg"])) {
+							echo $_GET["log_msg"];
+						}
+					?>
+				</section>
+				<p>
+					<img src="./ajax-loader.gif" id="loading_spinner"/>
+				</p>
 				<button id="nc_perform" onclick="exec_navicom()" type="button">Perform display</button><br/>
 		</form>
 
-		<p>
-			<img src="./ajax-loader.gif" id="loading_spinner"/>
-		</p>
-		<section id="logs">
-			<!--<?php echo $_GET["log_msg"] ?>-->
-		</section>
 	</body>
 </html>

@@ -47,6 +47,20 @@ var NAVICOM = "http://navicom.curie.fr/";
 function exec_navicom() {
 	// Start the NaviCell map and trigger NaviCom on the server
 
+    // Control that mandatory inputs are present
+    var error = "";
+    var study = document.getElementById("study_selection").value;
+    console.log(study);
+    if (study == "empty") {
+        error += "You have to select a study<br/>";
+    }
+    if (error != "") {
+        $("#logs").html(error);
+        return;
+    } else {
+        $("#logs").html("");
+    }
+
 	// Start the NaviCell map
 	var map_sel = document.getElementById("map_selection");
 	var map = map_sel.options[map_sel.selectedIndex].value;
