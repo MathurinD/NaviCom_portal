@@ -52,7 +52,7 @@ function exec_navicom() {
     var study = document.getElementById("study_selection").value;
     console.log(study);
     if (study == "empty") {
-        error += "You have to select a study<br/>";
+        error += "You have to select a study to be displayed<br/>";
     }
     if (error != "") {
         $("#logs").html(error);
@@ -106,11 +106,24 @@ function nvSession(form, url) {
 	id_post.setAttribute("id", "id");
 	form.appendChild(id_post)
 	form.setAttribute("method", "post");
-	form.setAttribute("action", NAVICOM + "navicom_cgi.py");
-	//form.submit()
+	form.setAttribute("action", "./navicom_cgi.py");
 }
 
 function download_data() {
+    // Control that mandatory inputs are present
+    var error = "";
+    var study = document.getElementById("study_selection").value;
+    console.log(study);
+    if (study == "empty") {
+        error += "You have to select a study to download<br/>";
+    }
+    if (error != "") {
+        $("#logs").html(error);
+        return;
+    } else {
+        $("#logs").html("");
+    }
+
 	$('#loading_spinner').show();
 	form = document.getElementById("nc_config");
 	$(form).append("<input type='hidden' value='dowload' id='action'>")
