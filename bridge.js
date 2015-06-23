@@ -38,14 +38,14 @@ function getRequest(url, success, error) {
 }
 
 function log(text) {
-	var logs = document.getElementById("logs");
-	logs.innerHTML = text;
-	console.log(text);
+    var logs = document.getElementById("logs");
+    logs.innerHTML = text;
+    console.log(text);
 }
 
 var NAVICOM = "http://navicom.curie.fr/";
 function exec_navicom() {
-	// Start the NaviCell map and trigger NaviCom on the server
+    // Start the NaviCell map and trigger NaviCom on the server
 
     // Control that mandatory inputs are present
     var error = "";
@@ -61,23 +61,23 @@ function exec_navicom() {
         $("#logs").html("");
     }
 
-	// Start the NaviCell map
-	var map_sel = document.getElementById("map_selection");
-	var map = map_sel.options[map_sel.selectedIndex].value;
-	var map_bis = document.getElementById("map_url").value;
+    // Start the NaviCell map
+    var map_sel = document.getElementById("map_selection");
+    var map = map_sel.options[map_sel.selectedIndex].value;
+    var map_bis = document.getElementById("map_url").value;
 
-	if (map_bis == "") {
-		var url = "https://acsn.curie.fr/navicell/maps/" + map + "/master/index.php";
-	} else {
-		var url = map_bis;
-	}
-	// TODO Control that the url is valid
+    if (map_bis == "") {
+        var url = "https://acsn.curie.fr/navicell/maps/" + map + "/master/index.php";
+    } else {
+        var url = map_bis;
+    }
+    // TODO Control that the url is valid
 
-	// Transfert data to the NaviCom server
-	var form = document.getElementById("nc_config");
-	nvSession(form, url);
-	$(form).append("<input type='hidden' value='display' name='action' id='action'>");
-	$('#loading_spinner').show();
+    // Transfert data to the NaviCom server
+    var form = document.getElementById("nc_config");
+    nvSession(form, url);
+    $(form).append("<input type='hidden' value='display' name='action' id='action'>");
+    $('#loading_spinner').show();
     log("Submission");
     $.ajax($(form).attr('action'), {
         async: true,
@@ -95,22 +95,22 @@ function exec_navicom() {
 }
 
 function nvSession(form, url) {
-	var session_id = "@navicom" + String(Math.ceil(Math.random() * 1000000000));
-	//window.open(url + "?id=" + session_id);
-	var url_post = document.createElement("input");
-	url_post.setAttribute("type", "hidden");
-	url_post.setAttribute("value", url);
-	url_post.setAttribute("id", "url");
-	url_post.setAttribute("name", "url");
-	form.appendChild(url_post)
-	var id_post = document.createElement("input");
-	id_post.setAttribute("type", "hidden");
-	id_post.setAttribute("value", session_id);
-	id_post.setAttribute("id", "id");
-	id_post.setAttribute("name", "id");
-	form.appendChild(id_post)
-	form.setAttribute("method", "post");
-	form.setAttribute("action", "./navicom_cgi.py");
+    var session_id = "@navicom" + String(Math.ceil(Math.random() * 1000000000));
+    //window.open(url + "?id=" + session_id);
+    var url_post = document.createElement("input");
+    url_post.setAttribute("type", "hidden");
+    url_post.setAttribute("value", url);
+    url_post.setAttribute("id", "url");
+    url_post.setAttribute("name", "url");
+    form.appendChild(url_post)
+    var id_post = document.createElement("input");
+    id_post.setAttribute("type", "hidden");
+    id_post.setAttribute("value", session_id);
+    id_post.setAttribute("id", "id");
+    id_post.setAttribute("name", "id");
+    form.appendChild(id_post)
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "./navicom_cgi.py");
 }
 
 function download_data() {
@@ -128,9 +128,9 @@ function download_data() {
         $("#logs").html("");
     }
 
-	$('#loading_spinner').show();
-	form = document.getElementById("nc_config");
-	$(form).append("<input type='hidden' value='dowload' name='action'>")
+    $('#loading_spinner').show();
+    form = document.getElementById("nc_config");
+    $(form).append("<input type='hidden' value='dowload' name='action'>")
     $.ajax($(form).attr('action'), {
         async: true,
         cache: false,
