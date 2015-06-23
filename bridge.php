@@ -10,6 +10,7 @@ define("DEST_LOGFILE", "3");
 		<script type="text/javascript" src="jscolor/jscolor.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="./bridge.js"></script>
+		<meta charset="utf-8">
 	</head>
 	<body>
 		<noscript>
@@ -82,7 +83,7 @@ define("DEST_LOGFILE", "3");
 			<table>
 				<fieldset>
 				<legend for="study_selection">Study:</legend>
-				<select id="study_selection">
+				<select id="study_selection" name="study_selection">
 					<option value="empty" selected>&nbsp;</option>
 					<?php
 					$studies = array();
@@ -92,10 +93,10 @@ define("DEST_LOGFILE", "3");
 						echo('<option value="laml_tcga_pub">Acute Myeloid Leukemia</option>');
 						echo('<option value="acc_tcga">Adenoid Cystic Carcinoma</option>');
 					} else {
-						for ($ii=1; $ii <=count($studies)-1; $ii++) {
+						for ($ii=1; $ii <count($studies)-1; $ii++) {
 							$line = preg_split("/ +/", $studies[$ii]);
 							$name = "";
-							for ($jj=2; $jj <= count($line); $jj++) {
+							for ($jj=2; $jj < count($line); $jj++) {
 								$name .= " " . $line[$jj];
 							}
 							echo("<option value='{$line[1]}'>{$name}</option>");
@@ -114,7 +115,7 @@ define("DEST_LOGFILE", "3");
 
 				<fieldset>
 				<legend for="map_selection">Map:</legend>
-				<select id="map_selection">
+				<select id="map_selection" name="map_selection">
 					<option value="acsn" title="The global map of ACSN">ACSN global map</option>
 					<option value="apoptosis" title="Apoptosis and mitochondria metabolism map">Apoptosis map</option>
 					<option value="survival" title="Cell survival map">Cell survival map</option>
@@ -128,7 +129,7 @@ define("DEST_LOGFILE", "3");
 
 				<fieldset>
 				<legend for="display_selection">Display mode:</legend>
-				<select id="display_selection">
+				<select id="display_selection" name="display_selection">
 					<option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
 					<!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
 					<!--<option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export</option>-->
@@ -145,9 +146,9 @@ define("DEST_LOGFILE", "3");
 				<fieldset>
 					<legend>Display configuration</legend>
 					<!--TODO write a selection-->
-					Color for lowest values: <input class="color" id="low_color" value="00FF00"/><br/>
-					Color for highest values: <input class="color" id="high_color" value="FF0000"/><br/>
-					Color for zero (if present): <input class="color" id="zero_color" value"FFFFFF"><br/>
+					Color for lowest values: <input class="color" id="low_color" value="00FF00" name="low_color"/><br/>
+					Color for highest values: <input class="color" id="high_color" value="FF0000" name="low_color"/><br/>
+					Color for zero (if present): <input class="color" id="zero_color" name="low_color" value"FFFFFF"><br/>
 				</fieldset>
 
 				<section id="logs">
