@@ -76,20 +76,22 @@ function exec_navicom() {
 	// Transfert data to the NaviCom server
 	var form = document.getElementById("nc_config");
 	nvSession(form, url);
-	$(form).append("<input type='hidden' value='display' id='action'>");
+	$(form).append("<input type='hidden' value='display' name='action' id='action'>");
 	$('#loading_spinner').show();
-	$(form).submit( function() {
-		$.post(
-			$(this).attr('action'),
-			$(this).serialize(),
-			function(file){
-				$('#loading_spinner').hide();
-				log("Download finished, data available at <a href=" + file + ">" + file + "</a>");
-			},
-			function(e) {
-				log("Error: " + e);
-			});
-		});
+    log("Submission");
+    $.ajax($(form).attr('action'), {
+        async: true,
+        cache: false,
+        type: 'POST',
+        data: $(form).serialize(),
+        success: function(file){
+            $('#loading_spinner').hide();
+            log("Download finished, data available at <a href=" + file + ">" + file + "</a>");
+        },
+        error: function(e, e2, error) {
+            $('#loading_spinner').hide();
+            log("Error: " + error);
+        }});
 }
 
 function nvSession(form, url) {
@@ -99,11 +101,13 @@ function nvSession(form, url) {
 	url_post.setAttribute("type", "hidden");
 	url_post.setAttribute("value", url);
 	url_post.setAttribute("id", "url");
+	url_post.setAttribute("name", "url");
 	form.appendChild(url_post)
 	var id_post = document.createElement("input");
 	id_post.setAttribute("type", "hidden");
 	id_post.setAttribute("value", session_id);
 	id_post.setAttribute("id", "id");
+	id_post.setAttribute("name", "id");
 	form.appendChild(id_post)
 	form.setAttribute("method", "post");
 	form.setAttribute("action", "./navicom_cgi.py");
@@ -126,15 +130,20 @@ function download_data() {
 
 	$('#loading_spinner').show();
 	form = document.getElementById("nc_config");
-	$(form).append("<input type='hidden' value='dowload' id='action'>")
-	$(form).submit(function(){
-		$.post(
-			$(this).attr('action'),
-			$(this).serialize(),
-			function(file){
-				window.open(NAVICOM + file);
-				$("#loading_spinner").hide();
-			});
-		});
+	$(form).append("<input type='hidden' value='dowload' name='action'>")
+    $.ajax($(form).attr('action'), {
+        async: true,
+        cache: false,
+        type: 'POST',
+        data: $(form).serialize(),
+        success: function(file){
+            $('#loading_spinner').hide();
+            //log("Download finished, data available at <a href=" + file + ">" + file + "</a>");
+            window.open(NAVICOM + file);
+        },
+        error: function(e, e2, error) {
+            $('#loading_spinner').hide();
+            log("Error: " + error);
+        }});
 }
 
