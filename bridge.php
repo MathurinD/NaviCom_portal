@@ -79,7 +79,7 @@ define("DEST_LOGFILE", "3");
 		<h2>Possibility 2</h2>
 		-->
 
-		<form id="nc_config" target="_blank">
+		<form id="nc_config">
 			<table>
 				<fieldset>
 				<legend for="study_selection">Study:</legend>
@@ -161,7 +161,7 @@ define("DEST_LOGFILE", "3");
 				<p>
 					<img src="./ajax-loader.gif" id="loading_spinner"/>
 				</p>
-				<button id="nc_perform" onclick="exec_navicom()" type="button">Perform display</button><br/>
+				<button id="nc_perform" onclick="exec_navicom(); return false" type="button">Perform display</button><br/>
 		</form>
 
 	</body>
