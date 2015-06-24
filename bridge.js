@@ -76,7 +76,7 @@ function exec_navicom() {
     // Transfert data to the NaviCom server
     var form = document.getElementById("nc_config");
     nvSession(form, url);
-    $(form).append("<input type='hidden' value='display' name='action' id='action'>");
+    $("#perform").setAttribute("value", "display");
     $('#loading_spinner').show();
     log("Submission");
     $.ajax($(form).attr('action'), {
@@ -97,20 +97,8 @@ function exec_navicom() {
 function nvSession(form, url) {
     var session_id = "@navicom" + String(Math.ceil(Math.random() * 1000000000));
     //window.open(url + "?id=" + session_id);
-    var url_post = document.createElement("input");
-    url_post.setAttribute("type", "hidden");
-    url_post.setAttribute("value", url);
-    url_post.setAttribute("id", "url");
-    url_post.setAttribute("name", "url");
-    form.appendChild(url_post)
-    var id_post = document.createElement("input");
-    id_post.setAttribute("type", "hidden");
-    id_post.setAttribute("value", session_id);
-    id_post.setAttribute("id", "id");
-    id_post.setAttribute("name", "id");
-    form.appendChild(id_post)
-    form.setAttribute("method", "post");
-    form.setAttribute("action", "./navicom_cgi.py");
+    $("#url").setAttribute("value", url);
+    $("#id").setAttribute("value", session_id);
 }
 
 function download_data() {
@@ -130,7 +118,9 @@ function download_data() {
 
     $('#loading_spinner').show();
     form = document.getElementById("nc_config");
-    $(form).append("<input type='hidden' value='dowload' name='action'>")
+    $("#perform").setAttribute("value", "download");
+    form.setAttribute("action", "./navicom_cgi.py");
+    log($(form).serialize());
     $.ajax($(form).attr('action'), {
         async: true,
         cache: false,
@@ -145,5 +135,6 @@ function download_data() {
             $('#loading_spinner').hide();
             log("Error: " + error);
         }});
+    $(form).submit(); // DEBUG
 }
 

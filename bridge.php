@@ -16,6 +16,25 @@ define("DEST_LOGFILE", "3");
 		<noscript>
 		This page relies on javascript to perform its functions. You must allow javascript in your browser to be able to use i.
 		</noscript>
+		<script>
+			$(document).ready(function(){
+				$(form).append("<input type='hidden' value='none' name='perform' id='perform'>");
+				var url_post = document.createElement("input");
+				url_post.setAttribute("type", "hidden");
+				url_post.setAttribute("value", "");
+				url_post.setAttribute("id", "url");
+				url_post.setAttribute("name", "url");
+				form.appendChild(url_post)
+				var id_post = document.createElement("input");
+				id_post.setAttribute("type", "hidden");
+				id_post.setAttribute("value", 0);
+				id_post.setAttribute("id", "id");
+				id_post.setAttribute("name", "id");
+				form.appendChild(id_post);
+				form.setAttribute("method", "post");
+				form.setAttribute("action", "./navicom_cgi.py");
+			});
+		</script>
 
 		<h1>NaviCom</h1>
 
