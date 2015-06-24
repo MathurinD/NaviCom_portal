@@ -152,8 +152,9 @@ define("DEST_LOGFILE", "3");
 					<option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
 					<!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
 					<!--<option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export</option>-->
-					<option value="displayMethylome" title="Display methylation data on top of ">Display methylation data</option>
-					<option value="displayMutations">Display mutations data</option>
+					<option value="completeDisplay" title="Display as much of the data as is possible">Display all the data</option>
+					<option value="displayMethylome" title="Display methylation data on top of RNA data">Display methylation data</option>
+					<option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Display mutations data</option>
 				</select>
 				</fieldset>
 
