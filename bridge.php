@@ -79,7 +79,7 @@ define("DEST_LOGFILE", "3");
 		<h2>Possibility 2</h2>
 		-->
 
-		<form id="nc_config">
+		<form id="nc_config" target="_blank">
 			<table>
 				<fieldset>
 				<legend for="study_selection">Study:</legend>
@@ -147,8 +147,8 @@ define("DEST_LOGFILE", "3");
 					<legend>Display configuration</legend>
 					<!--TODO write a selection-->
 					Color for lowest values: <input class="color" id="low_color" value="00FF00" name="low_color"/><br/>
-					Color for highest values: <input class="color" id="high_color" value="FF0000" name="low_color"/><br/>
-					Color for zero (if present): <input class="color" id="zero_color" name="low_color" value"FFFFFF"><br/>
+					Color for highest values: <input class="color" id="high_color" value="FF0000" name="hight_color"/><br/>
+					Color for zero (if present): <input class="color" id="zero_color" name="zero_color" value"FFFFFF"><br/>
 				</fieldset>
 
 				<section id="logs">
