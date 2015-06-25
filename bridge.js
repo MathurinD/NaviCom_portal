@@ -37,13 +37,17 @@ function getRequest(url, success, error) {
     return req;
 }
 
-function log(text) {
+function log(text, append) {
     var logs = document.getElementById("logs");
-    logs.innerHTML = text;
+    if (append) {
+    	logs.innerHTML = logs.innerHTML + "<br/>" + text;
+	} else {
+	    logs.innerHTML = text;
+	}
     console.log(text);
 }
 
-var NAVICOM = "http://navicom.curie.fr/";
+var NAVICOM = "http://navicom-dev.curie.fr/"; // TODO remove dev when getting to prod version
 function exec_navicom() {
     // Start the NaviCell map and trigger NaviCom on the server
 
@@ -76,7 +80,7 @@ function exec_navicom() {
     // Transfert data to the NaviCom server
     var form = document.getElementById("nc_config");
     nvSession(form, url);
-    $("#perform").setAttribute("value", "display");
+    $("#perform").attr("value", "display");
     $('#loading_spinner').show();
     log("Submission");
     $.ajax($(form).attr('action'), {
@@ -86,19 +90,20 @@ function exec_navicom() {
         data: $(form).serialize(),
         success: function(file){
             $('#loading_spinner').hide();
-            log("Download finished, data available at <a href=" + file + ">" + file + "</a>");
+            log("Display finished, data available at <a href=" + NAVICOM + file + ">" + file + "</a>");
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();
             log("Error: " + error);
+			log(e, true);
         }});
 }
 
 function nvSession(form, url) {
     var session_id = "@navicom" + String(Math.ceil(Math.random() * 1000000000));
-    //window.open(url + "?id=" + session_id);
-    $("#url").setAttribute("value", url);
-    $("#id").setAttribute("value", session_id);
+    window.open(url + "?id=" + session_id);
+    $("#url").attr("value", url);
+    $("#id").attr("value", session_id);
 }
 
 function download_data() {
@@ -118,8 +123,7 @@ function download_data() {
 
     $('#loading_spinner').show();
     form = document.getElementById("nc_config");
-    $("#perform").setAttribute("value", "download");
-    form.setAttribute("action", "./navicom_cgi.py");
+    $("#perform").attr("value", "download");
     log($(form).serialize());
     $.ajax($(form).attr('action'), {
         async: true,
