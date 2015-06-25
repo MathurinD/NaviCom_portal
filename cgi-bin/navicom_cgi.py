@@ -33,6 +33,13 @@ def error(error_text):
     print("<span style='color: red;'>Error: </span>" + error_text + "")
     raise ValueError(error_text)
 
+def prepare_error():
+    print("Status: 500 Internal Server Error")
+    print("Content-type: text/html;charset=utf-8\n\n")
+
+def print_headers():
+    print("Content-type: text/plain;charset=utf-8\n\n")
+
 form = cgi.FieldStorage()
 log(form)
 
@@ -47,7 +54,7 @@ if ("study_selection" in form):
         rand_id = str(int(random.randint(0, 100000) + time.time()) % 100000)
         #os.popen("./getData.R " + study_id + " " + rand_id).readlines() # TODO maybe, use the gmt file from the map
         output += str( subprocess.Popen(["./getData.R", study_id, rand_id], stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate() )
-        fname = os.popen("ls /scratch/navicom/*" + rand_id + "*").readlines()[0]
+        fname = os.popen("ls /scratch/navicom/*" + rand_id + "*").readlines()[0].strip()
     except:
         error("An error occured while trying to download the study, please check that the study ID is valid:" + "<br/>" + output)
 else:
@@ -58,8 +65,7 @@ if ("perform" in form):
 else:
     error("'perform' field is not specified\n")
 
-# Headers
-plain_header = "Content-type: text/plain;charset=utf-8\n\n"
+print_headers()
 
 if (perform == "download"):
     #print "Content-type: application/octet-stream; name=\"FileName\"\r\n";
@@ -82,12 +88,12 @@ elif (perform == "display"):
         nc._attachSession(url, session_id)
         log("NaviCom attached to the NaviCell session")
     except:
-        error("Could not attach session with id ")
+        error("Could not attach session with id " + str(session_id))
     try:
         nc.loadData(fname)
         log("Data loaded in NaviCom")
     except:
-        error("Could not load data in navicom")
+        error("Could not load data from " + fname + " in navicom")
     nc._browser_opened = True # The browser is opened by the client
 
     if ("processing" in form):
@@ -104,7 +110,7 @@ elif (perform == "display"):
         nc.completeExport()
     else:
         error("This method of display does not exist")
-    print(fname)
+    print("FNAME: " + fname)
 else:
     error("Invalide perform: " + perform)
 

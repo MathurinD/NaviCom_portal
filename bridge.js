@@ -90,18 +90,32 @@ function exec_navicom() {
         data: $(form).serialize(),
         success: function(file){
             $('#loading_spinner').hide();
+			file = getFileName(file);
             log("Display finished, data available at <a href=" + NAVICOM + file + ">" + file + "</a>");
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();
             log("Error: " + error);
-			log(e, true);
+			log(e.responseText, true);
         }});
 }
 
+function getFileName(rep) {
+	rep = rep.split("\n");
+	var ii = 0;
+	while (ii < rep.length) {
+		if (rep[ii].search(/^FNAME/) != -1) {
+			break;
+		}
+		ii += 1;
+	}
+	rep = rep[ii].replace(/^FNAME: /, "").trim();
+	return(rep.replace(/^\//, ""));
+}
+
 function nvSession(form, url) {
-    var session_id = "@navicom" + String(Math.ceil(Math.random() * 1000000000));
-    window.open(url + "?id=" + session_id);
+    var session_id = "navicom" + String(Math.ceil(Math.random() * 1000000000));
+    window.open(url + "?id=@" + session_id);
     $("#url").attr("value", url);
     $("#id").attr("value", session_id);
 }
