@@ -14,11 +14,12 @@ define("DEST_LOGFILE", "3");
 	</head>
 	<body>
 		<noscript>
-		This page relies on javascript to perform its functions. You must allow javascript in your browser to be able to use i.
+		This page relies on javascript to perform its functions. You must allow javascript in your browser to be able to use it.
 		</noscript>
 		<script>
 			$(document).ready(function(){
-				$(form).append("<input type='hidden' value='none' name='perform' id='perform'>");
+				var form = document.getElementById("nc_config")
+				$("form").append("<input type='hidden' value='none' name='perform' id='perform'>");
 				var url_post = document.createElement("input");
 				url_post.setAttribute("type", "hidden");
 				url_post.setAttribute("value", "");
@@ -32,7 +33,7 @@ define("DEST_LOGFILE", "3");
 				id_post.setAttribute("name", "id");
 				form.appendChild(id_post);
 				form.setAttribute("method", "post");
-				form.setAttribute("action", "./navicom_cgi.py");
+				form.setAttribute("action", "./cgi-bin/navicom_cgi.py");
 			});
 		</script>
 
@@ -42,7 +43,7 @@ define("DEST_LOGFILE", "3");
 			Welcome to NaviCom web service, a link between cBioPortal database and NaviCell web service.<br/>
 			Select a study from which you want to fetch data, the map on which you want it to be displayed and the type of display you want to see.<br/>
 			NaviCom uses the display function defined in the <a href="https://github.com/MathurinD/navicom">navicom</a> python package.<br/>
-			Note that downloading data from cBioPortal and exporting them to NaviCell can take some time.<br/>
+			Note that downloading data from cBioPortal and exporting them to NaviCell can take some time, depending on the speed of your connection and your computer.<br/>
 		</p>
 
 		<!--
@@ -106,7 +107,7 @@ define("DEST_LOGFILE", "3");
 					<option value="empty" selected>&nbsp;</option>
 					<?php
 					$studies = array();
-					exec("Rscript listStudies.R", $studies, $return);
+					exec("cgi-bin/listStudies.R", $studies, $return);
 
 					if ($return != 0) {
 						echo('<option value="laml_tcga_pub">Acute Myeloid Leukemia</option>');
@@ -139,7 +140,7 @@ define("DEST_LOGFILE", "3");
 					<option value="apoptosis" title="Apoptosis and mitochondria metabolism map">Apoptosis map</option>
 					<option value="survival" title="Cell survival map">Cell survival map</option>
 					<option value="emtcellmobility" title="Epithelial-to-mesenchymal transition and cell mobitility map">EMT and cell mobility map</option>
-					<option value="cellcycle" title="Cell cycle map">Cell cycle map</option>
+					<option value="cellcycle" title="Cell cycle map" selected>Cell cycle map</option>
 					<option value="dnarepair" title="DNA repair map">DNA repair map</option>
 				</select>
 				or <input type="text" title="URL of a NaviCell map" id="map_url" placeholder="Alternative map URL"/>
@@ -152,7 +153,6 @@ define("DEST_LOGFILE", "3");
 					<option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
 					<!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
 					<!--<option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export</option>-->
-					<option value="completeDisplay" title="Display as much of the data as is possible">Display all the data</option>
 					<option value="displayMethylome" title="Display methylation data on top of RNA data">Display methylation data</option>
 					<option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Display mutations data</option>
 				</select>
