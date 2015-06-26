@@ -13,93 +13,21 @@ define("DEST_LOGFILE", "3");
 		<meta charset="utf-8">
 	</head>
 	<body>
+		<section>
 		<noscript>
 		This page relies on javascript to perform its functions. You must allow javascript in your browser to be able to use it.
 		</noscript>
-		<script>
-			$(document).ready(function(){
-				var form = document.getElementById("nc_config")
-				$("form").append("<input type='hidden' value='none' name='perform' id='perform'>");
-				var url_post = document.createElement("input");
-				url_post.setAttribute("type", "hidden");
-				url_post.setAttribute("value", "");
-				url_post.setAttribute("id", "url");
-				url_post.setAttribute("name", "url");
-				form.appendChild(url_post)
-				var id_post = document.createElement("input");
-				id_post.setAttribute("type", "hidden");
-				id_post.setAttribute("value", 0);
-				id_post.setAttribute("id", "id");
-				id_post.setAttribute("name", "id");
-				form.appendChild(id_post);
-				form.setAttribute("method", "post");
-				form.setAttribute("action", "./cgi-bin/navicom_cgi.py");
-			});
-		</script>
 
 		<h1>NaviCom</h1>
 
 		<p>
-			Welcome to NaviCom web service, a link between cBioPortal database and NaviCell web service.<br/>
+			Welcome to NaviCom portal, a link between <a href="http://www.cbioportal.org">cBioPortal</a> database and <a href="http://navicell.curie.fr">NaviCell</a> web service.<br/>
 			Select a study from which you want to fetch data, the map on which you want it to be displayed and the type of display you want to see.<br/>
 			NaviCom uses the display function defined in the <a href="https://github.com/MathurinD/navicom">navicom</a> python package.<br/>
-			Note that downloading data from cBioPortal and exporting them to NaviCell can take some time, depending on the speed of your connection and your computer.<br/>
+			Note that downloading data from <a href="http://www.cbioportal.org">cBioPortal</a> and exporting them to NaviCell can take some time, depending on the speed of your connection and your computer.<br/>
 		</p>
 
-		<!--
-		<h2>Possibility 1</h2>
-
-		<form id="nc_config_bis">
-			<table>
-			<tr>
-				<td><label for="study_selection">Study:</label></td>
-				<td>
-				<select >
-					<option value="empty"></option>
-				</select>
-				</td>
-				<td>
-					or
-				</td>
-				<td>
-					<input type="file">
-				</td>
-			</tr>
-			<tr>
-				<td><label for="map_selection">Map:</label></td>
-				<td>
-				<select >
-					<option value="global_map">ACSN global map</option>
-				</select>
-				</td>
-				<td>
-					or
-				</td>
-				<td>
-					<input type="file">
-				</td>
-			</tr>
-			<tr>
-				<td><label for="display_selection">Display mode:</label></td>
-				<td colspan=2>
-				<select>
-					<option value="completeDisplay">Complete display</option>
-					<option value="displayOmics">Omics display</option>
-					<option value="completeExport">Complete export</option>
-				</select>
-				</td>
-			</tr>
-			</table>
-
-				<button id="nc_perform" onclick="exec_navicom()">Perform display</button><br/>
-
-				<label for="display_config">Display configuration</label>
-		</form>
-
-		<h2>Possibility 2</h2>
-		-->
-
-		<form id="nc_config" target="_blank">
+		<form id="nc_config" target="_blank" method="post" action="./cgi-bin/navicom_cgi.py">
 			<table>
 				<fieldset>
 				<legend for="study_selection">Study:</legend>
@@ -131,10 +59,9 @@ define("DEST_LOGFILE", "3");
 				?>
 				<!--or <input type="file" id="study_file">-->
 				</fieldset>
-				<button id="data_download" onclick="download_data()" type="button">Download cBioPortal data</button>
 
 				<fieldset>
-				<legend for="map_selection">Map:</legend>
+				<legend for="map_selection"><a href="http://acsn.curie.fr">ACSN</a> Map:</legend>
 				<select id="map_selection" name="map_selection">
 					<option value="acsn" title="The global map of ACSN">ACSN global map</option>
 					<option value="apoptosis" title="Apoptosis and mitochondria metabolism map">Apoptosis map</option>
@@ -143,7 +70,7 @@ define("DEST_LOGFILE", "3");
 					<option value="cellcycle" title="Cell cycle map" selected>Cell cycle map</option>
 					<option value="dnarepair" title="DNA repair map">DNA repair map</option>
 				</select>
-				or <input type="text" title="URL of a NaviCell map" id="map_url" placeholder="Alternative map URL"/>
+				or <input type="text" title="URL of a NaviCell map" id="map_url" placeholder="Alternative map URL (ex: https://navicell.curie.fr/navicell/maps/ewing/master/)"/>
 				</fieldset>
 				<!-- TODO input fields to specify local data or another map -->
 
@@ -152,9 +79,9 @@ define("DEST_LOGFILE", "3");
 				<select id="display_selection" name="display_selection">
 					<option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
 					<!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
-					<!--<option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export</option>-->
-					<option value="displayMethylome" title="Display methylation data on top of RNA data">Display methylation data</option>
-					<option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Display mutations data</option>
+					<option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export</option>
+					<option value="displayMethylome" title="Display methylation data on top of RNA data">Focus on methylation and transcription</option>
+					<option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Focus on mutations and copy number alteration</option>
 				</select>
 				</fieldset>
 
@@ -165,7 +92,6 @@ define("DEST_LOGFILE", "3");
 
 				<fieldset>
 					<legend>Display configuration</legend>
-					<!--TODO write a selection-->
 					Color for lowest values: <input class="color" id="low_color" value="00FF00" name="low_color"/><br/>
 					Color for highest values: <input class="color" id="high_color" value="FF0000" name="hight_color"/><br/>
 					Color for zero (if present): <input class="color" id="zero_color" name="zero_color" value"FFFFFF"><br/>
@@ -181,8 +107,22 @@ define("DEST_LOGFILE", "3");
 				<p>
 					<img src="./ajax-loader.gif" id="loading_spinner"/>
 				</p>
-				<button id="nc_perform" onclick="exec_navicom(); return false" type="button">Perform display</button><br/>
+				<button id="nc_perform" onclick="exec_navicom(); return false" type="button">Perform data visualisation</button>
+				<button id="data_download" onclick="download_data()" type="button">Download cBioPortal data</button>
+				<br/>
+				<input type='hidden' value='none' name='perform' id='perform'>
+				<input type="hidden" value="" id="url" name="url">
+				<input type="hidden" value=0 id="id" name="id">
+			</table>
 		</form>
 
+		</section>
+
+		<footer>
+			<p>
+				<center><b>NaviCom</b> was created and is maintained by the team <a href="http://sysbio.curie.fr/" target="_blank">"Computational Systems Biology of Cancer"</a> at the <a href="http://www.curie.fr">Institut Curie</a>.<br/>
+				Copyright (c) 2013</center>
+			</p>
+		</footer>
 	</body>
 </html>
