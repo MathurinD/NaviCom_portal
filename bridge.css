@@ -1,19 +1,41 @@
+html {
+	background: rgb(234, 234, 234);
+}
+
 body {
 	text-align: center;
-	background: #EEEEEE;
+	background: rgb(255, 120, 0);
 	margin: auto;
+	margin-top: 0px;
+	padding-top: 0px;
 	width: 70%;
+	font-family: Verdana,"Bitstream Vera Sans", "Lucida Grande",sans-serif;
+}
+
+section {
+	background: white;
 }
 
 h1 {
 	font-size: 3em;
+	background: rgb(255, 120, 0);
+	color: white;
+}
+
+form {
+	padding: 10px;
 }
 
 table, fieldset {
 	width: 70%;
-	background: #DDDD99;
+	background: rgb(255, 193, 64);
 	margin: auto;
 	border-radius: 10px;
+}
+
+button {
+	background: #DDDD99;
+	border-radius: 5px;
 }
 
 td {
@@ -21,6 +43,7 @@ td {
 }
 
 legend {
+	font-weight: bold;
 }
 
 #logs {
@@ -31,4 +54,17 @@ legend {
 
 #loading_spinner {
 	display:none;
+        position: fixed;
+        top: 40%;
+        left: 45%;
+}
+
+#nc_perform {
+	width: 10%;
+	height: 5%;
+}
+
+#data_download {
+	position: absolute;
+	right: 25%;
 }
