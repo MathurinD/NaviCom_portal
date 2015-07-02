@@ -18,7 +18,15 @@ define("DEST_LOGFILE", "3");
 		This page relies on javascript to perform its functions. You must allow javascript in your browser to be able to use it.
 		</noscript>
 
-		<h1>NaviCom</h1>
+		<header>
+			<div id="logos">
+				<img src="./images/portal_navicom_logo.png" id="navicom_logo" align="left">
+				<img src="./images/curie_logo.jpg" align="right">
+			</div>
+			<h1>
+				NaviCom portal
+			</h1>
+		</header>
 
 		<p>
 			Welcome to NaviCom portal, a link between <a href="http://www.cbioportal.org">cBioPortal</a> database and <a href="http://navicell.curie.fr">NaviCell</a> web service.<br/>
@@ -118,6 +126,9 @@ define("DEST_LOGFILE", "3");
 		</form>
 
 		</section>
+
+		<div class=separator>
+		</div>
 
 		<section id="help">
 			<h2>Documentation</h2>

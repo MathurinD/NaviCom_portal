@@ -1,20 +1,19 @@
 html {
 	background: rgb(234, 234, 234);
+	padding: 0pt;
 }
 
 body {
 	text-align: center;
 	background: rgb(255, 120, 0);
 	margin: auto;
-	margin-top: 0px;
-	padding-top: 0px;
 	width: 70%;
-	font-family: Verdana,"Bitstream Vera Sans", "Lucida Grande",sans-serif;
+	font-family: Verdana, "Bitstream Vera Sans", "Lucida Grande", sans-serif;
+	font-size: 0.8em;
 }
 
-section {
+section, div {
 	background: white;
-	height: 100%;
 }
 
 #help {
@@ -23,8 +22,28 @@ section {
 	padding-top: 0px;
 }
 
+header {
+	text-align: center;
+	background: rgb(255, 120, 0);
+	color: white;
+}
+
+header img {
+	border-radius: 10px;
+	margin: 15px;
+}
+
+#navicom_logo {
+	height: 120px;
+}
+
+#logos {
+	height: 80px;
+	background: rgb(255, 120, 0);
+}
+
 h1 {
-	font-size: 3em;
+	font-size: 2.8em;
 	text-align: center;
 	background: rgb(255, 120, 0);
 	color: white;
@@ -32,9 +51,15 @@ h1 {
 
 h2 {
 	font-size: 2em;
+	width: 100%;
+	margin: 0px 0px;
 	text-align: center;
 	background: rgb(255, 120, 0);
 	color: white;
+}
+
+p {
+	padding: 1px;
 }
 
 form {
@@ -90,4 +115,8 @@ legend {
 	position: relative;
 	bottom: -8px;
 	left: 8px;
+}
+
+.separator {
+	height: 20em;
 }
