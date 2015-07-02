@@ -40,10 +40,10 @@ function getRequest(url, success, error) {
 function log(text, append) {
     var logs = document.getElementById("logs");
     if (append) {
-    	logs.innerHTML = logs.innerHTML + "<br/>" + text;
-	} else {
-	    logs.innerHTML = text;
-	}
+        logs.innerHTML = logs.innerHTML + "<br/>" + text;
+    } else {
+        logs.innerHTML = text;
+    }
     console.log(text);
 }
 
@@ -90,27 +90,27 @@ function exec_navicom() {
         data: $(form).serialize(),
         success: function(file){
             $('#loading_spinner').hide();
-			file = getFileName(file);
+            file = getFileName(file);
             log("Display finished, data available at <a href=" + NAVICOM + file + ">" + file + "</a>");
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();
             log("Error: " + error);
-			log(e.responseText, true);
+            log(e.responseText, true);
         }});
 }
 
 function getFileName(rep) {
-	rep = rep.split("\n");
-	var ii = 0;
-	while (ii < rep.length) {
-		if (rep[ii].search(/^FNAME/) != -1) {
-			break;
-		}
-		ii += 1;
-	}
-	rep = rep[ii].replace(/^FNAME: /, "").trim();
-	return(rep.replace(/^\//, ""));
+    rep = rep.split("\n");
+    var ii = 0;
+    while (ii < rep.length) {
+        if (rep[ii].search(/^FNAME/) != -1) {
+            break;
+        }
+        ii += 1;
+    }
+    rep = rep[ii].replace(/^FNAME: /, "").trim();
+    return(rep.replace(/^\//, ""));
 }
 
 function nvSession(form, url) {
