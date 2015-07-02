@@ -51,7 +51,7 @@ define("DEST_LOGFILE", "3");
 							}
 						}
 					?>
-				</select>
+				</select><a href="#help_study_selection"><img class="select_help" src="./images/question-mark.png"></a>
 				<?php
 				if ($return != 0) {
 					echo("<p>An error occured while listing the studies (RETURN STATUS: $return)</p>");
@@ -71,6 +71,7 @@ define("DEST_LOGFILE", "3");
 					<option value="dnarepair" title="DNA repair map">DNA repair map</option>
 				</select>
 				or <input type="text" title="URL of a NaviCell map" id="map_url" placeholder="Alternative map URL (ex: https://navicell.curie.fr/navicell/maps/ewing/master/)"/>
+				<a href="#help_map_selection"><img class="select_help" src="./images/question-mark.png"></a>
 				</fieldset>
 				<!-- TODO input fields to specify local data or another map -->
 
@@ -82,7 +83,7 @@ define("DEST_LOGFILE", "3");
 					<option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export</option>
 					<option value="displayMethylome" title="Display methylation data on top of RNA data">Focus on methylation and transcription</option>
 					<option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Focus on mutations and copy number alteration</option>
-				</select>
+				</select><a href="#help_display_mode"><img class="select_help" src="./images/question-mark.png"></a>
 				</fieldset>
 
 				<!--<fieldset id="samples_selection">-->
@@ -105,7 +106,7 @@ define("DEST_LOGFILE", "3");
 					?>
 				</section>
 				<p>
-					<img src="./ajax-loader.gif" id="loading_spinner"/>
+					<img src="./images/ajax-loader.gif" id="loading_spinner"/>
 				</p>
 				<button id="nc_perform" onclick="exec_navicom(); return false" type="button">Perform data visualisation</button>
 				<button id="data_download" onclick="download_data()" type="button">Download cBioPortal data</button>
@@ -118,10 +119,36 @@ define("DEST_LOGFILE", "3");
 
 		</section>
 
+		<section id="help">
+			<h2>Documentation</h2>
+
+			<h3 id="help_study_selection">Study selection</h3>
+			<p>
+				Select a study from cBioPortal. The list of studies is optained from cBioPortal API, and thus contain all studies available from cBioPortal.<br/>
+				Note that TCGA provisional studies have not been published yet, and can be subject to restriction concerning publication using them.
+			</p>
+
+			<h3 id="help_map_selection">NaviCell map selection</h3>
+			<p>
+				Select a map from the set of curated maps of the <a href="http://acsn.curie.fr">Atlas of Cancer Signaling Network</a>, or provide an URL to another NaviCell map.
+			</p>
+
+			<h3 id="help_display_mode">Display mode</h3>
+			<p>
+				Select the way the data will be displayed on the NaviCell map. Each display mode has been designed to answer a specific biological question using specific data.<br/>
+				<ul>
+					<li>Focusing on methylation provides an overview of the transcriptionnal state of the sample. It displays transcriptomic data as map staining, to see the transcription levels of each gene, and methylation data as glyph size, to assess the transcriptionnal activity of the gene.</li>
+					<li>Focusing on mutations provides an overview on genetic abberations of the sample. It displays copy number variation as map staining, to see the number of copies of each gene, and the mutations frequency as glyph size, to get an idea of the degree of alteration of each gene.</li>
+					<li>The complete display representation aims at displaying as much of the data as possible on the map. It allows the evalutation of the coherence of the various type of data, and to see any striking signal in any type of data.</li>
+					<li>The complete export option is not directly a display function, but rather exports the entire cBioPortal dataset on the NaviCell map to allow the user to visualize it in a personnalized way.</li>
+				</ul>
+			</p>
+		</section>
+
 		<footer>
 			<p>
 				<center><b>NaviCom</b> was created and is maintained by the team <a href="http://sysbio.curie.fr/" target="_blank">"Computational Systems Biology of Cancer"</a> at the <a href="http://www.curie.fr">Institut Curie</a>.<br/>
-				Copyright (c) 2013</center>
+				Copyright (c) 2015</center>
 			</p>
 		</footer>
 	</body>

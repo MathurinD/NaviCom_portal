@@ -14,10 +14,25 @@ body {
 
 section {
 	background: white;
+	height: 100%;
+}
+
+#help {
+	text-align: left;
+	padding: 10px;
+	padding-top: 0px;
 }
 
 h1 {
 	font-size: 3em;
+	text-align: center;
+	background: rgb(255, 120, 0);
+	color: white;
+}
+
+h2 {
+	font-size: 2em;
+	text-align: center;
 	background: rgb(255, 120, 0);
 	color: white;
 }
@@ -54,17 +69,25 @@ legend {
 
 #loading_spinner {
 	display:none;
-        position: fixed;
-        top: 40%;
-        left: 45%;
+    position: fixed;
+    top: 40%;
+    left: 45%;
 }
 
 #nc_perform {
-	width: 10%;
+	width: 15%;
 	height: 5%;
+	padding: 10px;
+	font-size: 1.1em;
 }
 
 #data_download {
 	position: absolute;
 	right: 25%;
+}
+
+.select_help {
+	position: relative;
+	bottom: -8px;
+	left: 8px;
 }
