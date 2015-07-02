@@ -1,70 +1,122 @@
 html {
-	background: rgb(234, 234, 234);
+    background: rgb(234, 234, 234);
+    padding: 0pt;
 }
 
 body {
-	text-align: center;
-	background: rgb(255, 120, 0);
-	margin: auto;
-	margin-top: 0px;
-	padding-top: 0px;
-	width: 70%;
-	font-family: Verdana,"Bitstream Vera Sans", "Lucida Grande",sans-serif;
+    text-align: center;
+    background: rgb(255, 120, 0);
+    margin: auto;
+    width: 70%;
+    font-family: Verdana, "Bitstream Vera Sans", "Lucida Grande", sans-serif;
+    font-size: 0.8em;
 }
 
-section {
-	background: white;
+section, div {
+    background: white;
+}
+
+#help {
+    text-align: left;
+    padding: 10px;
+    padding-top: 0px;
+}
+
+header {
+    text-align: center;
+    background: rgb(255, 120, 0);
+    color: white;
+}
+
+header img {
+    border-radius: 10px;
+    margin: 15px;
+}
+
+#navicom_logo {
+    height: 120px;
+}
+
+#logos {
+    height: 80px;
+    background: rgb(255, 120, 0);
 }
 
 h1 {
-	font-size: 3em;
-	background: rgb(255, 120, 0);
-	color: white;
+    font-size: 2.8em;
+    text-align: center;
+    background: rgb(255, 120, 0);
+    color: white;
+}
+
+h2 {
+    font-size: 2em;
+    width: 100%;
+    margin: 0px 0px;
+    text-align: center;
+    background: rgb(255, 120, 0);
+    color: white;
+}
+
+p {
+    padding: 1px;
 }
 
 form {
-	padding: 10px;
+    padding: 10px;
 }
 
 table, fieldset {
-	width: 70%;
-	background: rgb(255, 193, 64);
-	margin: auto;
-	border-radius: 10px;
+    width: 70%;
+    background: rgb(255, 193, 64);
+    margin: auto;
+    border-radius: 10px;
 }
 
 button {
-	background: #DDDD99;
-	border-radius: 5px;
+    background: #DDDD99;
+    border-radius: 5px;
 }
 
 td {
-	padding: auto;
+    padding: auto;
 }
 
 legend {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 #logs {
-	text-align: center;
-	font-size: 1.3em;
-	color: #993300;
+    text-align: center;
+    font-size: 1.3em;
+    color: #993300;
 }
 
 #loading_spinner {
-	display:none;
-        position: fixed;
-        top: 40%;
-        left: 45%;
+    display:none;
+    position: fixed;
+    top: 40%;
+    left: 45%;
 }
 
 #nc_perform {
-	width: 10%;
-	height: 5%;
+    width: 15%;
+    height: 5%;
+    padding: 10px;
+    font-size: 1.1em;
 }
 
 #data_download {
-	position: absolute;
-	right: 25%;
+    position: absolute;
+    right: 25%;
+}
+
+.select_help {
+    position: relative;
+    bottom: -8px;
+    left: 8px;
+}
+
+.separator {
+    height: 20em;
 }
