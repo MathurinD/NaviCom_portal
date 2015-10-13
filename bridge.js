@@ -113,6 +113,7 @@ function getFileName(rep) {
     return(rep.replace(/^\//, ""));
 }
 
+// Open the NaviCell session
 function nvSession(form, url) {
     var session_id = "navicom" + String(Math.ceil(Math.random() * 1000000000));
     window.open(url + "?id=@" + session_id);
