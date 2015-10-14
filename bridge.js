@@ -139,7 +139,8 @@ function download_data() {
     $('#loading_spinner').show();
     form = document.getElementById("nc_config");
     $("#perform").attr("value", "download");
-    log($(form).serialize());
+    //log($(form).serialize());
+    log("Building data file")
     $.ajax($(form).attr('action'), {
         async: true,
         cache: false,
@@ -148,12 +149,13 @@ function download_data() {
         success: function(file){
             $('#loading_spinner').hide();
             //log("Download finished, data available at <a href=" + file + ">" + file + "</a>");
-            window.open(NAVICOM + file);
+            log(file);
+            window.open(file);
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();
             log("Error: " + error);
         }});
-    $(form).submit(); // DEBUG
+    //$(form).submit(); // DEBUG
 }
 
