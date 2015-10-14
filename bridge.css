@@ -19,7 +19,6 @@ section, div {
 #help {
     text-align: left;
     padding: 10px;
-    padding-top: 0px;
 }
 
 header {
@@ -33,8 +32,16 @@ header img {
     margin: 15px;
 }
 
+.img {
+    text-align: center;
+}
+
+.img img {
+    width: 80%;
+}
+
 #navicom_logo {
-    height: 120px;
+    height: 150px;
 }
 
 #logos {
@@ -45,8 +52,13 @@ header img {
 h1 {
     font-size: 2.8em;
     text-align: center;
+    margin: auto;
     background: rgb(255, 120, 0);
     color: white;
+    width: 25%;
+    position: relative;
+    top: -1em;
+    margin-bottom: 1em;
 }
 
 h2 {

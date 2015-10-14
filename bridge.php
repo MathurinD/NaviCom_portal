@@ -30,7 +30,7 @@ define("DEST_LOGFILE", "3");
 
         <p>
             Welcome to NaviCom portal, a link between <a href="http://www.cbioportal.org">cBioPortal</a> database and <a href="http://navicell.curie.fr">NaviCell</a> web service.<br/>
-            Select a study from which you want to fetch data, the map on which you want it to be displayed and the type of display you want to see.<br/>
+            Select a study from which you want to fetch data, the map on which you want it to be displayed and the type of display you want to see. For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
             NaviCom uses the display function defined in the <a href="https://github.com/MathurinD/navicom">navicom</a> python package (which is <a href="./refman.pdf">fully documented</a>).<br/>
             Note that downloading data from <a href="http://www.cbioportal.org">cBioPortal</a> and exporting them to NaviCell can take some time, depending on the speed of your connection and your computer.<br/>
         </p>
@@ -59,8 +59,8 @@ define("DEST_LOGFILE", "3");
                             }
                         }
                     ?>
-				</select>
-				<a href="#help_study_selection"><img class="select_help" alt="Question mark" title="cBioPortal study" src="./images/question-mark.png"></a>
+                </select>
+                <a href="./tutorial.html#help_study_selection"><img class="select_help" alt="Question mark" title="cBioPortal study" src="./images/question-mark.png"></a>
                 <?php
                 if ($return != 0) {
                     echo("<p>An error occured while listing the studies (RETURN STATUS: $return)</p>");
@@ -80,7 +80,7 @@ define("DEST_LOGFILE", "3");
                     <option value="dnarepair" title="DNA repair map">DNA repair map</option>
                 </select>
                 or <input type="text" title="URL of a NaviCell map" id="map_url" placeholder="Alternative map URL (ex: https://navicell.curie.fr/navicell/maps/ewing/master/)"/>
-                <a href="#help_map_selection"><img class="select_help" alt="Question mark" title="Map to use to display the data" src="./images/question-mark.png"></a>
+                <a href="./tutorial.html#help_map_selection"><img class="select_help" alt="Question mark" title="Map to use to display the data" src="./images/question-mark.png"></a>
                 </fieldset>
                 <!-- TODO input fields to specify local data or another map -->
 
@@ -92,8 +92,8 @@ define("DEST_LOGFILE", "3");
                     <option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export without display</option>
                     <option value="displayMethylome" title="Display methylation data on top of RNA data">Focus on methylation and transcription</option>
                     <option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Focus on mutations and copy number alteration</option>
-				</select>
-				<a href="#help_display_mode"><img class="select_help" alt="Question mark" title="Method from navicom to use to display data" src="./images/question-mark.png"></a>
+                </select>
+                <a href="tutorial.html#help_display_mode"><img class="select_help" alt="Question mark" title="Method from navicom to use to display data" src="./images/question-mark.png"></a>
                 </fieldset>
 
                 <!--<fieldset id="samples_selection">-->
@@ -129,6 +129,7 @@ define("DEST_LOGFILE", "3");
 
         </section>
 
+        <!--
         <div class=separator>
         </div>
 
@@ -138,7 +139,7 @@ define("DEST_LOGFILE", "3");
             <h3 id="help_study_selection">Study selection</h3>
             <p>
                 Select a study from cBioPortal. The list of studies is optained from cBioPortal API, and thus contain all studies available from cBioPortal.<br/>
-				Note that TCGA provisional studies have not been published yet, and can be subject to <a href="http://cancergenome.nih.gov/publications/publicationguidelines">restriction concerning their use</a> in publication.
+                Note that TCGA provisional studies have not been published yet, and can be subject to <a href="http://cancergenome.nih.gov/publications/publicationguidelines">restriction concerning their use</a> in publication.
             </p>
 
             <h3 id="help_map_selection">NaviCell map selection</h3>
@@ -157,10 +158,11 @@ define("DEST_LOGFILE", "3");
                 </ul>
             </p>
         </section>
+        -->
 
         <footer>
             <p>
-                <center><b>NaviCom</b> was created and is maintained by the team <a href="http://sysbio.curie.fr/" target="_blank">"Computational Systems Biology of Cancer"</a> at the <a href="http://www.curie.fr">Institut Curie</a>.<br/>
+                <center><b>NaviCom</b> was created and is maintained by the team <a href="http://sysbio.curie.fr/" target="_blank">"Computational Systems Biology of Cancer"</a> at <a href="http://www.curie.fr">Institut Curie</a>.<br/>
                 Copyright (c) 2015</center>
             </p>
         </footer>
