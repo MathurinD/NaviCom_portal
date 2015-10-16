@@ -13,7 +13,6 @@ define("DEST_LOGFILE", "3");
         <meta charset="utf-8">
     </head>
     <body>
-        <section>
         <noscript>
         This page relies on javascript to perform its functions. You must allow javascript in your browser to be able to use it.
         </noscript>
@@ -28,6 +27,7 @@ define("DEST_LOGFILE", "3");
             </h1>
         </header>
 
+        <section>
         <p>
             Welcome to NaviCom, a link between <a href="http://www.cbioportal.org">cBioPortal</a> database and <a href="http://navicell.curie.fr">NaviCell</a> web service.<br/>
             Select a study from which you want to fetch data, the map on which you want it to be displayed and the type of display you want to see. For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
