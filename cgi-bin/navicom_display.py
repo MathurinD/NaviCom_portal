@@ -14,7 +14,10 @@ def error(log_entry):
         ff.write(time.strftime("%H:%M %d/%m/%Y", time.localtime()) + " ")
         ff.write(str(log_entry) + "\r\n")
 
-error(sys.argv)
+try:
+    error(sys.argv)
+except:
+    pass
 fname = sys.argv[1]
 session_id = sys.argv[2]
 url = sys.argv[3]

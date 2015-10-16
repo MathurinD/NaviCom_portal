@@ -91,7 +91,7 @@ function exec_navicom() {
         success: function(file){
             $('#loading_spinner').hide();
             file = getFileName(file);
-            log("Display finished, data available at <a href=" + NAVICOM + file + ">" + file + "</a>");
+            log("Display finished, data available at <a href=" + NAVICOM + file + " download>" + file + "</a>");
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();

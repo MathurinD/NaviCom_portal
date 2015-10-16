@@ -7,8 +7,8 @@ options("max.print"=1000)
 library(cBioFetchR)
 
 arg = commandArgs(trailingOnly=T)
-#target_rep = "/scratch/navicom/"
-target_rep = "/bioinfo/pipelines/navicom/dev/html/share/"
+target_rep = "/scratch/navicom/"
+#target_rep = "/bioinfo/pipelines/navicom/dev/html/share/"
 
 study_id = arg[1]
 nc = cBioNCviz(study_id, genes_list="/bioinfo/pipelines/navicom/dev/html/cgi-bin/acsn_v1.1.gmt")

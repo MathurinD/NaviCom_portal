@@ -54,8 +54,9 @@ if ("study_selection" in form):
         rand_id = str(int(random.randint(0, 100000) + time.time()) % 100000)
         output += str( subprocess.Popen(["./getData.R", study_id, rand_id], stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate() )
         log(output)
-        fname = os.popen("ls /bioinfo/pipelines/navicom/dev/html/share/*" + rand_id + "*").readlines()[0].strip()
-        fname = fname[len("/bioinfo/pipelines/navicom/dev/html/"):]
+        #fname = os.popen("ls /bioinfo/pipelines/navicom/dev/html/share/*" + rand_id + "*").readlines()[0].strip()
+        #fname = fname[len("/bioinfo/pipelines/navicom/dev/html/"):]
+        fname = os.popen("ls /scratch/navicom/*" + rand_id + "*").readlines()[0].strip()
     except:
         error("An error occured while trying to download the study:" + "<br/>" + output)
 else:
@@ -68,12 +69,15 @@ else:
 
 
 if (perform == "download"):
-    print_headers()
+    #print("Content-disposition: attachment; filename="+fname[len("/scratch/navicom/"):])
+    #print("Content-type: text/plain;charset=utf-8\n\n")
     #with open(fname, "r") as ff:
         #for line in ff:
             #output += line
+    #print(output)
     #log("Download finished")
-    print("http://navicom-dev.curie.fr/" + fname)
+    print_headers()
+    print(fname)
 elif (perform == "display"):
     print_headers()
     print("Loading NaviCom")
@@ -105,8 +109,9 @@ elif (perform == "display"):
     else:
         processing = "raw"
 
-    subprocess.run("./navicom_display.py " + fname + " " + session_id + " " + url + " " + displayMethod + " " + processing + "&")
-    #subprocess.Popen(["./navicom_display.py ", fname, " ", session_id, " ", url, " ", displayMethod, " ", processing, "&"])
+    subprocess.Popen("./navicom_display.py '" + fname + "' '" + session_id + "' '" + url + "' '" + displayMethod + "' '" + processing + "' &", shell=True)
+    #subprocess.Popen(["./navicom_display.py", fname, session_id, url, displayMethod, processing, "&"])
+    log("Still running")
     #if (displayMethod == "completeDisplay"):
         #nc.completeDisplay(processing=processing)
     #elif (displayMethod == "displayMethylome"):
