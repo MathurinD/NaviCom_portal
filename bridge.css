@@ -80,7 +80,8 @@ form {
 
 table, fieldset {
     width: 70%;
-    background: rgb(255, 193, 64);
+    /*background: rgb(255, 193, 64);*/
+    background: rgb(200, 200, 200);
     margin: auto;
     border-radius: 10px;
 }
@@ -96,6 +97,9 @@ td {
 
 legend {
     font-weight: bold;
+    float: left;
+    /*position: relative;*/
+    /*top: 8px;*/
 }
 
 #logs {
