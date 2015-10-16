@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 #-*- coding:utf8 -*-
 
+import sys
 sys.path.append("/bioinfo/local/build/numpy_python3/lib/python3.1/site-packages/") # numpy
 sys.path.append("/bioinfo/pipelines/navicom/dev/html/lib/") # navicell
 import cgi
-import os 
+import os
+import subprocess
 import cgitb
 cgitb.enable()
 
@@ -21,9 +23,9 @@ def log(log_entry):
     with open("/bioinfo/pipelines/navicom/dev/html/navicom_log", "a") as ff:
         ff.write(time.strftime("%H:%M %d/%m/%Y", time.localtime()) + " ")
         ff.write(str(log_entry) + "\r\n")
-log("Hello data")
 
 form = cgi.FieldStorage()
+print_headers()
 
 if ("study_selection" in form):
     study_id = form['study_selection']
@@ -44,6 +46,5 @@ else:
 
 log("Hello data")
 
-print_headers()
-print("FNAME: " + study))
+print("FNAME: " + study)
 

@@ -48,6 +48,7 @@ function log(text, append) {
 }
 
 var NAVICOM = "http://navicom-dev.curie.fr/"; // TODO remove dev when getting to prod version
+var DATA_LOADED=false;
 function exec_navicom() {
     // Start the NaviCell map and trigger NaviCom on the server
 
@@ -80,9 +81,8 @@ function exec_navicom() {
     $("#url").attr("value", url);
     $("#id").attr("value", session_id);
 
-    getData(),
+    getData(url, session_id);
     window.open(url + "?id=@" + session_id);
-    //setTimeOut(displayData, 1000);
     displayData();
 
     //// Transfert data to the NaviCom server
@@ -109,17 +109,17 @@ function exec_navicom() {
 }
 
 // First get the data, then send another request to analyse them in NaviCell
-function getData() {
+function getData(url, session_id) {
     var form = document.getElementById("nc_config");
     $('#loading_spinner').show();
     $.ajax ("./cgi-bin/getData.py", {
-        async: true,
+        async: false,
         cache: false,
         type: 'POST',
         data: $(form).serialize(),
         success: function(file) {
             $('#loading_spinner').hide();
-            log("Data downloaded on the server")
+            log("Data downloaded on the server");
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();
@@ -139,6 +139,7 @@ function displayData() {
         data: $(form).serialize(),
         success: function(file) {
             $('#loading_spinner').hide();
+            log("Data displayed");
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();
