@@ -47,7 +47,7 @@ define("DEST_LOGFILE", "3");
                     <option value="empty" selected>&nbsp;</option>
                     <?php
                     $studies = array();
-                    exec("cgi-bin/listStudies.R", $studies, $return);
+                    exec("./cgi-bin/listStudies.R", $studies, $return);
 
                     if ($return != 0) {
                         echo('<option value="laml_tcga_pub">Acute Myeloid Leukemia</option>');

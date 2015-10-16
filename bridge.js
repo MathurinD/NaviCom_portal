@@ -1,6 +1,6 @@
 /*
  * bridge.js
- * L'y Mathurin Dorel
+ * By Mathurin Dorel
  * Start the NaviCell map and send data to the server for processing
  */
 
