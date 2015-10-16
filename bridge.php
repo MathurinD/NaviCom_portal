@@ -19,11 +19,15 @@ define("DEST_LOGFILE", "3");
 
         <header>
             <div id="logos">
-                <img src="./images/NaviCom_logo_background.png" id="navicom_logo" align="left">
-                <img src="./images/curie_logo.jpg" align="right">
+                <a href="bridge.php">
+                    <img src="./images/NaviCom_logo_background.png" id="navicom_logo" align="left">
+                </a>
+                <a href="http://curie.fr">
+                    <img src="./images/curie_logo.jpg" align="right">
+                </a>
             </div>
             <h1>
-                NaviCom
+                <a href="bridge.php">NaviCom</a>
             </h1>
         </header>
 
@@ -32,13 +36,13 @@ define("DEST_LOGFILE", "3");
             Welcome to NaviCom, a link between <a href="http://www.cbioportal.org">cBioPortal</a> database and <a href="http://navicell.curie.fr">NaviCell</a> web service.<br/>
             Select a study from which you want to fetch data, the map on which you want it to be displayed and the type of display you want to see. For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
             NaviCom uses the display function defined in the <a href="https://github.com/MathurinD/navicom">navicom</a> python package (which is <a href="./refman.pdf">fully documented</a>).<br/>
-            Note that downloading data from <a href="http://www.cbioportal.org">cBioPortal</a> and exporting them to NaviCell can take some time, depending on the speed of your connection and your computer.<br/>
+            Note that downloading non cached data from <a href="http://www.cbioportal.org">cBioPortal</a> take a long time (several minutes). Displaying the data to NaviCell can also be long depending on your connection, your computer and the version of your browser.<br/>
         </p>
 
         <form id="nc_config" target="_blank" method="post" action="./cgi-bin/navicom_cgi.py">
             <table>
                 <fieldset>
-                <legend for="study_selection">Study:</legend>
+                <legend for="study_selection">Data</legend><br/>
                 <select id="study_selection" name="study_selection">
                     <option value="empty" selected>&nbsp;</option>
                     <?php
@@ -70,7 +74,7 @@ define("DEST_LOGFILE", "3");
                 </fieldset>
 
                 <fieldset>
-                <legend for="map_selection"><a href="http://acsn.curie.fr">ACSN</a> Map:</legend>
+                <legend for="map_selection"><a href="http://acsn.curie.fr">ACSN</a> Map</legend><br/>
                 <select id="map_selection" name="map_selection">
                     <option value="acsn" title="The global map of ACSN">ACSN global map</option>
                     <option value="apoptosis" title="Apoptosis and mitochondria metabolism map">Apoptosis map</option>
@@ -85,7 +89,7 @@ define("DEST_LOGFILE", "3");
                 <!-- TODO input fields to specify local data or another map -->
 
                 <fieldset>
-                <legend for="display_selection">Display mode:</legend>
+                <legend for="display_selection">Display mode</legend><br/>
                 <select id="display_selection" name="display_selection">
                     <option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
                     <!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
@@ -102,7 +106,7 @@ define("DEST_LOGFILE", "3");
                 <!--</fieldset>-->
 
                 <fieldset>
-                    <legend>Display configuration</legend>
+                    <legend>Display configuration</legend><br/>
                     Color for lowest values: <input class="color" id="low_color" value="00FF00" name="low_color"/><br/>
                     Color for highest values: <input class="color" id="high_color" value="FF0000" name="hight_color"/><br/>
                     Color for zero (if present): <input class="color" id="zero_color" name="zero_color" value"FFFFFF"><br/>
