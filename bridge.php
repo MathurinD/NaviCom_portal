@@ -20,7 +20,7 @@ define("DEST_LOGFILE", "3");
 
         <header>
             <div id="logos">
-                <img src="./images/portal_navicom_logo.png" id="navicom_logo" align="left">
+                <img src="./images/NaviCom_logo_background.png" id="navicom_logo" align="left">
                 <img src="./images/curie_logo.jpg" align="right">
             </div>
             <h1>
