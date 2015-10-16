@@ -24,12 +24,12 @@ define("DEST_LOGFILE", "3");
                 <img src="./images/curie_logo.jpg" align="right">
             </div>
             <h1>
-                NaviCom portal
+                NaviCom
             </h1>
         </header>
 
         <p>
-            Welcome to NaviCom portal, a link between <a href="http://www.cbioportal.org">cBioPortal</a> database and <a href="http://navicell.curie.fr">NaviCell</a> web service.<br/>
+            Welcome to NaviCom, a link between <a href="http://www.cbioportal.org">cBioPortal</a> database and <a href="http://navicell.curie.fr">NaviCell</a> web service.<br/>
             Select a study from which you want to fetch data, the map on which you want it to be displayed and the type of display you want to see. For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
             NaviCom uses the display function defined in the <a href="https://github.com/MathurinD/navicom">navicom</a> python package (which is <a href="./refman.pdf">fully documented</a>).<br/>
             Note that downloading data from <a href="http://www.cbioportal.org">cBioPortal</a> and exporting them to NaviCell can take some time, depending on the speed of your connection and your computer.<br/>
