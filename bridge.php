@@ -39,7 +39,7 @@ define("DEST_LOGFILE", "3");
             Note that downloading non cached data from <a href="http://www.cbioportal.org">cBioPortal</a> take a long time (several minutes). Displaying the data to NaviCell can also be long depending on your connection, your computer and the version of your browser.<br/>
         </p>
 
-        <form id="nc_config" target="_blank" method="post" action="./cgi-bin/navicom_cgi.py">
+        <form id="nc_config" target="_blank" method="post" action="./cgi-bin/getData.py">
             <table>
                 <fieldset>
                 <legend for="study_selection">Data</legend><br/>

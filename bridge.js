@@ -1,6 +1,6 @@
 /*
  * bridge.js
- * By Mathurin Dorel
+ * L'y Mathurin Dorel
  * Start the NaviCell map and send data to the server for processing
  */
 
@@ -76,28 +76,84 @@ function exec_navicom() {
         var url = map_bis;
     }
     // TODO Control that the url is valid
+    var session_id = "navicom" + String(Math.ceil(Math.random() * 1000000000));
+    $("#url").attr("value", url);
+    $("#id").attr("value", session_id);
 
-    // Transfert data to the NaviCom server
+    getData(),
+    window.open(url + "?id=@" + session_id);
+    //setTimeOut(displayData, 1000);
+    displayData();
+
+    //// Transfert data to the NaviCom server
+    //var form = document.getElementById("nc_config");
+    //nvSession(form, url);
+    //$("#perform").attr("value", "display");
+    //$('#loading_spinner').show();
+    //log("Submission");
+    //$.ajax($(form).attr('action'), {
+        //async: true,
+        //cache: false,
+        //type: 'POST',
+        //data: $(form).serialize(),
+        //success: function(file){
+            //$('#loading_spinner').hide();
+            //file = getFileName(file);
+            //log("Display finished, data available at <a href=" + NAVICOM + file + " download>" + file + "</a>");
+        //},
+        //error: function(e, e2, error) {
+            //$('#loading_spinner').hide();
+            //log("Error: " + error);
+            //log(e.responseText, true);
+        //}});
+}
+
+// First get the data, then send another request to analyse them in NaviCell
+function getData() {
     var form = document.getElementById("nc_config");
-    nvSession(form, url);
-    $("#perform").attr("value", "display");
     $('#loading_spinner').show();
-    log("Submission");
-    $.ajax($(form).attr('action'), {
+    $.ajax ("./cgi-bin/getData.py", {
         async: true,
         cache: false,
         type: 'POST',
         data: $(form).serialize(),
-        success: function(file){
+        success: function(file) {
             $('#loading_spinner').hide();
-            file = getFileName(file);
-            log("Display finished, data available at <a href=" + NAVICOM + file + " download>" + file + "</a>");
+            log("Data downloaded on the server")
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();
-            log("Error: " + error);
+            log("Error in data loading: " + error);
             log(e.responseText, true);
-        }});
+        }
+    })
+}
+
+function displayData() {
+    var form = document.getElementById("nc_config");
+    $('#loading_spinner').show();
+    $.ajax ("./cgi-bin/displayData.py", {
+        async: true,
+        cache: false,
+        type: 'POST',
+        data: $(form).serialize(),
+        success: function(file) {
+            $('#loading_spinner').hide();
+        },
+        error: function(e, e2, error) {
+            $('#loading_spinner').hide();
+            log("Error in data display: " + error);
+            log(e.responseText, true);
+        }
+    })
+}
+
+// Open the NaviCell session
+function nvSession(form, url) {
+    var session_id = "navicom" + String(Math.ceil(Math.random() * 1000000000));
+    $("#url").attr("value", url);
+    $("#id").attr("value", session_id);
+    window.open(url + "?id=@" + session_id);
 }
 
 function getFileName(rep) {
@@ -111,14 +167,6 @@ function getFileName(rep) {
     }
     rep = rep[ii].replace(/^FNAME: /, "").trim();
     return(rep.replace(/^\//, ""));
-}
-
-// Open the NaviCell session
-function nvSession(form, url) {
-    var session_id = "navicom" + String(Math.ceil(Math.random() * 1000000000));
-    window.open(url + "?id=@" + session_id);
-    $("#url").attr("value", url);
-    $("#id").attr("value", session_id);
 }
 
 function download_data() {
@@ -141,6 +189,7 @@ function download_data() {
     $("#perform").attr("value", "download");
     //log($(form).serialize());
     log("Building data file")
+    //$.ajax($(form).attr('./cgi-bin/getData.py'), {
     $.ajax($(form).attr('action'), {
         async: true,
         cache: false,
@@ -149,7 +198,7 @@ function download_data() {
         success: function(file){
             $('#loading_spinner').hide();
             //log("Download finished, data available at <a href=" + file + ">" + file + "</a>");
-            log(file);
+            //log(file);
             window.open(file);
         },
         error: function(e, e2, error) {
