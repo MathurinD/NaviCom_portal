@@ -57,12 +57,10 @@ function completeFields() {
     }
     if (error != "") {
         $("#logs").html(error);
-        return;
-    } else {
-        $("#logs").html("");
+        return(false);
     }
 
-    // Selecti the NaviCell map
+    // Selection of the NaviCell map
     var map = document.getElementById("map_selection").value;
     log(map);
     var map_bis = document.getElementById("map_url").value;
@@ -84,6 +82,7 @@ var NAVICOM = "http://navicom-dev.curie.fr/"; // TODO remove dev when getting to
 // Start the NaviCell map and trigger NaviCom on the server
 function exec_navicom() {
     var url = completeFields();
+    if (!url) { return; }
     var session_id = $("#id").attr("value");
 
     getData(url, session_id);
@@ -157,6 +156,7 @@ function getFileName(rep) {
 
 function download_data() {
     var url = completeFields();
+    if (!url) { return; }
 
     $('#loading_spinner').show();
     form = document.getElementById("nc_config");

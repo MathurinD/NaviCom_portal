@@ -133,37 +133,6 @@ define("DEST_LOGFILE", "3");
 
         </section>
 
-        <!--
-        <div class=separator>
-        </div>
-
-        <section id="help">
-            <h2>Documentation</h2>
-
-            <h3 id="help_study_selection">Study selection</h3>
-            <p>
-                Select a study from cBioPortal. The list of studies is optained from cBioPortal API, and thus contain all studies available from cBioPortal.<br/>
-                Note that TCGA provisional studies have not been published yet, and can be subject to <a href="http://cancergenome.nih.gov/publications/publicationguidelines">restriction concerning their use</a> in publication.
-            </p>
-
-            <h3 id="help_map_selection">NaviCell map selection</h3>
-            <p>
-                Select a map from the set of curated maps of the <a href="http://acsn.curie.fr">Atlas of Cancer Signaling Network</a>, or provide an URL to another NaviCell map.
-            </p>
-
-            <h3 id="help_display_mode">Display mode</h3>
-            <p>
-                Select the way the data will be displayed on the NaviCell map. Each display mode has been designed to answer a specific biological question using specific data.<br/>
-                <ul>
-                    <li>Focusing on methylation provides an overview of the transcriptionnal state of the sample. It displays transcriptomic data as map staining, to see the transcription levels of each gene, and methylation data as glyph size, to assess the transcriptionnal activity of the gene.</li>
-                    <li>Focusing on mutations provides an overview on genetic abberations of the sample. It displays copy number variation as map staining, to see the number of copies of each gene, and the mutations frequency as glyph size, to get an idea of the degree of alteration of each gene.</li>
-                    <li>The complete display representation aims at displaying as much of the data as possible on the map. It allows the evalutation of the coherence of the various type of data, and to see any striking signal in any type of data.</li>
-                    <li>The complete export option is not directly a display function, but rather exports the entire cBioPortal dataset on the NaviCell map to allow the user to visualize it in a personnalized way.</li>
-                </ul>
-            </p>
-        </section>
-        -->
-
         <footer>
             <p>
                 <center><b>NaviCom</b> was created and is maintained by the team <a href="http://sysbio.curie.fr/" target="_blank">"Computational Systems Biology of Cancer"</a> at <a href="http://www.curie.fr">Institut Curie</a>.<br/>
