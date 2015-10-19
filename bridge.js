@@ -76,28 +76,58 @@ function exec_navicom() {
         var url = map_bis;
     }
     // TODO Control that the url is valid
+    var session_id = "navicom" + String(Math.ceil(Math.random() * 1000000000));
+    $("#url").attr("value", url);
+    $("#id").attr("value", session_id);
 
-    // Transfert data to the NaviCom server
+    getData(url, session_id);
+    ncwin = window.open(url + "?id=@" + session_id);
+    $('#loading_spinner').show();
+    //ncwin.onload = displayData;
+    setTimeout(displayData, '3000');
+}
+
+// First get the data, then send another request to analyse them in NaviCell
+function getData(url, session_id) {
     var form = document.getElementById("nc_config");
-    nvSession(form, url);
+    $('#loading_spinner').show();
+    $.ajax ("./cgi-bin/getData.py", {
+        async: false,
+        cache: false,
+        type: 'POST',
+        data: $(form).serialize(),
+        success: function(file) {
+            $('#loading_spinner').hide();
+            log("Data downloaded on the server: " + file);
+        },
+        error: function(e, e2, error) {
+            $('#loading_spinner').hide();
+            log("Error in data loading: " + error);
+            log(e.responseText, true);
+        }
+    })
+}
+
+function displayData() {
+    var form = document.getElementById("nc_config");
     $("#perform").attr("value", "display");
     $('#loading_spinner').show();
-    log("Submission");
-    $.ajax($(form).attr('action'), {
+    log('Displaying data...')
+    $.ajax ("./cgi-bin/displayData.py", {
         async: true,
         cache: false,
         type: 'POST',
         data: $(form).serialize(),
-        success: function(file){
+        success: function(file) {
             $('#loading_spinner').hide();
-            file = getFileName(file);
-            log("Display finished, data available at <a href=" + NAVICOM + file + ">" + file + "</a>");
+            log("Data displayed: " + file);
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();
-            log("Error: " + error);
+            log("Error in data display: " + error);
             log(e.responseText, true);
-        }});
+        }
+    })
 }
 
 function getFileName(rep) {
@@ -109,15 +139,12 @@ function getFileName(rep) {
         }
         ii += 1;
     }
-    rep = rep[ii].replace(/^FNAME: /, "").trim();
+    if (ii < rep.length) {
+        rep = rep[ii].replace(/^FNAME: /, "").trim();
+    } else {
+        rep = "";
+    }
     return(rep.replace(/^\//, ""));
-}
-
-function nvSession(form, url) {
-    var session_id = "navicom" + String(Math.ceil(Math.random() * 1000000000));
-    window.open(url + "?id=@" + session_id);
-    $("#url").attr("value", url);
-    $("#id").attr("value", session_id);
 }
 
 function download_data() {
@@ -138,7 +165,9 @@ function download_data() {
     $('#loading_spinner').show();
     form = document.getElementById("nc_config");
     $("#perform").attr("value", "download");
-    log($(form).serialize());
+    //log($(form).serialize());
+    log("Building data file")
+    //$.ajax($(form).attr('./cgi-bin/getData.py'), {
     $.ajax($(form).attr('action'), {
         async: true,
         cache: false,
@@ -147,12 +176,13 @@ function download_data() {
         success: function(file){
             $('#loading_spinner').hide();
             //log("Download finished, data available at <a href=" + file + ">" + file + "</a>");
-            window.open(NAVICOM + file);
+            //log(file);
+            window.open(file);
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();
             log("Error: " + error);
         }});
-    $(form).submit(); // DEBUG
+    //$(form).submit(); // DEBUG
 }
 

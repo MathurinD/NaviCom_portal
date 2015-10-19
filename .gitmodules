@@ -1,6 +1,3 @@
 [submodule "lib/navicom_package"]
 	path = lib/navicom_package
 	url = https://github.com/MathurinD/navicom.git
-[submodule "lib/cBioFetchR"]
-	path = lib/cBioFetchR
-	url = https://github.com/MathurinD/cBioFetchR.git

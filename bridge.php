@@ -13,37 +13,41 @@ define("DEST_LOGFILE", "3");
         <meta charset="utf-8">
     </head>
     <body>
-        <section>
         <noscript>
         This page relies on javascript to perform its functions. You must allow javascript in your browser to be able to use it.
         </noscript>
 
         <header>
             <div id="logos">
-                <img src="./images/portal_navicom_logo.png" id="navicom_logo" align="left">
-                <img src="./images/curie_logo.jpg" align="right">
+                <a href="bridge.php">
+                    <img src="./images/NaviCom_logo_background.png" id="navicom_logo" align="left">
+                </a>
+                <a href="http://curie.fr">
+                    <img src="./images/curie_logo.jpg" align="right">
+                </a>
             </div>
             <h1>
-                NaviCom portal
+                <a href="bridge.php">NaviCom</a>
             </h1>
         </header>
 
+        <section>
         <p>
-            Welcome to NaviCom portal, a link between <a href="http://www.cbioportal.org">cBioPortal</a> database and <a href="http://navicell.curie.fr">NaviCell</a> web service.<br/>
-            Select a study from which you want to fetch data, the map on which you want it to be displayed and the type of display you want to see.<br/>
-            NaviCom uses the display function defined in the <a href="https://github.com/MathurinD/navicom">navicom</a> python package.<br/>
-            Note that downloading data from <a href="http://www.cbioportal.org">cBioPortal</a> and exporting them to NaviCell can take some time, depending on the speed of your connection and your computer.<br/>
+            Welcome to NaviCom, a link between <a href="http://www.cbioportal.org">cBioPortal</a> database and <a href="http://navicell.curie.fr">NaviCell</a> web service.<br/>
+            Select a study from which you want to fetch data, the map on which you want it to be displayed and the type of display you want to see. For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
+            NaviCom uses the display function defined in the <a href="https://github.com/MathurinD/navicom">navicom</a> python package (which is <a href="./refman.pdf">fully documented</a>).<br/>
+            Note that downloading non cached data from <a href="http://www.cbioportal.org">cBioPortal</a> take a long time (several minutes). Displaying the data to NaviCell can also be long depending on your connection, your computer and the version of your browser.<br/>
         </p>
 
-        <form id="nc_config" target="_blank" method="post" action="./cgi-bin/navicom_cgi.py">
+        <form id="nc_config" target="_blank" method="post" action="./cgi-bin/getData.py">
             <table>
                 <fieldset>
-                <legend for="study_selection">Study:</legend>
+                <legend for="study_selection">Data</legend><br/>
                 <select id="study_selection" name="study_selection">
                     <option value="empty" selected>&nbsp;</option>
                     <?php
                     $studies = array();
-                    exec("cgi-bin/listStudies.R", $studies, $return);
+                    exec("./cgi-bin/listStudies.R", $studies, $return);
 
                     if ($return != 0) {
                         echo('<option value="laml_tcga_pub">Acute Myeloid Leukemia</option>');
@@ -59,7 +63,8 @@ define("DEST_LOGFILE", "3");
                             }
                         }
                     ?>
-                </select><a href="#help_study_selection"><img class="select_help" src="./images/question-mark.png"></a>
+                </select>
+                <a href="./tutorial.html#help_study_selection"><img class="select_help" alt="Question mark" title="cBioPortal study" src="./images/question-mark.png"></a>
                 <?php
                 if ($return != 0) {
                     echo("<p>An error occured while listing the studies (RETURN STATUS: $return)</p>");
@@ -69,7 +74,7 @@ define("DEST_LOGFILE", "3");
                 </fieldset>
 
                 <fieldset>
-                <legend for="map_selection"><a href="http://acsn.curie.fr">ACSN</a> Map:</legend>
+                <legend for="map_selection"><a href="http://acsn.curie.fr">ACSN</a> Map</legend><br/>
                 <select id="map_selection" name="map_selection">
                     <option value="acsn" title="The global map of ACSN">ACSN global map</option>
                     <option value="apoptosis" title="Apoptosis and mitochondria metabolism map">Apoptosis map</option>
@@ -79,19 +84,20 @@ define("DEST_LOGFILE", "3");
                     <option value="dnarepair" title="DNA repair map">DNA repair map</option>
                 </select>
                 or <input type="text" title="URL of a NaviCell map" id="map_url" placeholder="Alternative map URL (ex: https://navicell.curie.fr/navicell/maps/ewing/master/)"/>
-                <a href="#help_map_selection"><img class="select_help" src="./images/question-mark.png"></a>
+                <a href="./tutorial.html#help_map_selection"><img class="select_help" alt="Question mark" title="Map to use to display the data" src="./images/question-mark.png"></a>
                 </fieldset>
                 <!-- TODO input fields to specify local data or another map -->
 
                 <fieldset>
-                <legend for="display_selection">Display mode:</legend>
+                <legend for="display_selection">Display mode</legend><br/>
                 <select id="display_selection" name="display_selection">
                     <option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
                     <!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
-                    <option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export</option>
+                    <option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export without display</option>
                     <option value="displayMethylome" title="Display methylation data on top of RNA data">Focus on methylation and transcription</option>
                     <option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Focus on mutations and copy number alteration</option>
-                </select><a href="#help_display_mode"><img class="select_help" src="./images/question-mark.png"></a>
+                </select>
+                <a href="tutorial.html#help_display_mode"><img class="select_help" alt="Question mark" title="Method from navicom to use to display data" src="./images/question-mark.png"></a>
                 </fieldset>
 
                 <!--<fieldset id="samples_selection">-->
@@ -100,7 +106,7 @@ define("DEST_LOGFILE", "3");
                 <!--</fieldset>-->
 
                 <fieldset>
-                    <legend>Display configuration</legend>
+                    <legend>Display configuration</legend><br/>
                     Color for lowest values: <input class="color" id="low_color" value="00FF00" name="low_color"/><br/>
                     Color for highest values: <input class="color" id="high_color" value="FF0000" name="hight_color"/><br/>
                     Color for zero (if present): <input class="color" id="zero_color" name="zero_color" value"FFFFFF"><br/>
@@ -127,6 +133,7 @@ define("DEST_LOGFILE", "3");
 
         </section>
 
+        <!--
         <div class=separator>
         </div>
 
@@ -136,7 +143,7 @@ define("DEST_LOGFILE", "3");
             <h3 id="help_study_selection">Study selection</h3>
             <p>
                 Select a study from cBioPortal. The list of studies is optained from cBioPortal API, and thus contain all studies available from cBioPortal.<br/>
-                Note that TCGA provisional studies have not been published yet, and can be subject to restriction concerning publication using them.
+                Note that TCGA provisional studies have not been published yet, and can be subject to <a href="http://cancergenome.nih.gov/publications/publicationguidelines">restriction concerning their use</a> in publication.
             </p>
 
             <h3 id="help_map_selection">NaviCell map selection</h3>
@@ -155,10 +162,11 @@ define("DEST_LOGFILE", "3");
                 </ul>
             </p>
         </section>
+        -->
 
         <footer>
             <p>
-                <center><b>NaviCom</b> was created and is maintained by the team <a href="http://sysbio.curie.fr/" target="_blank">"Computational Systems Biology of Cancer"</a> at the <a href="http://www.curie.fr">Institut Curie</a>.<br/>
+                <center><b>NaviCom</b> was created and is maintained by the team <a href="http://sysbio.curie.fr/" target="_blank">"Computational Systems Biology of Cancer"</a> at <a href="http://www.curie.fr">Institut Curie</a>.<br/>
                 Copyright (c) 2015</center>
             </p>
         </footer>
