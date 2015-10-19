@@ -6,6 +6,8 @@ sys.path.append("/bioinfo/local/build/numpy_python3/lib/python3.1/site-packages/
 sys.path.append("/bioinfo/pipelines/navicom/dev/html/lib/") # navicell
 import cgi
 import os
+import re
+import time
 import subprocess
 import cgitb
 cgitb.enable()
@@ -28,21 +30,29 @@ form = cgi.FieldStorage()
 print_headers()
 
 if ("study_selection" in form):
-    study_id = form['study_selection']
+    study_id = form['study_selection'].value
 else:
     error("'study_selection' field is not specified\n")
 
 if ('url' in form):
     url = form["url"].value
+    url_dir = re.sub('/index.(php|html)$', '', url)
+    url_dir = re.sub('^https?://', '', url_dir)
+    url_dir = re.sub('/', '_', url_dir)
+    url_dir = re.sub("maps_", "", url_dir)
+    log(url_dir)
 else:
     error("'url' field is not specified\n")
 
-study = os.popen("ls scratch/navicom/ | grep 'id=" + study_id + "\.txt'").readlines()
+log("Start")
+study = os.popen("ls ../scratch/navicom/ | grep 'id=" + study_id + "\.txt'").readlines()
 if (len(study) >= 1):
     study = study[0].strip()
 else:
-    subprocess.Popen(["./getData.R", study_id, "id="+study_id], stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
-    study = os.popen("ls scratch/navicom/ | grep 'id=" + study_id + "\.txt'").readlines()[0].strip()
+    subprocess.Popen(["./getData.R", study_id, "id="+study_id], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    study = os.popen("ls ../scratch/navicom/ | grep 'id=" + study_id + "\.txt'").readlines()
+    log(study_id + " " + str(study))
+    study = study[0].strip()
 
 log("Hello data")
 

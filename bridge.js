@@ -48,7 +48,6 @@ function log(text, append) {
 }
 
 var NAVICOM = "http://navicom-dev.curie.fr/"; // TODO remove dev when getting to prod version
-var DATA_LOADED=false;
 function exec_navicom() {
     // Start the NaviCell map and trigger NaviCom on the server
 
@@ -82,30 +81,10 @@ function exec_navicom() {
     $("#id").attr("value", session_id);
 
     getData(url, session_id);
-    window.open(url + "?id=@" + session_id);
-    displayData();
-
-    //// Transfert data to the NaviCom server
-    //var form = document.getElementById("nc_config");
-    //nvSession(form, url);
-    //$("#perform").attr("value", "display");
-    //$('#loading_spinner').show();
-    //log("Submission");
-    //$.ajax($(form).attr('action'), {
-        //async: true,
-        //cache: false,
-        //type: 'POST',
-        //data: $(form).serialize(),
-        //success: function(file){
-            //$('#loading_spinner').hide();
-            //file = getFileName(file);
-            //log("Display finished, data available at <a href=" + NAVICOM + file + " download>" + file + "</a>");
-        //},
-        //error: function(e, e2, error) {
-            //$('#loading_spinner').hide();
-            //log("Error: " + error);
-            //log(e.responseText, true);
-        //}});
+    ncwin = window.open(url + "?id=@" + session_id);
+    $('#loading_spinner').show();
+    //ncwin.onload = displayData;
+    setTimeout(displayData, '3000');
 }
 
 // First get the data, then send another request to analyse them in NaviCell
@@ -119,7 +98,7 @@ function getData(url, session_id) {
         data: $(form).serialize(),
         success: function(file) {
             $('#loading_spinner').hide();
-            log("Data downloaded on the server");
+            log("Data downloaded on the server: " + file);
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();
@@ -131,7 +110,9 @@ function getData(url, session_id) {
 
 function displayData() {
     var form = document.getElementById("nc_config");
+    $("#perform").attr("value", "display");
     $('#loading_spinner').show();
+    log('Displaying data...')
     $.ajax ("./cgi-bin/displayData.py", {
         async: true,
         cache: false,
@@ -139,7 +120,7 @@ function displayData() {
         data: $(form).serialize(),
         success: function(file) {
             $('#loading_spinner').hide();
-            log("Data displayed");
+            log("Data displayed: " + file);
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();
@@ -147,14 +128,6 @@ function displayData() {
             log(e.responseText, true);
         }
     })
-}
-
-// Open the NaviCell session
-function nvSession(form, url) {
-    var session_id = "navicom" + String(Math.ceil(Math.random() * 1000000000));
-    $("#url").attr("value", url);
-    $("#id").attr("value", session_id);
-    window.open(url + "?id=@" + session_id);
 }
 
 function getFileName(rep) {
@@ -166,7 +139,11 @@ function getFileName(rep) {
         }
         ii += 1;
     }
-    rep = rep[ii].replace(/^FNAME: /, "").trim();
+    if (ii < rep.length) {
+        rep = rep[ii].replace(/^FNAME: /, "").trim();
+    } else {
+        rep = "";
+    }
     return(rep.replace(/^\//, ""));
 }
 

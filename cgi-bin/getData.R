@@ -11,7 +11,13 @@ target_rep = "/scratch/navicom/"
 #target_rep = "/bioinfo/pipelines/navicom/dev/html/share/"
 
 study_id = arg[1]
+#if (length(arg) >= 2) {
+        #nc = cBioNCviz(study_id, genes_list=arg[2])
+#} else {
+        #nc = cBioNCviz(study_id, genes_list="/bioinfo/pipelines/navicom/dev/html/cgi-bin/acsn_v1.1.gmt")
+#}
 nc = cBioNCviz(study_id, genes_list="/bioinfo/pipelines/navicom/dev/html/cgi-bin/acsn_v1.1.gmt")
+
 if (length(arg) >= 2) {
         fname = saveData(nc, path=target_rep, suffix=arg[2])
 } else {
