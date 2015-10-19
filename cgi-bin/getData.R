@@ -16,6 +16,11 @@ study_id = arg[1]
 #} else {
         #nc = cBioNCviz(study_id, genes_list="/bioinfo/pipelines/navicom/dev/html/cgi-bin/acsn_v1.1.gmt")
 #}
+if (length(arg) >= 3) {
+        target_rep = arg[3]
+        dir.create(target_rep)
+}
+
 nc = cBioNCviz(study_id, genes_list="/bioinfo/pipelines/navicom/dev/html/cgi-bin/acsn_v1.1.gmt")
 
 if (length(arg) >= 2) {

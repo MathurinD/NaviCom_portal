@@ -47,11 +47,8 @@ function log(text, append) {
     console.log(text);
 }
 
-var NAVICOM = "http://navicom-dev.curie.fr/"; // TODO remove dev when getting to prod version
-function exec_navicom() {
-    // Start the NaviCell map and trigger NaviCom on the server
-
-    // Control that mandatory inputs are present
+// Ensure that mandatory inputs are present
+function completeFields() {
     var error = "";
     var study = document.getElementById("study_selection").value;
     console.log(study);
@@ -65,9 +62,9 @@ function exec_navicom() {
         $("#logs").html("");
     }
 
-    // Start the NaviCell map
-    var map_sel = document.getElementById("map_selection");
-    var map = map_sel.options[map_sel.selectedIndex].value;
+    // Selecti the NaviCell map
+    var map = document.getElementById("map_selection").value;
+    log(map);
     var map_bis = document.getElementById("map_url").value;
 
     if (map_bis == "") {
@@ -80,25 +77,35 @@ function exec_navicom() {
     $("#url").attr("value", url);
     $("#id").attr("value", session_id);
 
+    return(url);
+}
+
+var NAVICOM = "http://navicom-dev.curie.fr/"; // TODO remove dev when getting to prod version
+// Start the NaviCell map and trigger NaviCom on the server
+function exec_navicom() {
+    var url = completeFields();
+    var session_id = $("#id").attr("value");
+
     getData(url, session_id);
     ncwin = window.open(url + "?id=@" + session_id);
-    $('#loading_spinner').show();
-    //ncwin.onload = displayData;
-    setTimeout(displayData, '3000');
+    //setTimeout(displayData, '3000');
 }
 
 // First get the data, then send another request to analyse them in NaviCell
 function getData(url, session_id) {
     var form = document.getElementById("nc_config");
+    DATA_READY=false;
     $('#loading_spinner').show();
     $.ajax ("./cgi-bin/getData.py", {
-        async: false,
+        async: true,
         cache: false,
         type: 'POST',
         data: $(form).serialize(),
         success: function(file) {
             $('#loading_spinner').hide();
+            file = getFileName(file);
             log("Data downloaded on the server: " + file);
+            displayData();
         },
         error: function(e, e2, error) {
             $('#loading_spinner').hide();
@@ -120,6 +127,7 @@ function displayData() {
         data: $(form).serialize(),
         success: function(file) {
             $('#loading_spinner').hide();
+            file = getFileName(file);
             log("Data displayed: " + file);
         },
         error: function(e, e2, error) {
@@ -148,35 +156,24 @@ function getFileName(rep) {
 }
 
 function download_data() {
-    // Control that mandatory inputs are present
-    var error = "";
-    var study = document.getElementById("study_selection").value;
-    console.log(study);
-    if (study == "empty") {
-        error += "You have to select a study to download<br/>";
-    }
-    if (error != "") {
-        $("#logs").html(error);
-        return;
-    } else {
-        $("#logs").html("");
-    }
+    var url = completeFields();
 
     $('#loading_spinner').show();
     form = document.getElementById("nc_config");
     $("#perform").attr("value", "download");
     //log($(form).serialize());
     log("Building data file")
-    //$.ajax($(form).attr('./cgi-bin/getData.py'), {
-    $.ajax($(form).attr('action'), {
-        async: true,
+    $.ajax("./cgi-bin/getData.py", {
+    //$.ajax($(form).attr('action'), {
+        async: false,
         cache: false,
         type: 'POST',
         data: $(form).serialize(),
         success: function(file){
             $('#loading_spinner').hide();
             //log("Download finished, data available at <a href=" + file + ">" + file + "</a>");
-            //log(file);
+            log(file);
+            file = getFileName(file);
             window.open(file);
         },
         error: function(e, e2, error) {

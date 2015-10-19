@@ -115,7 +115,7 @@ legend {
 
 #loading_spinner {
     display:none;
-    position: fixed;
+    /*position: fixed;*/
     top: 40%;
     left: 45%;
 }
