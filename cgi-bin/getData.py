@@ -11,6 +11,7 @@ import time
 import subprocess
 import cgitb
 cgitb.enable()
+from navicom import *
 from helper_cgi import *
 
 form = cgi.FieldStorage()
@@ -28,13 +29,36 @@ if ('url' in form):
 else:
     error("'url' field is not specified\n")
 
-log("Start")
+#log("Start")
 study = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "\.txt'").readlines()
 if (len(study) >= 1):
     study = study[0].strip()
 else:
     log("Downloading data for id " + study_id + ", in repository " + url_dir)
-    subprocess.Popen(["./getData.R", study_id, "id="+study_id, url_dir], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # Generate gmt file with the genes on the map
+    gmt = os.popen("ls " + rel_dir + "* | grep " + url_dir + ".gmt").readlines()
+    if (len(gmt) >= 1):
+        gmt = gmt[0].strip()
+    else:
+        if ('id' in form):
+            session_id = form["id"].value
+        else:
+            error("'id' field is not specified")
+        if not os.path.exists(rel_dir):
+            os.makedirs(rel_dir)
+        nc = NaviCom()
+        attachNaviCell(nc, url, session_id)
+        gmt = rel_dir[:-1] + ".gmt"
+        with open(gmt, "w") as ff:
+            genes = nc._nv.getHugoList()
+            if (genes == []):
+                return_error("Invalid Map: cannot get a list of HUGO names from the map")
+            ff.write( "ALL\tna\t" + '\t'.join(genes) )
+    log("gmt: " + str(gmt))
+    
+    with open(os.devnull, "a") as devnull:
+        errors = str( subprocess.Popen(["./getData.R", study_id, "id="+study_id, url_dir, gmt], stdout=devnull, stderr=subprocess.PIPE).communicate() )
+    log(errors)
     study = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "\.txt'").readlines()
     log(study_id + " " + str(study))
     study = study[0].strip()

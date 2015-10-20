@@ -33,11 +33,11 @@ else:
 fname = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "\.txt'").readlines()[0].strip()
 
 print_headers()
-log("Loading NaviCom")
+#log("Loading NaviCom")
 
 displayMethod = form["display_selection"].value
 mm = [bool(re.search("[dD]isplay", list(NaviCom.__dict__.keys())[ii] )) for ii in range(len(NaviCom.__dict__.keys()))]
-valid_displays = list(np.array(NaviCom.__dict__.keys())[np.array(mm)])
+valid_displays = list(np.array(NaviCom.__dict__.keys())[np.array(mm)]) + ["completeExport"]
 if (not displayMethod in valid_displays):
     error("This method of display does not exist")
 
@@ -52,13 +52,14 @@ else:
     processing = "raw"
 
 nc = NaviCom()
-log("Successfully loaded NaviCom")
+#log("Successfully loaded NaviCom")
 
-try:
-    nc._attachSession(url, session_id)
-    log("NaviCom attached to the NaviCell session")
-except:
-    error("Could not attach session with id " + str(session_id))
+attachNaviCell(nc, url, session_id)
+#try:
+    #nc._attachSession(url, session_id)
+    #log("NaviCom attached to the NaviCell session")
+#except:
+    #error("Could not attach session with id " + str(session_id))
 
 try:
     nc.loadData(rel_dir + fname)
@@ -79,7 +80,7 @@ elif (displayMethod == "displayMutations"):
 elif (displayMethod == "completeExport"):
     nc.completeExport()
 else:
-    error("This method of display does not exist")
+    error("This method of display is not valid")
 log('Done')
 print("FNAME: " + url_dir + fname)
 

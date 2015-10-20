@@ -78,6 +78,14 @@ function completeFields() {
     return(url);
 }
 
+function navicom_error(e, e2, error) {
+    $('#loading_spinner').hide();
+    log("Error: " + error);
+    if (error != "Gateway Time-out ") {
+        log("<span style='color: red;'>Error: </span>" + e.responseText);
+    }
+}
+
 var NAVICOM = "http://navicom-dev.curie.fr/"; // TODO remove dev when getting to prod version
 // Start the NaviCell map and trigger NaviCom on the server
 function exec_navicom() {
@@ -85,8 +93,8 @@ function exec_navicom() {
     if (!url) { return; }
     var session_id = $("#id").attr("value");
 
-    getData(url, session_id);
     ncwin = window.open(url + "?id=@" + session_id);
+    getData(url, session_id);
     //setTimeout(displayData, '3000');
 }
 
@@ -107,9 +115,11 @@ function getData(url, session_id) {
             displayData();
         },
         error: function(e, e2, error) {
-            $('#loading_spinner').hide();
-            log("Error in data loading: " + error);
-            log(e.responseText, true);
+            if (one_more && error == "Gateway Time-out ") {
+                setTimeout(download_data(false), 3 * 60000); // Wait 3 minutes
+            } else {
+                navicom_error(e, e2, error);
+            }
         }
     })
 }
@@ -126,14 +136,10 @@ function displayData() {
         data: $(form).serialize(),
         success: function(file) {
             $('#loading_spinner').hide();
-            file = getFileName(file);
             log("Data displayed: " + file);
+            file = getFileName(file);
         },
-        error: function(e, e2, error) {
-            $('#loading_spinner').hide();
-            log("Error in data display: " + error);
-            log(e.responseText, true);
-        }
+        error: navicom_error
     })
 }
 
@@ -154,32 +160,40 @@ function getFileName(rep) {
     return(rep.replace(/^\//, ""));
 }
 
-function download_data() {
+function download_data(one_more) {
+    if (typeof(one_more) == 'undefined') { one_more=false; }
     var url = completeFields();
     if (!url) { return; }
+    var session_id = $("#id").attr("value");
+    var map_bis = document.getElementById("map_url").value;
+    //if (map_bis != "") {
+        //ncwin = window.open(url + "?id=@" + session_id);
+    //}
+    ncwin = window.open(url + "?id=@" + session_id);
 
     $('#loading_spinner').show();
     form = document.getElementById("nc_config");
     $("#perform").attr("value", "download");
-    //log($(form).serialize());
     log("Building data file")
     $.ajax("./cgi-bin/getData.py", {
-    //$.ajax($(form).attr('action'), {
-        async: false,
+        async: true,
         cache: false,
         type: 'POST',
         data: $(form).serialize(),
         success: function(file){
             $('#loading_spinner').hide();
-            //log("Download finished, data available at <a href=" + file + ">" + file + "</a>");
             log(file);
             file = getFileName(file);
+            if (map_bis!="") { ncwin.close(); }
             window.open(file);
         },
         error: function(e, e2, error) {
-            $('#loading_spinner').hide();
-            log("Error: " + error);
+            if (one_more && error == "Gateway Time-out ") {
+                setTimeout(download_data(false), 3 * 60000); // Wait 3 minutes
+            } else {
+                if (map_bis!="") { ncwin.close(); }
+                navicom_error(e, e2, error);
+            }
         }});
-    //$(form).submit(); // DEBUG
 }
 

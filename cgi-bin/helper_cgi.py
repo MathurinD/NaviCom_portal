@@ -1,11 +1,17 @@
 import re
 import time
+import sys
 
 def error(error_text):
     print("Status: 500 Internal Server Error")
     print("Content-type: text/html;charset=utf-8\n\n")
-    print("<span style='color: red;'>Error: </span>" + error_text + "")
-    raise ValueError(error_text)
+    print(error_text)
+    raise ValueError(error_text) # Change to print in prod
+
+def return_error(error_text):
+    print("Status: 500 Internal Server Error\n\n")
+    print(error_text)
+    sys.exit(0)
 
 def print_dl_headers(fname="data.txt"):
     #print("Content-type: text/plain;charset=utf-8\n\n")
@@ -28,6 +34,32 @@ def processURL(url):
         url_dir = re.sub('^https?://', '', url_dir)
         url_dir = re.sub('/', '_', url_dir)
         url_dir = re.sub("maps_", "", url_dir)
-    log(url_dir)
+        url_dir = re.sub("_$", "", url_dir)
+    log("URL: " + url_dir)
     url_dir = "/scratch/navicom/" + url_dir + "/"
     return(url_dir)
+
+def getFormValue(form, key, alt=None):
+    if (key in form):
+        return(form[key].value)
+    elif (alt != None):
+        return(alt)
+    else:
+        print_headers()
+        error("'" + key + "' field is not specified")
+
+# Attach the NaviCell session to the NaviCom object
+def attachNaviCell(nc, url, session_id):
+    attached = False
+    iTime = time.time()
+    timeout = 5
+    while ( not attached and (time.time()-iTime) < timeout ):
+        try:
+            nc._attachSession(url, session_id)
+        except: 
+            time.sleep(0.01)
+    try:
+        nc._nv._waitForReady('')
+    except:
+        print_headers()
+        error("Could not attach session with id " + str(session_id))
