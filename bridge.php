@@ -108,7 +108,8 @@ define("DEST_LOGFILE", "3");
                 <fieldset>
                     <legend>Display configuration</legend><br/>
                     Color for lowest values: <input class="color" id="low_color" value="00FF00" name="low_color"/><br/>
-                    Color for highest values: <input class="color" id="high_color" value="FF0000" name="high_color"/><br/>
+                    Color for highest values: <input class="color" id="high_color" value="FF0000" name="high_color"/>
+                    <a href="./tutorial.html#help_color_selection"><img class="select_help" alt="Question mark" title="Map to use to display the data" src="./images/question-mark.png"></a><br/>
                     Color for zero (if present): <input class="color" id="zero_color" name="zero_color" value"FFFFFF"><br/>
                 </fieldset>
 
