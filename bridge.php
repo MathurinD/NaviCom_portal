@@ -82,7 +82,7 @@ define("DEST_LOGFILE", "3");
                     <option value="acsn" title="The global map of ACSN">ACSN global map</option>
                     <option value="apoptosis" title="Apoptosis and mitochondria metabolism map">Apoptosis map</option>
                     <option value="survival" title="Cell survival map">Cell survival map</option>
-                    <option value="emtcellmobility" title="Epithelial-to-mesenchymal transition and cell mobitility map">EMT and cell mobility map</option>
+                    <option value="emtcellmotility" title="Epithelial-to-mesenchymal transition and cell mobitility map">EMT and cell mobility map</option>
                     <option value="cellcycle" title="Cell cycle map" selected>Cell cycle map</option>
                     <option value="dnarepair" title="DNA repair map">DNA repair map</option>
                 </select>
@@ -132,8 +132,10 @@ define("DEST_LOGFILE", "3");
                 <p>
                     <img src="./images/ajax-loader.gif" id="loading_spinner"/>
                 </p>
+
                 <button id="nc_perform" onclick="exec_navicom(); return false" type="button">Perform data visualisation</button>
-                <button id="data_download" onclick="download_data()" type="button">Download cBioPortal data</button>
+                <br/><br/>
+                (or <button id="data_download" onclick="download_data()" type="button">Download cBioPortal data</button>)
                 <br/>
                 <input type='hidden' value='none' name='perform' id='perform'>
                 <input type="hidden" value="" id="url" name="url">
