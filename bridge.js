@@ -138,7 +138,7 @@ function displayData() {
         data: $(form).serialize(),
         success: function(file) {
             $('#loading_spinner').hide();
-            log("Data displayed: " + file);
+            log("<a href='" + file + "'>Data displayed</a>");
             file = getFileName(file);
         },
         error: navicom_error
@@ -168,9 +168,9 @@ function download_data(one_more) {
     if (!url) { return; }
     var session_id = $("#id").attr("value");
     var map_bis = document.getElementById("map_url").value;
-    //if (map_bis != "") {
-        //ncwin = window.open(url + "?id=@" + session_id);
-    //}
+    if (map_bis != "") {
+        ncwin = window.open(url + "?id=@" + session_id);
+    }
     ncwin = window.open(url + "?id=@" + session_id);
 
     $('#loading_spinner').show();

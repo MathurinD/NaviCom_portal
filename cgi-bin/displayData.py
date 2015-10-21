@@ -51,7 +51,10 @@ if ("processing" in form):
 else:
     processing = "raw"
 
-nc = NaviCom()
+hc = getFormValue(form, "high_color")
+lc = getFormValue(form, "low_color")
+zc = getFormValue(form, "zero_color")
+nc = NaviCom(display_config=DisplayConfig(color_gradient=[lc, hc], zero_color=zc))
 attachNaviCell(nc, url, session_id)
 
 try:
