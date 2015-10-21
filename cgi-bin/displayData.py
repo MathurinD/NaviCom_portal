@@ -67,6 +67,7 @@ nc._browser_opened = True # The browser is opened by the client
 #subprocess.Popen("./navicom_display.py '" + fname + "' '" + session_id + "' '" + url + "' '" + displayMethod + "' '" + processing + "' &", shell=True)
 #subprocess.Popen(["./navicom_display.py", fname, session_id, url, displayMethod, processing, "&"])
 log("Running with " + fname)
+nc._nv.noticeMessage('', 'Loading', 'NaviCom is performing display<br/>This window will close automatically once the display is complete', position='middle')
 if (displayMethod == "completeDisplay"):
     nc.completeDisplay(processing=processing)
 elif (displayMethod == "displayMethylome"):
@@ -77,6 +78,7 @@ elif (displayMethod == "completeExport"):
     nc.completeExport()
 else:
     error("This method of display is not valid")
+nc._nv.noticeClose('')
 log('Done')
 print("FNAME: " + url_dir + fname)
 

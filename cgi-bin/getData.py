@@ -48,12 +48,14 @@ else:
             os.makedirs(rel_dir)
         nc = NaviCom()
         attachNaviCell(nc, url, session_id)
+        nc._nv.noticeMessage('', 'Loading', 'NaviCom is using the map to download data<br/>This window will close automatically once the task is complete', position='middle')
         gmt = rel_dir[:-1] + ".gmt"
         with open(gmt, "w") as ff:
             genes = nc._nv.getHugoList()
             if (genes == []):
                 return_error("Invalid Map: cannot get a list of HUGO names from the map")
             ff.write( "ALL\tna\t" + '\t'.join(genes) )
+        nc._nv.noticeClose('')
     log("gmt: " + str(gmt))
     
     with open(os.devnull, "a") as devnull:
