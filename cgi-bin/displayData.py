@@ -52,14 +52,7 @@ else:
     processing = "raw"
 
 nc = NaviCom()
-#log("Successfully loaded NaviCom")
-
 attachNaviCell(nc, url, session_id)
-#try:
-    #nc._attachSession(url, session_id)
-    #log("NaviCom attached to the NaviCell session")
-#except:
-    #error("Could not attach session with id " + str(session_id))
 
 try:
     nc.loadData(rel_dir + fname)

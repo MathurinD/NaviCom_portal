@@ -3,7 +3,7 @@
 .libPaths("/bioinfo/pipelines/navicom/dev/html/lib/")
 
 library(cBioFetchR)
-target_rep = "/scratch/navicom/"
+target_rep = "/scratch/navicom/acsn/"
 
 conn = cBioConnect()
 studies = listStudies(conn)
