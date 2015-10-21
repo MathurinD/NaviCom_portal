@@ -42,8 +42,10 @@ define("DEST_LOGFILE", "3");
         <form id="nc_config" target="_blank" method="post" action="./cgi-bin/getData.py">
             <table>
                 <fieldset>
-                <legend for="study_selection">Data</legend><br/>
-                <select id="study_selection" name="study_selection">
+                <legend for="study_selection">Data
+                    <a href="./tutorial.html#help_study_selection"><img class="select_help" alt="Question mark" title="cBioPortal study" src="./images/question-mark.png"></a>
+                </legend><br/><br/>
+                <select id="study_selection" name="study_selection" onchange="cbiolink();">
                     <option value="empty" selected>&nbsp;</option>
                     <?php
                     $studies = array();
@@ -55,8 +57,8 @@ define("DEST_LOGFILE", "3");
                     } else {
                         for ($ii=1; $ii <count($studies)-1; $ii++) {
                             $line = preg_split("/ +/", $studies[$ii]);
-                            $name = "";
-                            for ($jj=2; $jj < count($line); $jj++) {
+                            $name = $line[2];
+                            for ($jj=3; $jj < count($line); $jj++) {
                                 $name .= " " . $line[$jj];
                             }
                             echo("<option value='{$line[1]}'>{$name}</option>");
@@ -64,17 +66,18 @@ define("DEST_LOGFILE", "3");
                         }
                     ?>
                 </select>
-                <a href="./tutorial.html#help_study_selection"><img class="select_help" alt="Question mark" title="cBioPortal study" src="./images/question-mark.png"></a>
                 <?php
                 if ($return != 0) {
                     echo("<p>An error occured while listing the studies (RETURN STATUS: $return)</p>");
                 }
                 ?>
                 <!--or <input type="file" id="study_file">-->
+                <p id="cbiolink"></p>
                 </fieldset>
 
                 <fieldset>
-                <legend for="map_selection"><a href="http://acsn.curie.fr">ACSN</a> Map</legend><br/>
+                <legend for="map_selection"><a href="http://acsn.curie.fr">ACSN</a> Map
+                    <a href="./tutorial.html#help_map_selection"><img class="select_help" alt="Question mark" title="Map to use to display the data" src="./images/question-mark.png"></a></legend><br/>
                 <select id="map_selection" name="map_selection">
                     <option value="acsn" title="The global map of ACSN">ACSN global map</option>
                     <option value="apoptosis" title="Apoptosis and mitochondria metabolism map">Apoptosis map</option>
@@ -84,12 +87,13 @@ define("DEST_LOGFILE", "3");
                     <option value="dnarepair" title="DNA repair map">DNA repair map</option>
                 </select>
                 or <input type="text" title="URL of a NaviCell map" id="map_url" placeholder="Alternative map URL (ex: https://navicell.curie.fr/navicell/maps/ewing/master/)"/>
-                <a href="./tutorial.html#help_map_selection"><img class="select_help" alt="Question mark" title="Map to use to display the data" src="./images/question-mark.png"></a>
                 </fieldset>
                 <!-- TODO input fields to specify local data or another map -->
 
                 <fieldset>
-                <legend for="display_selection">Display mode</legend><br/>
+                <legend for="display_selection">Display mode
+                    <a href="tutorial.html#help_display_mode"><img class="select_help" alt="Question mark" title="Method from navicom to use to display data" src="./images/question-mark.png"></a>
+                </legend><br/>
                 <select id="display_selection" name="display_selection">
                     <option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
                     <!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
@@ -97,7 +101,6 @@ define("DEST_LOGFILE", "3");
                     <option value="displayMethylome" title="Display methylation data on top of RNA data">Focus on methylation and transcription</option>
                     <option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Focus on mutations and copy number alteration</option>
                 </select>
-                <a href="tutorial.html#help_display_mode"><img class="select_help" alt="Question mark" title="Method from navicom to use to display data" src="./images/question-mark.png"></a>
                 </fieldset>
 
                 <!--<fieldset id="samples_selection">-->
@@ -106,11 +109,17 @@ define("DEST_LOGFILE", "3");
                 <!--</fieldset>-->
 
                 <fieldset>
-                    <legend>Display configuration</legend><br/>
-                    Color for lowest values: <input class="color" id="low_color" value="00FF00" name="low_color"/><br/>
-                    Color for highest values: <input class="color" id="high_color" value="FF0000" name="high_color"/>
-                    <a href="./tutorial.html#help_color_selection"><img class="select_help" alt="Question mark" title="Map to use to display the data" src="./images/question-mark.png"></a><br/>
-                    Color for zero (if present): <input class="color" id="zero_color" name="zero_color" value"FFFFFF"><br/>
+                    <legend>Display configuration
+                    <a href="./tutorial.html#help_color_selection"><img class="select_help" alt="Question mark" title="Colors to use for the map staining and heatmaps" src="./images/question-mark.png"></a>
+                    </legend><br/><br/>
+                    <label for="high_color" class="colsel">Color for highest values:</label>
+                    <input class="color" id="high_color" value="FF0000" name="high_color"/>
+                    <br/>
+                    <label for="zero_color" class="colsel">Color for zero (if present):</label>
+                    <input class="color" id="zero_color" name="zero_color" value"FFFFFF">
+                    <br/>
+                    <label for="low_color" class="colsel">Color for lowest values:</label>
+                    <input class="color" id="low_color" value="00FF00" name="low_color"/>
                 </fieldset>
 
                 <section id="logs">

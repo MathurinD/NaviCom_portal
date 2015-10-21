@@ -37,6 +37,16 @@ function getRequest(url, success, error) {
     return req;
 }
 
+function cbiolink() {
+    cbl = document.getElementById("cbiolink");
+    cbs = document.getElementById("study_selection");
+    if (cbs.value == "empty") {
+        cbl.innerHTML = "";
+    } else {
+        cbl.innerHTML = "<a href='http://www.cbioportal.org/index.do?cancer_study_list=" + cbs.value + "'>" + cbs.children[cbs.selectedIndex].innerHTML + "</a> on cBioPortal";
+    }
+}
+
 function log(text, append) {
     var logs = document.getElementById("logs");
     if (append) {

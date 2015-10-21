@@ -91,6 +91,7 @@ table, fieldset {
     border-radius: 10px;
 }
 
+
 button {
     background: #DDDD99;
     border-radius: 5px;
@@ -132,10 +133,14 @@ legend {
     right: 25%;
 }
 
+#cbiolink {
+    height: 2em;
+}
+
 .select_help {
     position: relative;
     bottom: -8px;
-    left: 8px;
+    margin-top: -8px;
 }
 
 .separator {
