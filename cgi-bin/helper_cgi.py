@@ -11,6 +11,7 @@ def error(error_text):
 def return_error(error_text):
     print("Status: 500 Internal Server Error\n\n")
     print(error_text)
+    print("<a href='tutorial.html#help_errors'>(More informations)</a>")
     sys.exit(0)
 
 def print_dl_headers(fname="data.txt"):
@@ -62,4 +63,5 @@ def attachNaviCell(nc, url, session_id):
     try:
         nc._nv._waitForReady('')
     except:
-        error("Could not attach session with id " + str(session_id))
+        #error("Could not attach session with id " + str(session_id))
+        return_error("Not a NaviCell map (Could not attach the map)")

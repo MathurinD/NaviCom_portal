@@ -55,7 +55,7 @@ h1 {
     margin: auto;
     background: rgb(255, 120, 0);
     color: white;
-    width: 25%;
+    width: 40%;
     position: relative;
     top: -1em;
     margin-bottom: 1em;
@@ -64,6 +64,10 @@ h1 {
 h1 a {
     text-decoration: none;
     color: white;
+}
+
+#slogan {
+    font-size: 0.4em;
 }
 
 h2 {
@@ -77,6 +81,9 @@ h2 {
 
 p {
     padding: 1px;
+    margin: auto;
+    text-align: justify;
+    width: 80%;
 }
 
 form {
@@ -149,4 +156,8 @@ legend {
 
 .separator {
     height: 20em;
+}
+
+.small {
+    font-size: 0.8em;
 }

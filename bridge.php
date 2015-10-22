@@ -27,16 +27,24 @@ define("DEST_LOGFILE", "3");
                 </a>
             </div>
             <h1>
-                <a href="bridge.php">NaviCom</a>
+                <a href="bridge.php">NaviCom</a><br/>
+                <span id='slogan'>Connects data to network maps</span>
             </h1>
         </header>
 
         <section>
         <p>
-            Welcome to NaviCom, a link between <a href="http://www.cbioportal.org">cBioPortal</a> database and <a href="http://navicell.curie.fr">NaviCell</a> web service.<br/>
-            Select a study from which you want to fetch data, the map on which you want it to be displayed and the type of display you want to see. For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
-            NaviCom uses the display function defined in the <a href="https://github.com/MathurinD/navicom">navicom</a> python package (which is <a href="./refman.pdf">fully documented</a>).<br/>
-            Note that downloading non cached data from <a href="http://www.cbioportal.org">cBioPortal</a> take a long time (several minutes). Displaying the data to NaviCell can also be long depending on your connection, your computer and the version of your browser.<br/>
+            <!--NaviCom uses the display function defined in the <a href="https://github.com/MathurinD/navicom">navicom</a> python package (which is <a href="./refman.pdf">fully documented</a>).<br/>-->
+        <!--Note that downloading non cached data from <a href="http://www.cbioportal.org">cBioPortal</a> take a long time (several minutes). Displaying the data to NaviCell can also be long depending on your connection, your computer and the version of your browser.<br/>-->
+
+        Welcome to NaviCom, a platform for generating interactive network based molecular portraits using high-throughput datasets.<br/>
+        NaviCom connects between <a href="http://www.cbioportal.org">cBioPortal</a> database and <a href="http://navicell.curie.fr">NaviCell web service</a> and allows to display various high-throughput data types simultaneously on the network maps in one click.<br/>
+        <br/>
+        Select a study to fetch data, the network map to display the data on, and the type of display. Click ‘Perform data visualization’ to obtain a network-based molecular portrait.<br/>
+For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
+    <br/>
+    <span class='small'>Note that displaying data on network maps may take several minutes depending on the size of the dataset and the map.<br/>
+        Supported browsers&nbsp;: Firefox, Google Chrome, Safari.</span>
         </p>
 
         <form id="nc_config" target="_blank" method="post" action="./cgi-bin/getData.py">
@@ -99,12 +107,14 @@ define("DEST_LOGFILE", "3");
                     <option value="alzheimer" title="Signaling pathways of Alzheimer's disease">Signaling pathways of Alzheimer's disease</option>
                 </select>
                 <br/>
-                or <input type="text" title="URL of a NaviCell map" id="map_url" placeholder="Alternative map URL (ex: https://navicell.curie.fr/navicell/maps/ewing/master/)"/>
+                or
+                <br/>
+                <input type="text" title="URL of a NaviCell map" id="map_url" placeholder="Alternative map URL (ex: https://navicell.curie.fr/navicell/maps/ewing/master/)"/>
                 </fieldset>
                 <!-- TODO input fields to specify local data or another map -->
 
                 <fieldset>
-                <legend for="display_selection">Display mode
+                <legend for="display_selection">Display modes
                     <a href="tutorial.html#help_display_mode"><img class="select_help" alt="Question mark" title="Method from navicom to use to display data" src="./images/question-mark.png"></a>
                 </legend><br/>
                 <select id="display_selection" name="display_selection">
