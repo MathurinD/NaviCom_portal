@@ -56,6 +56,7 @@ def attachNaviCell(nc, url, session_id):
     while ( not attached and (time.time()-iTime) < timeout ):
         try:
             nc._attachSession(url, session_id)
+            attached = True
         except: 
             time.sleep(0.01)
     try:

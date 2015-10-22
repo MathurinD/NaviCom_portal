@@ -79,8 +79,8 @@ function completeFields() {
         var url = "https://acsn.curie.fr/navicell/maps/" + map + "/master/index.php";
     } else {
         var url = map_bis;
-        url.replace(/\/$/, "index.php");
-        url.replace(/.html$/, ".php");
+        url = url.replace(/\/$/, "/index.php");
+        url = url.replace(/.html$/, ".php");
     }
     // TODO Control that the url is valid
     var session_id = "navicom" + String(Math.ceil(Math.random() * 1000000000));
