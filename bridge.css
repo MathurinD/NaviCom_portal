@@ -55,7 +55,7 @@ h1 {
     margin: auto;
     background: rgb(255, 120, 0);
     color: white;
-    width: 25%;
+    width: 40%;
     position: relative;
     top: -1em;
     margin-bottom: 1em;
@@ -64,6 +64,10 @@ h1 {
 h1 a {
     text-decoration: none;
     color: white;
+}
+
+#slogan {
+    font-size: 0.4em;
 }
 
 h2 {
@@ -77,6 +81,9 @@ h2 {
 
 p {
     padding: 1px;
+    margin: auto;
+    text-align: justify;
+    width: 80%;
 }
 
 form {
@@ -90,6 +97,7 @@ table, fieldset {
     margin: auto;
     border-radius: 10px;
 }
+
 
 button {
     background: #DDDD99;
@@ -115,7 +123,7 @@ legend {
 
 #loading_spinner {
     display:none;
-    position: fixed;
+    /*position: fixed;*/
     top: 40%;
     left: 45%;
 }
@@ -128,16 +136,28 @@ legend {
 }
 
 #data_download {
-    position: absolute;
-    right: 25%;
+    /*position: absolute;*/
+    /*right: 25%;*/
+}
+
+#map_url {
+    width: 60%;
+}
+
+#cbiolink {
+    height: 2em;
 }
 
 .select_help {
     position: relative;
     bottom: -8px;
-    left: 8px;
+    margin-top: -8px;
 }
 
 .separator {
     height: 20em;
+}
+
+.small {
+    font-size: 0.8em;
 }

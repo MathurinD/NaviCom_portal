@@ -37,6 +37,16 @@ function getRequest(url, success, error) {
     return req;
 }
 
+function cbiolink() {
+    cbl = document.getElementById("cbiolink");
+    cbs = document.getElementById("study_selection");
+    if (cbs.value == "empty") {
+        cbl.innerHTML = "";
+    } else {
+        cbl.innerHTML = "<a href='http://www.cbioportal.org/index.do?cancer_study_list=" + cbs.value + "'>" + cbs.children[cbs.selectedIndex].innerHTML + "</a> on cBioPortal";
+    }
+}
+
 function log(text, append) {
     var logs = document.getElementById("logs");
     if (append) {
@@ -47,11 +57,8 @@ function log(text, append) {
     console.log(text);
 }
 
-var NAVICOM = "http://navicom-dev.curie.fr/"; // TODO remove dev when getting to prod version
-function exec_navicom() {
-    // Start the NaviCell map and trigger NaviCom on the server
-
-    // Control that mandatory inputs are present
+// Ensure that mandatory inputs are present
+function completeFields() {
     var error = "";
     var study = document.getElementById("study_selection").value;
     console.log(study);
@@ -60,50 +67,78 @@ function exec_navicom() {
     }
     if (error != "") {
         $("#logs").html(error);
-        return;
-    } else {
-        $("#logs").html("");
+        return(false);
     }
 
-    // Start the NaviCell map
-    var map_sel = document.getElementById("map_selection");
-    var map = map_sel.options[map_sel.selectedIndex].value;
+    // Selection of the NaviCell map
+    log("Connecting to the NaviCell session");
+    var map = document.getElementById("map_selection").value;
+    var map_navicell = document.getElementById("map_navicell").value;
     var map_bis = document.getElementById("map_url").value;
 
-    if (map_bis == "") {
-        var url = "https://acsn.curie.fr/navicell/maps/" + map + "/master/index.php";
+    var url="";
+    if (map_bis != "") {
+        url = map_bis;
+    } else if (map_navicell != "") {
+        url = "https://navicell.curie.fr/navicell/maps/" + map_navicell + "/master/index.php"
     } else {
-        var url = map_bis;
+        url = "https://acsn.curie.fr/navicell/maps/" + map + "/master/index.php";
     }
+    url = url.replace(/\/$/, "/index.php");
+    url = url.replace(/.html$/, ".php");
+
     // TODO Control that the url is valid
     var session_id = "navicom" + String(Math.ceil(Math.random() * 1000000000));
     $("#url").attr("value", url);
     $("#id").attr("value", session_id);
 
-    getData(url, session_id);
+    return(url);
+}
+
+function navicom_error(e, e2, error) {
+    $('#loading_spinner').hide();
+    log("Error: " + error);
+    if (error != "Gateway Time-out ") {
+        log("<span style='color: red;'>Error: </span>" + e.responseText);
+    }
+}
+
+var NAVICOM = "http://navicom-dev.curie.fr/"; // TODO remove dev when getting to prod version
+// Start the NaviCell map and trigger NaviCom on the server
+function exec_navicom() {
+    var url = completeFields();
+    if (!url) { return; }
+    var session_id = $("#id").attr("value");
+
     ncwin = window.open(url + "?id=@" + session_id);
-    $('#loading_spinner').show();
-    //ncwin.onload = displayData;
-    setTimeout(displayData, '3000');
+    getData(true, url, session_id);
+    //setTimeout(displayData, '3000');
 }
 
 // First get the data, then send another request to analyse them in NaviCell
-function getData(url, session_id) {
+function getData(one_more, url, session_id) {
     var form = document.getElementById("nc_config");
     $('#loading_spinner').show();
+    log("Building data file");
     $.ajax ("./cgi-bin/getData.py", {
-        async: false,
+        async: true,
         cache: false,
         type: 'POST',
         data: $(form).serialize(),
         success: function(file) {
             $('#loading_spinner').hide();
+            file = getFileName(file);
             log("Data downloaded on the server: " + file);
+            displayData();
         },
         error: function(e, e2, error) {
-            $('#loading_spinner').hide();
-            log("Error in data loading: " + error);
-            log(e.responseText, true);
+            if (one_more && error == "Gateway Time-out ") {
+                setTimeout(function() {
+                    download_data(false)
+                }, 3 * 60000); // Wait 3 minutes
+            } else {
+                navicom_error(e, e2, error);
+            }
         }
     })
 }
@@ -120,13 +155,10 @@ function displayData() {
         data: $(form).serialize(),
         success: function(file) {
             $('#loading_spinner').hide();
-            log("Data displayed: " + file);
+            log("<a href='" + file + "'>Data displayed</a>");
+            file = getFileName(file);
         },
-        error: function(e, e2, error) {
-            $('#loading_spinner').hide();
-            log("Error in data display: " + error);
-            log(e.responseText, true);
-        }
+        error: navicom_error
     })
 }
 
@@ -147,42 +179,42 @@ function getFileName(rep) {
     return(rep.replace(/^\//, ""));
 }
 
-function download_data() {
-    // Control that mandatory inputs are present
-    var error = "";
-    var study = document.getElementById("study_selection").value;
-    console.log(study);
-    if (study == "empty") {
-        error += "You have to select a study to download<br/>";
+function download_data(one_more) {
+    if (typeof(one_more) == 'undefined') { one_more=false; }
+    var url = completeFields();
+    if (!url) { return; }
+    var session_id = $("#id").attr("value");
+    var map_bis = document.getElementById("map_url").value;
+    if (map_bis != "") {
+        ncwin = window.open(url + "?id=@" + session_id);
     }
-    if (error != "") {
-        $("#logs").html(error);
-        return;
-    } else {
-        $("#logs").html("");
-    }
+    ncwin = window.open(url + "?id=@" + session_id);
 
     $('#loading_spinner').show();
     form = document.getElementById("nc_config");
     $("#perform").attr("value", "download");
-    //log($(form).serialize());
     log("Building data file")
-    //$.ajax($(form).attr('./cgi-bin/getData.py'), {
-    $.ajax($(form).attr('action'), {
+    $.ajax("./cgi-bin/getData.py", {
         async: true,
         cache: false,
         type: 'POST',
         data: $(form).serialize(),
         success: function(file){
             $('#loading_spinner').hide();
-            //log("Download finished, data available at <a href=" + file + ">" + file + "</a>");
-            //log(file);
+            log(file);
+            file = getFileName(file);
+            if (map_bis!="") { ncwin.close(); }
             window.open(file);
         },
         error: function(e, e2, error) {
-            $('#loading_spinner').hide();
-            log("Error: " + error);
+            if (one_more && error == "Gateway Time-out ") {
+                setTimeout(function() {
+                    download_data(false)
+                }, 3 * 60000); // Wait 3 minutes
+            } else {
+                if (map_bis!="") { ncwin.close(); }
+                navicom_error(e, e2, error);
+            }
         }});
-    //$(form).submit(); // DEBUG
 }
 

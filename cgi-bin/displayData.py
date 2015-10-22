@@ -13,20 +13,7 @@ cgitb.enable() # Debug for development
 #sys.tracebacklimit=0
 
 from navicom import *
-
-def log(log_entry):
-    with open("/bioinfo/pipelines/navicom/dev/html/navicom_log", "a") as ff:
-        ff.write(time.strftime("%H:%M %d/%m/%Y", time.localtime()) + " ")
-        ff.write(str(log_entry) + "\r\n")
-
-def print_headers():
-    print("Content-type: text/plain;charset=utf-8\n\n")
-    
-def error(error_text):
-    print("Status: 500 Internal Server Error")
-    print("Content-type: text/html;charset=utf-8\n\n")
-    print("<span style='color: red;'>Error: </span>" + error_text + "")
-    raise ValueError(error_text)
+from helper_cgi import *
 
 log("Starting the display")
 form = cgi.FieldStorage()
@@ -38,17 +25,19 @@ else:
 
 if ('url' in form):
     url = form["url"].value
+    url_dir = processURL(url)
+    rel_dir = ".." + url_dir # Relative path for the cgis
 else:
     error("'url' field is not specified\n")
 
-fname = os.popen("ls ../scratch/navicom/* | grep 'id=" + study_id + "\.txt'").readlines()[0].strip()
+fname = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "\.txt'").readlines()[0].strip()
 
 print_headers()
-log("Loading NaviCom")
+#log("Loading NaviCom")
 
 displayMethod = form["display_selection"].value
 mm = [bool(re.search("[dD]isplay", list(NaviCom.__dict__.keys())[ii] )) for ii in range(len(NaviCom.__dict__.keys()))]
-valid_displays = list(np.array(NaviCom.__dict__.keys())[np.array(mm)])
+valid_displays = list(np.array(NaviCom.__dict__.keys())[np.array(mm)]) + ["completeExport"]
 if (not displayMethod in valid_displays):
     error("This method of display does not exist")
 
@@ -62,25 +51,23 @@ if ("processing" in form):
 else:
     processing = "raw"
 
-nc = NaviCom()
-log("Successfully loaded NaviCom")
+hc = getFormValue(form, "high_color")
+lc = getFormValue(form, "low_color")
+zc = getFormValue(form, "zero_color")
+nc = NaviCom(display_config=DisplayConfig(color_gradient=[lc, hc], zero_color=zc))
+attachNaviCell(nc, url, session_id)
 
 try:
-    nc._attachSession(url, session_id)
-    log("NaviCom attached to the NaviCell session")
-except:
-    error("Could not attach session with id " + str(session_id))
-
-try:
-    nc.loadData(fname)
+    nc.loadData(rel_dir + fname)
     log("Data loaded in NaviCom")
 except:
-    error("Could not load data from " + fname + " in navicom")
+    error("Could not load data from " + rel_dir + fname + " in navicom")
 nc._browser_opened = True # The browser is opened by the client
 
 #subprocess.Popen("./navicom_display.py '" + fname + "' '" + session_id + "' '" + url + "' '" + displayMethod + "' '" + processing + "' &", shell=True)
 #subprocess.Popen(["./navicom_display.py", fname, session_id, url, displayMethod, processing, "&"])
 log("Running with " + fname)
+nc._nv.noticeMessage('', 'Loading', 'NaviCom is performing display<br/>This window will close automatically once the display is complete', position='middle')
 if (displayMethod == "completeDisplay"):
     nc.completeDisplay(processing=processing)
 elif (displayMethod == "displayMethylome"):
@@ -90,7 +77,8 @@ elif (displayMethod == "displayMutations"):
 elif (displayMethod == "completeExport"):
     nc.completeExport()
 else:
-    error("This method of display does not exist")
+    error("This method of display is not valid")
+nc._nv.noticeClose('')
 log('Done')
-print("FNAME: " + re.sub('^\.\./', '', fname))
+print("FNAME: " + url_dir + fname)
 
