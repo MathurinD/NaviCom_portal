@@ -46,7 +46,7 @@ else:
             error("'id' field is not specified")
         nc = NaviCom()
         attachNaviCell(nc, url, session_id)
-        nc._nv.noticeMessage('', 'Loading', 'NaviCom is using the map to download data<br/>This window will close automatically once the task is complete', position='middle')
+        nc._nv.noticeMessage('', 'Loading', 'NaviCom is using the map to download data<br/>This window will close automatically once the task has been completed', position='middle')
         gmt = rel_dir[:-1] + ".gmt"
         with open(gmt, "w") as ff:
             genes = nc._nv.getHugoList()

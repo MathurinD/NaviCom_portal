@@ -62,5 +62,4 @@ def attachNaviCell(nc, url, session_id):
     try:
         nc._nv._waitForReady('')
     except:
-        print_headers()
         error("Could not attach session with id " + str(session_id))

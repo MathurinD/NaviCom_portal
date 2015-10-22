@@ -73,15 +73,20 @@ function completeFields() {
     // Selection of the NaviCell map
     log("Connecting to the NaviCell session");
     var map = document.getElementById("map_selection").value;
+    var map_navicell = document.getElementById("map_navicell").value;
     var map_bis = document.getElementById("map_url").value;
 
-    if (map_bis == "") {
-        var url = "https://acsn.curie.fr/navicell/maps/" + map + "/master/index.php";
+    var url="";
+    if (map_bis != "") {
+        url = map_bis;
+    } else if (map_navicell != "") {
+        url = "https://navicell.curie.fr/navicell/maps/" + map_navicell + "/master/index.php"
     } else {
-        var url = map_bis;
-        url = url.replace(/\/$/, "/index.php");
-        url = url.replace(/.html$/, ".php");
+        url = "https://acsn.curie.fr/navicell/maps/" + map + "/master/index.php";
     }
+    url = url.replace(/\/$/, "/index.php");
+    url = url.replace(/.html$/, ".php");
+
     // TODO Control that the url is valid
     var session_id = "navicom" + String(Math.ceil(Math.random() * 1000000000));
     $("#url").attr("value", url);

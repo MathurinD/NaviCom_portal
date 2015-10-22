@@ -133,6 +133,10 @@ legend {
     /*right: 25%;*/
 }
 
+#map_url {
+    width: 60%;
+}
+
 #cbiolink {
     height: 2em;
 }

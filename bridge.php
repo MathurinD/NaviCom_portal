@@ -76,16 +76,29 @@ define("DEST_LOGFILE", "3");
                 </fieldset>
 
                 <fieldset>
-                <legend for="map_selection"><a href="http://acsn.curie.fr">ACSN</a> Map
+                <legend for="map_selection">Map
                     <a href="./tutorial.html#help_map_selection"><img class="select_help" alt="Question mark" title="Map to use to display the data" src="./images/question-mark.png"></a></legend><br/>
+                <a href="http://acsn.curie.fr">ACSN :</a>
                 <select id="map_selection" name="map_selection">
                     <option value="acsn" title="The global map of ACSN">ACSN global map</option>
-                    <option value="apoptosis" title="Apoptosis and mitochondria metabolism map">Apoptosis map</option>
+                    <option value="apoptosis" title="Apoptosis and mitochondria metabolism map">Apoptosis map</option>ewing
                     <option value="survival" title="Cell survival map">Cell survival map</option>
                     <option value="emtcellmotility" title="Epithelial-to-mesenchymal transition and cell mobitility map">EMT and cell mobility map</option>
                     <option value="cellcycle" title="Cell cycle map" selected>Cell cycle map</option>
                     <option value="dnarepair" title="DNA repair map">DNA repair map</option>
                 </select>
+                <br/>
+                or
+                <br/>
+                NaviCell
+                <select id="map_navicell" name="map_navicell">
+                    <option value="" title=""></option>
+                    <option value="mastcellactivation" title="Mast Cell Activation Network">Mast Cell Activation Network</option>
+                    <option value="ewing" title="Ewing Sarcoma">Ewing Sarcoma signaling network</option>
+                    <option value="signallingnetworkofemtregulation" title="Crosstalk between Notch and p53 signaling pathways">Crosstalk between Notch and p53 signaling pathways</option>
+                    <option value="alzheimer" title="Signaling pathways of Alzheimer's disease">Signaling pathways of Alzheimer's disease</option>
+                </select>
+                <br/>
                 or <input type="text" title="URL of a NaviCell map" id="map_url" placeholder="Alternative map URL (ex: https://navicell.curie.fr/navicell/maps/ewing/master/)"/>
                 </fieldset>
                 <!-- TODO input fields to specify local data or another map -->
