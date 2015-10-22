@@ -128,7 +128,9 @@ function getData(one_more, url, session_id) {
         },
         error: function(e, e2, error) {
             if (one_more && error == "Gateway Time-out ") {
-                setTimeout(download_data(false), 3 * 60000); // Wait 3 minutes
+                setTimeout(function() {
+                    download_data(false)
+                }, 3 * 60000); // Wait 3 minutes
             } else {
                 navicom_error(e, e2, error);
             }
@@ -201,7 +203,9 @@ function download_data(one_more) {
         },
         error: function(e, e2, error) {
             if (one_more && error == "Gateway Time-out ") {
-                setTimeout(download_data(false), 3 * 60000); // Wait 3 minutes
+                setTimeout(function() {
+                    download_data(false)
+                }, 3 * 60000); // Wait 3 minutes
             } else {
                 if (map_bis!="") { ncwin.close(); }
                 navicom_error(e, e2, error);
