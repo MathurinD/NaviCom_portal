@@ -71,8 +71,8 @@ function completeFields() {
     }
 
     // Selection of the NaviCell map
+    log("Connecting to the NaviCell session");
     var map = document.getElementById("map_selection").value;
-    log(map);
     var map_bis = document.getElementById("map_url").value;
 
     if (map_bis == "") {
@@ -106,15 +106,15 @@ function exec_navicom() {
     var session_id = $("#id").attr("value");
 
     ncwin = window.open(url + "?id=@" + session_id);
-    getData(url, session_id);
+    getData(true, url, session_id);
     //setTimeout(displayData, '3000');
 }
 
 // First get the data, then send another request to analyse them in NaviCell
-function getData(url, session_id) {
+function getData(one_more, url, session_id) {
     var form = document.getElementById("nc_config");
-    DATA_READY=false;
     $('#loading_spinner').show();
+    log("Building data file");
     $.ajax ("./cgi-bin/getData.py", {
         async: true,
         cache: false,
