@@ -13,10 +13,15 @@
         ?>
 
         <section>
-            <h2 id="downloads">NaviCom downloads</h2>
+            <h3 id="downloads">NaviCom downloads</h3>
+
+            <p>
+                The tutorial for NaviCom is <a href="./tutorial.pdf">available as a pdf</a>.
+            </p>
             
             <p>
-                The navicom python module is available on github: <a href="https://github/sysbio-curie/navicom">https://github/sysbio-curie/navicom</a> and comes with a <a href="./refman.pdf">nice documentation</a>.
+                The navicom python module is available on github: <a href="https://github/sysbio-curie/navicom">https://github/sysbio-curie/navicom</a>.<br/>
+                We also provide the <a href="./refman.pdf">documentation as a pdf</a>.
             </p>
 
             <p>

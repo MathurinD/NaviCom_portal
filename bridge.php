@@ -37,7 +37,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
         Supported browsers&nbsp;: Firefox, Google Chrome, Safari.</span>
         </p>
 
-        <form id="nc_config" target="_blank" method="post" action="./cgi-bin/getData.py">
+        <form id="nc_config" target="_blank" method="post">
             <table>
                 <fieldset>
                 <legend for="study_selection">Data
@@ -114,12 +114,16 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                     <a href="tutorial.html#help_display_mode"><img class="select_help" alt="Question mark" title="Method from navicom to use to display data" src="./images/question-mark.png"></a>
                 </legend><br/>
                 <select id="display_selection" name="display_selection">
-                    <option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
                     <!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
-                    <option value="completeExport" title="Export all data available for the dataset to  NaviCell">Complete export without display</option>
+                    <option value="completeExport" title="Export all data available for the dataset to  NaviCell"></option>
+                    <option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
                     <option value="displayMethylome" title="Display methylation data on top of RNA data">Focus on methylation and transcription</option>
                     <option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Focus on mutations and copy number alteration</option>
                 </select>
+                <br/>
+                or
+                <br/>
+                <button id="completeExport" type="button">Export the dataset</button> to manually perform the visualisation in NaviCell.
                 </fieldset>
 
                 <!--<fieldset id="samples_selection">-->
@@ -152,12 +156,12 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                     <img src="./images/ajax-loader.gif" id="loading_spinner"/>
                 </p>
 
-                <button id="nc_perform" onclick="exec_navicom(); return false" type="button">Perform data visualisation</button>
+                <button id="nc_perform" type="button">Perform data visualisation</button>
                 <br/>
                 <a href="tutorial.html#help_loading"><img class="select_help" alt="Question mark" title="Retrieve cBioPortal data and display them on the selected NaviCell map" src="./images/question-mark.png"></a>
                 <br/>
                 <br/>
-                (or <button id="data_download" onclick="download_data()" type="button">Download cBioPortal data</button>)
+                (or <button id="data_download" type="button">Download cBioPortal data</button>)
                 <br/>
                 <input type='hidden' value='none' name='perform' id='perform'>
                 <input type="hidden" value="" id="url" name="url">
