@@ -115,6 +115,13 @@ function exec_navicom() {
     //setTimeout(displayData, '3000');
 }
 
+function completeExport() {
+    document.getElementById("display_selection").value = "completeExport";
+    completeFields();
+    log("Compleeeete")
+    exec_navicom();
+}
+
 // First get the data, then send another request to analyse them in NaviCell
 function getData(one_more, url, session_id) {
     var form = document.getElementById("nc_config");
@@ -217,4 +224,12 @@ function download_data(one_more) {
             }
         }});
 }
+
+// Define the onclick calls
+document.addEventListener("DOMContentLoaded", function(event) { 
+    document.getElementById("completeExport").onclick = completeExport;
+    document.getElementById("nc_perform").onclick = exec_navicom;
+    document.getElementById("data_download").onclick = download_data;
+});
+
 

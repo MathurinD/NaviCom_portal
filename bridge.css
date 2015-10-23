@@ -4,19 +4,22 @@ html {
 }
 
 body {
-    text-align: center;
+    text-align: justify;
+    line-height: 1.5;
     background: rgb(255, 120, 0);
     margin: auto;
-    width: 70%;
+    width: 80%;
     font-family: Verdana, "Bitstream Vera Sans", "Lucida Grande", sans-serif;
     font-size: 0.8em;
 }
 
 section, div {
+    padding-top: 10px;
+    padding-bottom: 10px;
     background: white;
 }
 
-#help {
+#help , #intro {
     text-align: left;
     padding: 10px;
 }
@@ -32,8 +35,39 @@ header img {
     margin: 15px;
 }
 
+nav {
+    background: rgb(255, 192, 72);
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 12px 15px;
+}
+
+nav ul {
+    margin: 0;
+    text-align: center;
+}
+
+nav a {
+    color: rgb(166, 105, 0);
+    padding: 6px;
+    text-decoration: none;
+}
+
+nav ul li {
+    display: inline;
+}
+
+footer {
+    padding: 15px 20px;
+}
+
+footer a {
+    color: white;
+}
+
 .img {
     text-align: center;
+    margin-top: 5px;
 }
 
 .img img {
@@ -58,7 +92,6 @@ h1 {
     width: 40%;
     position: relative;
     top: -1em;
-    margin-bottom: 1em;
 }
 
 h1 a {
@@ -68,6 +101,7 @@ h1 a {
 
 #slogan {
     font-size: 0.4em;
+    margin-bottom: 1em;
 }
 
 h2 {
@@ -79,11 +113,28 @@ h2 {
     color: white;
 }
 
+h3 {
+    text-decoration: underline;
+}
+
+h4 {
+    margin-left: 20px;
+}
+
 p {
     padding: 1px;
-    margin: auto;
+    margin: 5px auto;
     text-align: justify;
     width: 80%;
+}
+
+a {
+    /*color: rgb(255, 105, 51);*/
+    color: rgb(166, 124, 0);
+}
+
+a:hover {
+    filter: invert(100%);
 }
 
 form {
@@ -92,6 +143,7 @@ form {
 
 table, fieldset {
     width: 70%;
+    text-align: center;
     /*background: rgb(255, 193, 64);*/
     background: rgb(200, 200, 200);
     margin: auto;
@@ -128,11 +180,19 @@ legend {
     left: 45%;
 }
 
+#loading {
+    text-align: center;
+}
+
 #nc_perform {
     width: 15%;
     height: 5%;
     padding: 10px;
     font-size: 1.1em;
+}
+
+#action_buttons {
+    text-align: center;
 }
 
 #data_download {

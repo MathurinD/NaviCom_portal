@@ -3,39 +3,50 @@
     <head>
         <title>NaviCom</title>
         <link type="text/css" rel="stylesheet" href="./bridge.css"/>
+        <link rel="icon" href="favicon.ico" title="favicon" />
         <meta charset="utf-8">
     </head>
     <body>
 
-        <header>
-            <div id="logos">
-                <a href="bridge.php">
-                    <img src="./images/NaviCom_logo_background.png" id="navicom_logo" align="left">
-                </a>
-                <a href="http://curie.fr">
-                    <img src="./images/curie_logo.jpg" align="right">
-                </a>
-            </div>
-            <h1>
-                <a href="bridge.php">NaviCom</a>
-            </h1>
-        </header>
+        <?php
+            include('header.html');
+        ?>
+
+	<section>
+	<p>
+		This documentation has a <a href="tutorial.pdf">pdf version</a>.
+	</p>
+	<section>
+
+        <section id="intro">
+            <h2>Introduction</h2>
+            
+            <p>
+                NaviCom is a web portal to display data from <a href="http://www.cbioportal.org/">cBioPortal</a> on interactive maps provided by <a href="https://navicell.curie.fr/index.html">NaviCell</a>.<br/>
+                NaviCom uses the R package cBioFetchR and the python package navicom, both developped by the <a href='http://bioinfo-out.curie.fr/sysbio'>Computionnal Systems Biology of Cancer group</a>, to respectively retrieve data from cBioPortal and display those data on NaviCell maps.
+            </p>
+
+            <center>
+                <img src="images/NaviCom_Figure.png" alt="Organisation of the NaviCom service" width='60%'/>
+            </center>
+        </section>
 
         <section id="help">
-            <h2>NaviCom tutorial</h2>
+            <h2>Tutorial</h2>
             <h3 id="help_study_selection">Data selection</h3>
 
             <p>
                 Select a study from cBioPortal. The list of studies is optained through the cBioPortal API, and thus contains all studies available from cBioPortal at the moment.<br/>
                 <p class="img"><img src="images/study_selection.png" alt="Data selection screenshot"/></p>
 
-                NOTE: TCGA provisional studies have not been published yet, and can be subject to <a href="http://cancergenome.nih.gov/publications/publicationguidelines">restriction concerning their use in publication</a>.
+                NOTE: TCGA provisional studies have not been published yet, and can be subjected to <a href="http://cancergenome.nih.gov/publications/publicationguidelines">restriction concerning their use in publication</a>.
             </p>
 
             <h3 id="help_map_selection">NaviCell map selection</h3>
             <p>
-                Select a map from the set of curated maps of the <a href="http://acsn.curie.fr">Atlas of Cancer Signaling Network</a>, or provide an URL to another NaviCell map.
-                <p class="img"><img src="images/map_selection.png" alt="Map selection screenshot"/></p>
+                Select a map from the set of curated maps of the <a href="http://acsn.curie.fr">Atlas of Cancer Signaling Network collection</a>, from the <a href="https://navicell.curie.fr/pages/maps.html">NaviCell collection</a>, or provide an URL to another NaviCell map.<br/>
+                <p class="img"><img src="images/map_selection.png" alt="Map selection screenshot"/></p><br/>
+                The NaviCell collection map will only be used if no alternative URL is provided, and the ACSN collection map will only be used if no alternative URL is provided an no NaviCell collection map is selected.
             </p>
 
             <h3 id="help_display_mode">Display modes</h3>
@@ -71,11 +82,9 @@
             </p>
         </section>
 
-        <footer>
-            <p>
-                <center><b>NaviCom</b> was created and is maintained by the team <a href="http://sysbio.curie.fr/" target="_blank">"Computational Systems Biology of Cancer"</a> at <a href="http://www.curie.fr">Institut Curie</a>.<br/>
-                Copyright (c) 2015</center>
-            </p>
-        </footer>
+	<?php
+		include('footer.html');
+	?>
+
     </body>
 </html>
