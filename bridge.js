@@ -117,9 +117,8 @@ function exec_navicom() {
 
 function completeExport() {
     document.getElementById("display_selection").value = "completeExport";
-    completeFields();
-    log("Compleeeete")
     exec_navicom();
+    log("Exporting data");
 }
 
 // First get the data, then send another request to analyse them in NaviCell
@@ -162,8 +161,8 @@ function displayData() {
         data: $(form).serialize(),
         success: function(file) {
             $('#loading_spinner').hide();
-            log("<a href='" + file + "'>Data displayed</a>");
             file = getFileName(file);
+            log("<a href='" + file + "'>Data displayed</a>");
         },
         error: navicom_error
     })
@@ -208,8 +207,8 @@ function download_data(one_more) {
         data: $(form).serialize(),
         success: function(file){
             $('#loading_spinner').hide();
-            log(file);
             file = getFileName(file);
+            log("Download finished");
             if (typeof ncwin !== 'undefined') { ncwin.close(); }
             window.open(file);
         },
