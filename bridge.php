@@ -10,6 +10,7 @@ define("DEST_LOGFILE", "3");
         <script type="text/javascript" src="jscolor/jscolor.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="./bridge.js"></script>
+        <link rel="icon" href="favicon.ico" title="favicon" />
         <meta charset="utf-8">
     </head>
     <body>
@@ -30,7 +31,7 @@ define("DEST_LOGFILE", "3");
         NaviCom connects between <a href="http://www.cbioportal.org">cBioPortal</a> database and <a href="http://navicell.curie.fr">NaviCell web service</a> and allows to display various high-throughput data types simultaneously on the network maps in one click.<br/>
         <br/>
         Select a study to fetch data, the network map to display the data on, and the type of display. Click ‘Perform data visualization’ to obtain a network-based molecular portrait.<br/>
-For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
+For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
     <br/>
     <span class='small'>Note that displaying data on network maps may take several minutes depending on the size of the dataset and the map.<br/>
         Supported browsers&nbsp;: Firefox, Google Chrome, Safari.</span>

@@ -3,6 +3,7 @@
     <head>
         <title>NaviCom</title>
         <link type="text/css" rel="stylesheet" href="./bridge.css"/>
+        <link rel="icon" href="favicon.ico" title="favicon" />
         <meta charset="utf-8">
     </head>
     <body>
