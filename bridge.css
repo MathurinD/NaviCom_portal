@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    text-align: center;
+    text-align: justify;
     line-height: 1.5;
     background: rgb(255, 120, 0);
     margin: auto;
@@ -143,6 +143,7 @@ form {
 
 table, fieldset {
     width: 70%;
+    text-align: center;
     /*background: rgb(255, 193, 64);*/
     background: rgb(200, 200, 200);
     margin: auto;
@@ -188,6 +189,10 @@ legend {
     height: 5%;
     padding: 10px;
     font-size: 1.1em;
+}
+
+#action_buttons {
+    text-align: center;
 }
 
 #data_download {

@@ -12,6 +12,12 @@
             include('header.html');
         ?>
 
+	<section>
+	<p>
+		This documentation has a <a href="tutorial.pdf">pdf version</a>.
+	</p>
+	<section>
+
         <section id="intro">
             <h2>Introduction</h2>
             
