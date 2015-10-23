@@ -54,7 +54,6 @@ For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
                     <a href="./tutorial.html#help_study_selection"><img class="select_help" alt="Question mark" title="cBioPortal study" src="./images/question-mark.png"></a>
                 </legend><br/><br/>
                 <select id="study_selection" name="study_selection" onchange="cbiolink();">
-                    <option value="empty" selected>&nbsp;</option>
                     <?php
                     $studies = array();
                     exec("./cgi-bin/listStudies.R", $studies, $return);
@@ -63,7 +62,14 @@ For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
                         echo('<option value="laml_tcga_pub">Acute Myeloid Leukemia</option>');
                         echo('<option value="acc_tcga">Adenoid Cystic Carcinoma</option>');
                     } else {
-                        for ($ii=1; $ii <count($studies)-1; $ii++) {
+                        $line = preg_split("/ +/", $studies[1]);
+                        $name = $line[2];
+                        for ($jj=3; $jj < count($line); $jj++) {
+                            $name .= " " . $line[$jj];
+                        }
+                        echo("<option value='{$line[1]}' selected>{$name}</option>");
+
+                        for ($ii=2; $ii <count($studies)-1; $ii++) {
                             $line = preg_split("/ +/", $studies[$ii]);
                             $name = $line[2];
                             for ($jj=3; $jj < count($line); $jj++) {
@@ -86,7 +92,7 @@ For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
                 <fieldset>
                 <legend for="map_selection">Map
                     <a href="./tutorial.html#help_map_selection"><img class="select_help" alt="Question mark" title="Map to use to display the data" src="./images/question-mark.png"></a></legend><br/>
-                <a href="http://acsn.curie.fr">ACSN :</a>
+                ACSN collection:
                 <select id="map_selection" name="map_selection">
                     <option value="acsn" title="The global map of ACSN">ACSN global map</option>
                     <option value="apoptosis" title="Apoptosis and mitochondria metabolism map">Apoptosis map</option>ewing
@@ -98,13 +104,13 @@ For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
                 <br/>
                 or
                 <br/>
-                NaviCell
+                NaviCell collection:
                 <select id="map_navicell" name="map_navicell">
                     <option value="" title=""></option>
-                    <option value="mastcellactivation" title="Mast Cell Activation Network">Mast Cell Activation Network</option>
                     <option value="ewing" title="Ewing Sarcoma">Ewing Sarcoma signaling network</option>
                     <option value="signallingnetworkofemtregulation" title="Crosstalk between Notch and p53 signaling pathways">Crosstalk between Notch and p53 signaling pathways</option>
                     <option value="alzheimer" title="Signaling pathways of Alzheimer's disease">Signaling pathways of Alzheimer's disease</option>
+                    <option value="mastcellactivation" title="Mast Cell Activation Network">Mast Cell Activation Network</option>
                 </select>
                 <br/>
                 or
