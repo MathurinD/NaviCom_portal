@@ -158,12 +158,15 @@ For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
                         }
                     ?>
                 </section>
-                <p>
+                <p id="loading">
                     <img src="./images/ajax-loader.gif" id="loading_spinner"/>
                 </p>
 
                 <button id="nc_perform" onclick="exec_navicom(); return false" type="button">Perform data visualisation</button>
-                <br/><br/>
+                <br/>
+                <a href="tutorial.html#help_loading"><img class="select_help" alt="Question mark" title="Retrieve cBioPortal data and display them on the selected NaviCell map" src="./images/question-mark.png"></a>
+                <br/>
+                <br/>
                 (or <button id="data_download" onclick="download_data()" type="button">Download cBioPortal data</button>)
                 <br/>
                 <input type='hidden' value='none' name='perform' id='perform'>

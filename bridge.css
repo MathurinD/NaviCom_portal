@@ -16,7 +16,7 @@ section, div {
     background: white;
 }
 
-#help {
+#help , #intro {
     text-align: left;
     padding: 10px;
 }
@@ -34,6 +34,7 @@ header img {
 
 .img {
     text-align: center;
+    margin-top: 5px;
 }
 
 .img img {
@@ -77,6 +78,14 @@ h2 {
     text-align: center;
     background: rgb(255, 120, 0);
     color: white;
+}
+
+h3 {
+    text-decoration: underline;
+}
+
+h4 {
+    margin-left: 20px;
 }
 
 p {
@@ -126,6 +135,10 @@ legend {
     /*position: fixed;*/
     top: 40%;
     left: 45%;
+}
+
+#loading {
+    text-align: center;
 }
 
 #nc_perform {
