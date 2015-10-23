@@ -210,7 +210,7 @@ function download_data(one_more) {
             $('#loading_spinner').hide();
             log(file);
             file = getFileName(file);
-            if (map_bis!="") { ncwin.close(); }
+            if (typeof ncwin !== 'undefined') { ncwin.close(); }
             window.open(file);
         },
         error: function(e, e2, error) {
@@ -219,7 +219,8 @@ function download_data(one_more) {
                     download_data(false)
                 }, 3 * 60000); // Wait 3 minutes
             } else {
-                if (map_bis!="") { ncwin.close(); }
+                if (typeof ncwin !== 'undefined') { ncwin.close(); }
+                
                 navicom_error(e, e2, error);
             }
         }});
