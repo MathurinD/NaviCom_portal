@@ -17,20 +17,9 @@ define("DEST_LOGFILE", "3");
         This page relies on javascript to perform its functions. You must allow javascript in your browser to be able to use it.
         </noscript>
 
-        <header>
-            <div id="logos">
-                <a href="bridge.php">
-                    <img src="./images/NaviCom_logo_background.png" id="navicom_logo" align="left">
-                </a>
-                <a href="http://curie.fr">
-                    <img src="./images/curie_logo.jpg" align="right">
-                </a>
-            </div>
-            <h1>
-                <a href="bridge.php">NaviCom</a><br/>
-                <span id='slogan'>Connects data to network maps</span>
-            </h1>
-        </header>
+        <?php
+            include('header.html');
+        ?>
 
         <section>
         <p>
@@ -177,11 +166,9 @@ For more details, see the <a href="./tutorial.html">tutorial</a>.<br/>
 
         </section>
 
-        <footer>
-            <p>
-                <center><b>NaviCom</b> was created and is maintained by the team <a href="http://sysbio.curie.fr/" target="_blank">"Computational Systems Biology of Cancer"</a> at <a href="http://www.curie.fr">Institut Curie</a>.<br/>
-                Copyright (c) 2015</center>
-            </p>
-        </footer>
+        <?php
+            include('footer.html');
+        ?>
+
     </body>
 </html>

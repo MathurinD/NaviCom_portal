@@ -5,14 +5,16 @@ html {
 
 body {
     text-align: center;
+    line-height: 1.5;
     background: rgb(255, 120, 0);
     margin: auto;
-    width: 70%;
+    width: 80%;
     font-family: Verdana, "Bitstream Vera Sans", "Lucida Grande", sans-serif;
     font-size: 0.8em;
 }
 
 section, div {
+    padding-top: 10px;
     background: white;
 }
 
@@ -30,6 +32,36 @@ header {
 header img {
     border-radius: 10px;
     margin: 15px;
+}
+
+nav {
+    background: rgb(255, 192, 72);
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 12px 15px;
+}
+
+nav ul {
+    margin: 0;
+    text-align: center;
+}
+
+nav a {
+    color: rgb(166, 105, 0);
+    padding: 6px;
+    text-decoration: none;
+}
+
+nav ul li {
+    display: inline;
+}
+
+footer {
+    padding: 15px 20px;
+}
+
+footer a {
+    color: white;
 }
 
 .img {
@@ -59,7 +91,6 @@ h1 {
     width: 40%;
     position: relative;
     top: -1em;
-    margin-bottom: 1em;
 }
 
 h1 a {
@@ -69,6 +100,7 @@ h1 a {
 
 #slogan {
     font-size: 0.4em;
+    margin-bottom: 1em;
 }
 
 h2 {
@@ -93,6 +125,15 @@ p {
     margin: auto;
     text-align: justify;
     width: 80%;
+}
+
+a {
+    /*color: rgb(255, 105, 51);*/
+    color: rgb(166, 124, 0);
+}
+
+a:hover {
+    filter: invert(100%);
 }
 
 form {
