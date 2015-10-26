@@ -40,7 +40,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
         <form id="nc_config" target="_blank" method="post">
             <fieldset>
             <legend for="study_selection">Data
-                <a href="./tutorial.html#help_study_selection"><img class="select_help" alt="Question mark" title="cBioPortal study" src="./images/question-mark.png"></a>
+                <a href="./tutorial.php#help_study_selection"><img class="select_help" alt="Question mark" title="cBioPortal study" src="./images/question-mark.png"></a>
             </legend><br/><br/>
             <select id="study_selection" name="study_selection" onchange="cbiolink();">
                 <?php
@@ -80,7 +80,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
 
             <fieldset>
             <legend for="map_selection">Map
-                <a href="./tutorial.html#help_map_selection"><img class="select_help" alt="Question mark" title="Map to use to display the data" src="./images/question-mark.png"></a></legend><br/>
+                <a href="./tutorial.php#help_map_selection"><img class="select_help" alt="Question mark" title="Map to use to display the data" src="./images/question-mark.png"></a></legend><br/>
             ACSN collection:
             <select id="map_selection" name="map_selection">
                 <option value="acsn" title="The global map of ACSN">ACSN global map</option>
@@ -110,7 +110,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
 
             <fieldset>
             <legend for="display_selection">Display modes
-                <a href="tutorial.html#help_display_mode"><img class="select_help" alt="Question mark" title="Method from navicom to use to display data" src="./images/question-mark.png"></a>
+                <a href="tutorial.php#help_display_mode"><img class="select_help" alt="Question mark" title="Method from navicom to use to display data" src="./images/question-mark.png"></a>
             </legend><br/>
             <select id="display_selection" name="display_selection">
                 <!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
@@ -122,7 +122,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
             <br/>
             or
             <br/>
-            <button id="completeExport" type="button">Export the dataset</button> to manually perform the visualisation in NaviCell.
+            <button id="completeExport" type="button">Export the dataset to NaviCell</button> and perform the visualisation manually.
             </fieldset>
 
             <!--<fieldset id="samples_selection">-->
@@ -132,7 +132,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
 
             <fieldset>
                 <legend>Display configuration
-                <a href="./tutorial.html#help_color_selection"><img class="select_help" alt="Question mark" title="Colors to use for the map staining and heatmaps" src="./images/question-mark.png"></a>
+                <a href="./tutorial.php#help_color_selection"><img class="select_help" alt="Question mark" title="Colors to use for the map staining and heatmaps" src="./images/question-mark.png"></a>
                 </legend><br/><br/>
                 <label for="high_color" class="colsel">Color for highest values:</label>
                 <input class="color" id="high_color" value="FF0000" name="high_color"/>
@@ -159,7 +159,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
 
                 <button id="nc_perform" type="button">Perform data visualisation</button>
                 <br/>
-                <a href="tutorial.html#help_loading"><img class="select_help" alt="Question mark" title="Retrieve cBioPortal data and display them on the selected NaviCell map" src="./images/question-mark.png"></a>
+                <a href="tutorial.php#help_loading"><img class="select_help" alt="Question mark" title="Retrieve cBioPortal data and display them on the selected NaviCell map" src="./images/question-mark.png"></a>
                 <br/>
                 <br/>
                 (or <button id="data_download" type="button">Download cBioPortal data</button>)
