@@ -116,7 +116,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                 <!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
                 <option value="completeExport" title="Export all data available for the dataset to  NaviCell"></option>
                 <option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
-                <option value="displayMethylome" title="Display methylation data on top of RNA data">Focus on methylation and transcription</option>
+                <option value="displayMethylome" title="Display methylation data on top of RNA data">Focus on methylation and gene expression</option>
                 <option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Focus on mutations and copy number alteration</option>
             </select>
             <br/>

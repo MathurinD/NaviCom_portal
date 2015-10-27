@@ -230,6 +230,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("completeExport").onclick = completeExport;
     document.getElementById("nc_perform").onclick = exec_navicom;
     document.getElementById("data_download").onclick = download_data;
+    cbiolink();
 });
-
-
