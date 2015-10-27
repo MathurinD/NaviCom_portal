@@ -19,13 +19,13 @@
         <br/><br/>
         Kuperstein I, Cohen DP, Pook S, Viara E, Calzone L, Barillot E, Zinovyev A. NaviCell: a web-based environment for navigation, curation and maintenance of large molecular interaction maps. BMC Syst Biol. 2013 Oct 7;7:100. doi: 10.1186/1752-0509-7-100. Pubmed ID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/24099179">24099179</a>.
         <br/><br/>
-        Cerami E, Gao J,  Dogrusoz U, et al. The cBio Cancer Genomics Portal: An Open Platform for Exploring Multidimensional Cancer Genomics Data Cancer Discov. 2012 May; 2(5): 401–404. doi: 10.1158/2159-8290.CD-12-0095 Pubmed ID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/?term=22588877">22588877</a>.
+        Cerami E, Gao J,  Dogrusoz U, et al. The cBio Cancer Genomics Portal: An Open Platform for Exploring Multidimensional Cancer Genomics Data Cancer Discov. 2012 May; 2(5): 401–404. doi: 10.1158/2159-8290.CD-12-0095 Pubmed ID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/22588877">22588877</a>.
         <br/><br/>
-        Czerwinska U, Calzone L, Barillot E, Zinovyev A. DeDaL: Cytoscape 3 app for producing and morphing data-driven and structure-driven network layouts. BMC Syst Biol. 2015 Aug 14;9:46. doi: 10.1186/s12918-015-0189-4. Pubmed ID: <a href="26271256">26271256</a>.
+        Czerwinska U, Calzone L, Barillot E, Zinovyev A. DeDaL: Cytoscape 3 app for producing and morphing data-driven and structure-driven network layouts. BMC Syst Biol. 2015 Aug 14;9:46. doi: 10.1186/s12918-015-0189-4. Pubmed ID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/26271256">26271256</a>.
         <br/><br/>
-        Vera-Licona P, Bonnet E, Barillot E, Zinovyev A. OCSANA: optimal combinations of interventions from network analysis. Bioinformatics. 2013 Jun 15;29(12):1571-3. doi: 10.1093/bioinformatics/btt195. Pubmed ID: <a href="23626000">23626000</a>.
+        Vera-Licona P, Bonnet E, Barillot E, Zinovyev A. OCSANA: optimal combinations of interventions from network analysis. Bioinformatics. 2013 Jun 15;29(12):1571-3. doi: 10.1093/bioinformatics/btt195. Pubmed ID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/23626000">23626000</a>.
         <br/><br/>
-        Bonnet E, Calzone L, Rovera D, Stoll G, Barillot E, Zinovyev A. BiNoM 2.0, a Cytoscape plugin for accessing and analyzing pathways using standard systems biology formats. BMC Syst Biol. 2013 Mar 1;7:18. doi: 10.1186/1752-0509-7-18. Pubmed ID: <a href="23453054">23453054</a>.
+        Bonnet E, Calzone L, Rovera D, Stoll G, Barillot E, Zinovyev A. BiNoM 2.0, a Cytoscape plugin for accessing and analyzing pathways using standard systems biology formats. BMC Syst Biol. 2013 Mar 1;7:18. doi: 10.1186/1752-0509-7-18. Pubmed ID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/23453054">23453054</a>.
 
         <h3 id="contact">Contact</h3>
 

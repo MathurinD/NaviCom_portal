@@ -14,14 +14,12 @@ body {
 }
 
 section, div {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 20px;
     background: white;
 }
 
 #help , #intro {
     text-align: left;
-    padding: 10px;
 }
 
 header {

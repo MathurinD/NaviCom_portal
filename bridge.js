@@ -117,9 +117,8 @@ function exec_navicom() {
 
 function completeExport() {
     document.getElementById("display_selection").value = "completeExport";
-    completeFields();
-    log("Compleeeete")
     exec_navicom();
+    log("Exporting data");
 }
 
 // First get the data, then send another request to analyse them in NaviCell
@@ -162,8 +161,8 @@ function displayData() {
         data: $(form).serialize(),
         success: function(file) {
             $('#loading_spinner').hide();
-            log("<a href='" + file + "'>Data displayed</a>");
             file = getFileName(file);
+            log("<a href='" + file + "'>Data displayed</a>");
         },
         error: navicom_error
     })
@@ -208,9 +207,9 @@ function download_data(one_more) {
         data: $(form).serialize(),
         success: function(file){
             $('#loading_spinner').hide();
-            log(file);
             file = getFileName(file);
-            if (map_bis!="") { ncwin.close(); }
+            log("Download finished");
+            if (typeof ncwin !== 'undefined') { ncwin.close(); }
             window.open(file);
         },
         error: function(e, e2, error) {
@@ -219,7 +218,8 @@ function download_data(one_more) {
                     download_data(false)
                 }, 3 * 60000); // Wait 3 minutes
             } else {
-                if (map_bis!="") { ncwin.close(); }
+                if (typeof ncwin !== 'undefined') { ncwin.close(); }
+                
                 navicom_error(e, e2, error);
             }
         }});
@@ -230,6 +230,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("completeExport").onclick = completeExport;
     document.getElementById("nc_perform").onclick = exec_navicom;
     document.getElementById("data_download").onclick = download_data;
+    cbiolink();
 });
-
-
