@@ -6,3 +6,4 @@ execute_navicom.js
 index.html
 data/*
 lib/navicom_package/*
+*Session.vim
