@@ -118,6 +118,9 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                 <option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
                 <option value="displayMethylome" title="Display methylation data on top of RNA data">Focus on methylation and gene expression</option>
                 <option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Focus on mutations and copy number alteration</option>
+                <option value="mRNAandProt" title="Display proteomics data as glyphs and gene expression as map staining">Display proteomics and gene expression</option>
+                <option value="mRNAandmiRNA" title="Display miRNA data as glyphs and gene expression as map staining">Display miRNA and gene expression</option>
+                <option value="mRNAandMeth" title="Display methylation data as glyphs and gene expression as map staining">Display methylation and gene expression</option>
             </select>
             <br/>
             or

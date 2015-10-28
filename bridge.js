@@ -121,11 +121,15 @@ function completeExport() {
     log("Exporting data");
 }
 
+function showSpinner(text) {
+    $('#loading_spinner').show();
+    log(text);
+}
+
 // First get the data, then send another request to analyse them in NaviCell
 function getData(one_more, url, session_id) {
     var form = document.getElementById("nc_config");
-    $('#loading_spinner').show();
-    log("Building data file");
+    showSpinner("Building data file");
     $.ajax ("./cgi-bin/getData.py", {
         async: true,
         cache: false,
@@ -152,8 +156,7 @@ function getData(one_more, url, session_id) {
 function displayData() {
     var form = document.getElementById("nc_config");
     $("#perform").attr("value", "display");
-    $('#loading_spinner').show();
-    log('Displaying data...')
+    showSpinner('Displaying data...<br/>It will take from 30 seconds up to 10 minutes for big datasets')
     $.ajax ("./cgi-bin/displayData.py", {
         async: true,
         cache: false,
@@ -162,27 +165,28 @@ function displayData() {
         success: function(file) {
             $('#loading_spinner').hide();
             file = getFileName(file);
-            log("<a href='" + file + "'>Data displayed</a>");
+            if (file != "") {
+                log("<a href='" + file + "'>Data displayed</a>");
+            }
         },
         error: navicom_error
     })
 }
 
 function getFileName(rep) {
+    console.log(rep);
     rep = rep.split("\n");
     var ii = 0;
     while (ii < rep.length) {
         if (rep[ii].search(/^FNAME/) != -1) {
-            break;
+            return( rep[ii].replace(/^FNAME: /, "").trim().replace(/^\//, "") );
+        }
+        if (rep[ii].search(/Status.*Error/) != -1) {
+            log( "<span style='color: red;'>Error: </span>" + rep.join("</br>") );
         }
         ii += 1;
     }
-    if (ii < rep.length) {
-        rep = rep[ii].replace(/^FNAME: /, "").trim();
-    } else {
-        rep = "";
-    }
-    return(rep.replace(/^\//, ""));
+    return("");
 }
 
 function download_data(one_more) {
@@ -196,10 +200,9 @@ function download_data(one_more) {
     }
     ncwin = window.open(url + "?id=@" + session_id);
 
-    $('#loading_spinner').show();
+    showSpinner("Building data file")
     form = document.getElementById("nc_config");
     $("#perform").attr("value", "download");
-    log("Building data file")
     $.ajax("./cgi-bin/getData.py", {
         async: true,
         cache: false,
