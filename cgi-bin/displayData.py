@@ -36,15 +36,15 @@ print_headers()
 #log("Loading NaviCom")
 
 displayMethod = form["display_selection"].value
-mm = [bool(re.search("[dD]isplay", list(NaviCom.__dict__.keys())[ii] )) for ii in range(len(NaviCom.__dict__.keys()))]
-valid_displays = list(np.array(NaviCom.__dict__.keys())[np.array(mm)]) + ["completeExport"]
-if (not displayMethod in valid_displays):
-    error("This method of display does not exist")
+#mm = [bool(re.search("[dD]isplay", list(NaviCom.__dict__.keys())[ii] )) for ii in range(len(NaviCom.__dict__.keys()))]
+#valid_displays = list(np.array(NaviCom.__dict__.keys())[np.array(mm)]) + ["completeExport"]
+#if (not displayMethod in valid_displays):
+    #return_error("This method of display does not exist")
 
 if ('id' in form):
     session_id = form["id"].value
 else:
-    error("'id' field is not specified")
+    return_error("'id' field is not specified")
 
 if ("processing" in form):
     processing = form["processing"].value
@@ -56,6 +56,7 @@ lc = getFormValue(form, "low_color")
 zc = getFormValue(form, "zero_color")
 nc = NaviCom(display_config=DisplayConfig(color_gradient=[lc, hc], zero_color=zc))
 attachNaviCell(nc, url, session_id)
+nc._nv.noticeMessage('', 'Loading', 'NaviCom is performing display. It can take up to 10 minutes for big datasets<br/>This window will close automatically once the display is complete', position='middle')
 
 try:
     nc.loadData(rel_dir + fname)
@@ -67,7 +68,6 @@ nc._browser_opened = True # The browser is opened by the client
 #subprocess.Popen("./navicom_display.py '" + fname + "' '" + session_id + "' '" + url + "' '" + displayMethod + "' '" + processing + "' &", shell=True)
 #subprocess.Popen(["./navicom_display.py", fname, session_id, url, displayMethod, processing, "&"])
 log("Running with " + fname)
-nc._nv.noticeMessage('', 'Loading', 'NaviCom is performing display<br/>This window will close automatically once the display is complete', position='middle')
 if (displayMethod == "completeDisplay"):
     nc.completeDisplay(processing=processing)
 elif (displayMethod == "displayMethylome"):
@@ -76,6 +76,12 @@ elif (displayMethod == "displayMutations"):
     nc.displayMutations(processing=processing) # background ?
 elif (displayMethod == "completeExport"):
     nc.completeExport()
+elif (displayMethod == "mRNAandProt"):
+    nc.displayExpressionWithProteomics(processing=processing)
+elif (displayMethod == "mRNAandmiRNA"):
+    nc.displayExpressionWithmiRNA(processing=processing)
+elif (displayMethod == "mRNAandMeth"):
+    nc.displayExpressionWithMethylation(processing=processing)
 else:
     error("This method of display is not valid")
 nc._nv.noticeClose('')
