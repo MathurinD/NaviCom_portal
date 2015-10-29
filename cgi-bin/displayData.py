@@ -82,6 +82,14 @@ elif (displayMethod == "mRNAandmiRNA"):
     nc.displayExpressionWithmiRNA(processing=processing)
 elif (displayMethod == "mRNAandMeth"):
     nc.displayExpressionWithMethylation(processing=processing)
+elif (displayMethod == "mRNAandCNA"):
+    nc.displayExpressionWithCopyNumber(processing=processing)
+elif (displayMethod == "mRNAandMut"):
+    nc.displayExpressionWithMutations(processing=processing)
+elif (displayMethod == "mutAndGenes"):
+    nc.displayMutationsWithGenomics(processing=processing)
+elif (displayMethod == "mRNA"):
+    nc.displayExpression(processing=processing)
 else:
     error("This method of display is not valid")
 nc._nv.noticeClose('')

@@ -22,11 +22,10 @@ for (ii in 1:nrow(studies)) {
             warnings(paste0("Study ", studies[ii, 1], " was not downloaded properly"))
         })
     } else {
-        print("Importing")
         fname = scratch[which(dfile)[1]]
         nc = importNCviz(paste0(target_rep, fname))
     }
-    writeLines( paste( fname, length(nc@nc_data), ncol(nc@nc_data[[1]]) ), ff)
+    writeLines( paste( fname, length(nc@nc_data), ncol(nc@nc_data[[1]]), paste(names(nc@nc_data), collapse=" ") ), ff)
 }
 close(ff)
 

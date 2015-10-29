@@ -116,11 +116,14 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                 <!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
                 <option value="completeExport" title="Export all data available for the dataset to  NaviCell"></option>
                 <option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
-                <option value="displayMethylome" title="Display methylation data on top of RNA data">Focus on methylation and gene expression</option>
-                <option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Focus on mutations and copy number alteration</option>
-                <option value="mRNAandProt" title="Display proteomics data as glyphs and gene expression as map staining">Display proteomics and gene expression</option>
-                <option value="mRNAandmiRNA" title="Display miRNA data as glyphs and gene expression as map staining">Display miRNA and gene expression</option>
-                <option value="mRNAandMeth" title="Display methylation data as glyphs and gene expression as map staining">Display methylation and gene expression</option>
+                <!--<option value="displayMethylome" title="Display methylation data on top of RNA data">Focus on methylation and gene expression</option>-->
+                <!--<option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Focus on mutations and copy number alteration</option>-->
+                <option value="mutAndGenes" title="Display mutations as glyph with gene expression as map staining and copy number as heatmap">Mutations and genomic data</option>
+                <option value="mRNAandMut" title="Display mutations as glyph and gene expression as map staining" selected>Expression and mutations</option>
+                <option value="mRNAandProt" title="Display proteomics data as glyphs and gene expression as map staining">Expression and proteomics</option>
+                <option value="mRNAandmiRNA" title="Display miRNA data as glyphs and gene expression as map staining">Expression and miRNA</option>
+                <option value="mRNAandMeth" title="Display methylation data as glyphs and gene expression as map staining">Expression and methylation</option>
+                <option value="mRNA" title="Display expression data as map stainnig">Expression</option>
             </select>
             <br/>
             or
@@ -137,14 +140,21 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                 <legend>Display configuration
                 <a href="./tutorial.php#help_color_selection"><img class="select_help" alt="Question mark" title="Colors to use for the map staining and heatmaps" src="./images/question-mark.png"></a>
                 </legend><br/><br/>
-                <label for="high_color" class="colsel">Color for highest values:</label>
-                <input class="color" id="high_color" value="FF0000" name="high_color"/>
-                <br/>
-                <label for="zero_color" class="colsel">Color for zero (if present):</label>
-                <input class="color" id="zero_color" name="zero_color" value"FFFFFF">
-                <br/>
-                <label for="low_color" class="colsel">Color for lowest values:</label>
-                <input class="color" id="low_color" value="00FF00" name="low_color"/>
+                <table>
+                    <tr>
+                        <td><label for="high_color" class="colsel">Color for highest values:</label></td>
+
+                        <td><input class="color" id="high_color" value="FF0000" name="high_color"/></td>
+                </tr>
+                <tr>
+                    <td><label for="zero_color" class="colsel">Color for zero (if present):</label></td>
+                <td><input class="color" id="zero_color" name="zero_color" value"FFFFFF"></td>
+                </tr>
+                <tr>
+                <td><label for="low_color" class="colsel">Color for lowest values:</label></td>
+                <td><input class="color" id="low_color" value="00FF00" name="low_color"/></td>
+                </tr>
+                </table>
             </fieldset>
 
             <section id="logs">

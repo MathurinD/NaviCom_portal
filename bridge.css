@@ -87,7 +87,7 @@ h1 {
     margin: auto;
     background: rgb(255, 120, 0);
     color: white;
-    width: 40%;
+    width: 8em;
     position: relative;
     top: -1em;
 }
@@ -139,7 +139,7 @@ form {
     padding: 10px;
 }
 
-table, fieldset {
+fieldset {
     width: 70%;
     text-align: center;
     /*background: rgb(255, 193, 64);*/
@@ -148,6 +148,12 @@ table, fieldset {
     border-radius: 10px;
 }
 
+table {
+    text-align: center;
+    width: 60%;
+    background: rgb(200, 200, 200);
+    margin: auto;
+}
 
 button {
     background: #DDDD99;
