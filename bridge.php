@@ -44,36 +44,18 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
             </legend><br/><br/>
             <select id="study_selection" name="study_selection" onchange="cbiolink();">
                 <?php
-                $studies = array();
-                exec("./cgi-bin/listStudies.R", $studies, $return);
-
-                if ($return != 0) {
-                    echo('<option value="laml_tcga_pub">Acute Myeloid Leukemia</option>');
-                    echo('<option value="acc_tcga">Adenoid Cystic Carcinoma</option>');
-                } else {
-                    $line = preg_split("/ +/", $studies[1]);
-                    $name = $line[2];
-                    for ($jj=3; $jj < count($line); $jj++) {
-                        $name .= " " . $line[$jj];
-                    }
-                    echo("<option value='{$line[1]}' selected>{$name}</option>");
-
-                    for ($ii=2; $ii <count($studies)-1; $ii++) {
-                        $line = preg_split("/ +/", $studies[$ii]);
-                        $name = $line[2];
-                        for ($jj=3; $jj < count($line); $jj++) {
-                            $name .= " " . $line[$jj];
-                        }
-                        echo("<option value='{$line[1]}'>{$name}</option>");
-                        }
-                    }
+                $studies = file("/scratch/navicom/old_all_studies.txt");
+                for ($ii=0; $ii < count($studies); $ii++) {
+                    $line = preg_split("/ /", $studies[$ii]);
+                    $nsamples = $line[2];
+                    $id = preg_replace("/.*id=(.*).txt$/", "\\1", $line[0]);
+                    $name = str_replace("_", " ", $line[0]);
+                    $name = preg_replace("/id=.*.txt$/", "", $name);
+                    $methods = join(", ", array_slice($line, 3, count($line)) );
+                    echo ("<option label='{$name}'>${methods}|{$id}|{$nsamples}</option>");
+                }
                 ?>
             </select>
-            <?php
-            if ($return != 0) {
-                echo("<p>An error occured while listing the studies (RETURN STATUS: $return)</p>");
-            }
-            ?>
             <!--or <input type="file" id="study_file">-->
             <p id="cbiolink"></p>
             </fieldset>

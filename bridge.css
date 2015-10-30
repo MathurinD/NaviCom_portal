@@ -209,7 +209,8 @@ legend {
 }
 
 #cbiolink {
-    height: 2em;
+    height: 5em;
+    text-align: left;
 }
 
 .select_help {
