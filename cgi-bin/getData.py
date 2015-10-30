@@ -47,6 +47,7 @@ else:
         nc = NaviCom()
         attachNaviCell(nc, url, session_id)
         nc._nv.noticeMessage('', 'Loading', 'NaviCom is using the map to download data<br/>This window will close automatically once the task has been completed', position='middle')
+        nc._nv.flush()
         gmt = rel_dir[:-1] + ".gmt"
         with open(gmt, "w") as ff:
             genes = nc._nv.getHugoList()
@@ -56,6 +57,7 @@ else:
         if not os.path.exists(rel_dir):
             os.makedirs(rel_dir)
         nc._nv.noticeClose('')
+        nc._nv.flush()
     log("gmt: " + str(gmt))
     
     with open(os.devnull, "a") as devnull:
