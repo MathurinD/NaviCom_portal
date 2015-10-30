@@ -162,6 +162,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                 <input type='hidden' value='none' name='perform' id='perform'>
                 <input type="hidden" value="" id="url" name="url">
                 <input type="hidden" value=0 id="id" name="id">
+                <input type="hidden" value="" id="study_id" name="study_id">
             </section>
         </form>
 

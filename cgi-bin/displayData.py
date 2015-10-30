@@ -18,10 +18,7 @@ from helper_cgi import *
 log("Starting the display")
 form = cgi.FieldStorage()
 
-if ("study_selection" in form):
-    study_id = form["study_selection"].value
-else:
-    error("'study_selection' field is not provided")
+study_id = getFormValue(form, "study_id")
 
 if ('url' in form):
     url = form["url"].value

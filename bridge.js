@@ -85,10 +85,17 @@ function log(text, append) {
     console.log(text);
 }
 
+function getStudyId() {
+    var id = document.getElementById("study_selection").value;
+    id = id.split("|")[1].trim();
+    $("#study_id").attr("value", id);
+    return(id);
+}
+
 // Ensure that mandatory inputs are present
 function completeFields() {
     var error = "";
-    var study = document.getElementById("study_selection").value;
+    var study = getStudyId();
     console.log(study);
     if (study == "empty") {
         error += "You have to select a study to be displayed<br/>";
