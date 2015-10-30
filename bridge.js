@@ -71,7 +71,7 @@ function cbiolink() {
         }
         methods = methods.filter(onlyUnique).join(", ");
 
-        cbl.innerHTML = "<a href='http://www.cbioportal.org/index.do?cancer_study_list=" + id + "'>" + scbs.label + "</a>(" + nsamples + " samples) on cBioPortal<br/>Data types available: " + methods;
+        cbl.innerHTML = "<a href='http://www.cbioportal.org/index.do?cancer_study_list=" + id + "'>" + scbs.label + "</a>(" + nsamples + " samples) on cBioPortal<br/><strong>Data types available</strong>: " + methods;
     }
 }
 

@@ -17,6 +17,7 @@
 
             <ul>
                 <li><a href="./tutorial.pdf">NaviCom tutorial</a></li>
+                <li><a href="images/NaviCom_DataDisplayLegend.png">Legend for the display created with NaviCom</a></li>
                 <li><a href="https://github/sysbio-curie/navicom">navicom python module</a></li>
                 <li><a href="./refman.pdf">Documentation for navicom python module</a></li>
                 <li><a href="https://github/sysbio-curie/cBioFetchR">cBioFetchR R package</a></li>
