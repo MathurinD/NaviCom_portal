@@ -18,10 +18,7 @@ from helper_cgi import *
 log("Starting the display")
 form = cgi.FieldStorage()
 
-if ("study_selection" in form):
-    study_id = form["study_selection"].value
-else:
-    error("'study_selection' field is not provided")
+study_id = getFormValue(form, "study_id")
 
 if ('url' in form):
     url = form["url"].value
@@ -57,6 +54,7 @@ zc = getFormValue(form, "zero_color")
 nc = NaviCom(display_config=DisplayConfig(color_gradient=[lc, hc], zero_color=zc))
 attachNaviCell(nc, url, session_id)
 nc._nv.noticeMessage('', 'Loading', 'NaviCom is performing display. It can take up to 10 minutes for big datasets<br/>This window will close automatically once the display is complete', position='middle')
+nc._nv.flush()
 
 try:
     nc.loadData(rel_dir + fname)
@@ -93,6 +91,7 @@ elif (displayMethod == "mRNA"):
 else:
     error("This method of display is not valid")
 nc._nv.noticeClose('')
+nc._nv.flush()
 log('Done')
 print("FNAME: " + url_dir + fname)
 

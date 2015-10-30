@@ -37,13 +37,41 @@ function getRequest(url, success, error) {
     return req;
 }
 
+function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+}
+
 function cbiolink() {
-    cbl = document.getElementById("cbiolink");
-    cbs = document.getElementById("study_selection");
+    var cbl = document.getElementById("cbiolink");
+    var cbs = document.getElementById("study_selection");
     if (cbs.value == "empty") {
         cbl.innerHTML = "";
     } else {
-        cbl.innerHTML = "<a href='http://www.cbioportal.org/index.do?cancer_study_list=" + cbs.value + "'>" + cbs.children[cbs.selectedIndex].innerHTML + "</a> on cBioPortal";
+        var scbs = cbs.children[cbs.selectedIndex];
+        var ss = scbs.innerHTML.split("|");
+        var id = ss[1];
+        var nsamples = ss[2];
+        var raw_methods = ss[0].split(" ");
+        console.log(raw_methods);
+        var methods = Array()
+        for (var ii=0; ii<raw_methods.length; ii++) {
+            met = raw_methods[ii].toLowerCase();
+            if (met.search(/mirna/) != -1) {
+            } else if (met.search(/rna/) != -1) {
+                methods.push("Expression");
+            } else if (met.search(/cna/) != -1 || met.search(/gistic/) != -1) {
+                methods.push("Copy Number");
+            } else if (met.search(/mutation/) != -1) {
+                methods.push("Mutations");
+            } else if (met.search("rppa") != -1 || met.search(/prot/) != -1) {
+                methods.push("Proteomics");
+            } else if (met.search(/methylation/) != -1) {
+                methods.push("Methylation");
+            }
+        }
+        methods = methods.filter(onlyUnique).join(", ");
+
+        cbl.innerHTML = "<a href='http://www.cbioportal.org/index.do?cancer_study_list=" + id + "'>" + scbs.label + "</a>(" + nsamples + " samples) on cBioPortal<br/><strong>Data types available</strong>: " + methods;
     }
 }
 
@@ -57,10 +85,17 @@ function log(text, append) {
     console.log(text);
 }
 
+function getStudyId() {
+    var id = document.getElementById("study_selection").value;
+    id = id.split("|")[1].trim();
+    $("#study_id").attr("value", id);
+    return(id);
+}
+
 // Ensure that mandatory inputs are present
 function completeFields() {
     var error = "";
-    var study = document.getElementById("study_selection").value;
+    var study = getStudyId();
     console.log(study);
     if (study == "empty") {
         error += "You have to select a study to be displayed<br/>";

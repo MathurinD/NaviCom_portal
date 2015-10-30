@@ -30,7 +30,6 @@ header {
 
 header img {
     border-radius: 10px;
-    margin: 15px;
 }
 
 nav {
@@ -51,8 +50,18 @@ nav a {
     text-decoration: none;
 }
 
+nav ul {
+    display: inline-block;
+    margin-left: 20%;
+}
+
 nav ul li {
     display: inline;
+}
+
+#navicom_icon {
+    float: right;
+    margin-top: -5px;
 }
 
 footer {
@@ -65,7 +74,7 @@ footer a {
 
 .img {
     text-align: center;
-    margin-top: 5px;
+    margin: 5px;
 }
 
 .img img {
@@ -209,7 +218,8 @@ legend {
 }
 
 #cbiolink {
-    height: 2em;
+    height: 5em;
+    text-align: left;
 }
 
 .select_help {
