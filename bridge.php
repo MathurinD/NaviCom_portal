@@ -44,7 +44,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
             </legend><br/><br/>
             <select id="study_selection" name="study_selection" onchange="cbiolink();">
                 <?php
-                $studies = file("/scratch/navicom/old_all_studies.txt");
+                $studies = file("/scratch/navicom/all_studies.txt");
                 for ($ii=0; $ii < count($studies); $ii++) {
                     $line = preg_split("/ /", $studies[$ii]);
                     $nsamples = $line[2];
@@ -52,7 +52,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                     $name = str_replace("_", " ", $line[0]);
                     $name = preg_replace("/id=.*.txt$/", "", $name);
                     $methods = join(", ", array_slice($line, 3, count($line)) );
-                    echo ("<option label='{$name}'>${methods}|{$id}|{$nsamples}</option>");
+                    echo ("<option value='${methods}|{$id}|{$nsamples}'>${name}</option>");
                 }
                 ?>
             </select>

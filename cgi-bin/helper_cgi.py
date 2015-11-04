@@ -23,9 +23,10 @@ def print_headers():
     print("Content-type: text/plain;charset=utf-8\n\n")
 
 def log(log_entry):
-    with open("/bioinfo/pipelines/navicom/dev/html/navicom_log", "a") as ff:
-        ff.write(time.strftime("%H:%M %d/%m/%Y", time.localtime()) + " ")
-        ff.write(str(log_entry) + "\r\n")
+    pass
+#    with open("/bioinfo/pipelines/navicom/dev/html/navicom_log", "a") as ff:
+#        ff.write(time.strftime("%H:%M %d/%m/%Y", time.localtime()) + " ")
+#        ff.write(str(log_entry) + "\r\n")
 
 def processURL(url):
     if ( re.search("acsn.curie.fr/navicell/maps/(cellcycle|emtcellmobility|dnarepair|survival|apoptosis|acsn)", url) ):

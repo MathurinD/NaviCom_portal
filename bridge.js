@@ -44,17 +44,17 @@ function onlyUnique(value, index, self) {
 function cbiolink() {
     var cbl = document.getElementById("cbiolink");
     var cbs = document.getElementById("study_selection");
-    if (cbs.value == "empty") {
+    if (cbs.children[cbs.selectedIndex] == "empty") {
         cbl.innerHTML = "";
     } else {
         var scbs = cbs.children[cbs.selectedIndex];
-        var ss = scbs.innerHTML.split("|");
+        var ss = scbs.value.split("|");
         var id = ss[1];
         var nsamples = ss[2];
         var raw_methods = ss[0].split(" ");
         console.log(raw_methods);
         var methods = Array()
-        for (var ii=0; ii<raw_methods.length; ii++) {
+        for (var ii=0; ii < raw_methods.length; ii++) {
             met = raw_methods[ii].toLowerCase();
             if (met.search(/mirna/) != -1) {
             } else if (met.search(/rna/) != -1) {
@@ -71,7 +71,7 @@ function cbiolink() {
         }
         methods = methods.filter(onlyUnique).join(", ");
 
-        cbl.innerHTML = "<a href='http://www.cbioportal.org/index.do?cancer_study_list=" + id + "'>" + scbs.label + "</a>(" + nsamples + " samples) on cBioPortal<br/><strong>Data types available</strong>: " + methods;
+        cbl.innerHTML = "<a href='http://www.cbioportal.org/index.do?cancer_study_list=" + id + "'>" + scbs.label + "</a> (" + nsamples + " samples) on cBioPortal<br/><strong>Data types available</strong>: " + methods;
     }
 }
 
