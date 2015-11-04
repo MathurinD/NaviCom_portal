@@ -51,7 +51,7 @@ else:
 hc = getFormValue(form, "high_color")
 lc = getFormValue(form, "low_color")
 zc = getFormValue(form, "zero_color")
-nc = NaviCom(display_config=DisplayConfig(color_gradient=[lc, hc], zero_color=zc))
+nc = NaviCom(display_config=DisplayConfig(color_gradient=[lc, hc], zero_color=zc, step_count=3))
 attachNaviCell(nc, url, session_id)
 nc._nv.noticeMessage('', 'Loading', 'NaviCom is performing display. It can take up to 10 minutes for big datasets<br/>This window will close automatically once the display is complete', position='middle')
 nc._nv.flush()
