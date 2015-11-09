@@ -113,27 +113,31 @@
                         <td>all data available for a given dataset</td>
                     </tr>
                     <tr>
-                        <td>Triple data display</td>
+                        <td>Mutations and genomic data</td>
                         <td>expression-map staining / copy number-heat map / mutations-glyph 1</td>
                     </tr>
                     <tr>
-                        <td>Double data display	1</td>
+                        <td>Expression and copy number</td>
                         <td>expression-maps staining / copy number-heat map</td>
                     </tr>
                     <tr>
-                        <td>Double data display 2</td>
+                        <td>Expression and mutations</td>
                         <td>expression-maps staining / mutations-glyph 1</td>
                     </tr>
                     <tr>
-                        <td>Double data display 3</td>
-                        <td>expression-maps staining / methylation-glyph 3</td>
+                        <td>Expression and methylation</td>
+                        <td>expression-maps staining / methylation-glyph 2</td>
                     </tr>
                     <tr>
-                        <td>Double data display 4</td>
+                        <td>Expression and miRNA</td>
+                        <td>expression-maps staining / miRNA-glyph 3</td>
+                    </tr>
+                    <tr>
+                        <td>Expression and proteomics</td>
                         <td>expression-maps staining / proteome-glyph 4</td>
                     </tr>
                     <tr>
-                        <td>Single display</td>
+                        <td>Expression</td>
                         <td>expression-map staining</td>
                     </tr>
                 </table>
