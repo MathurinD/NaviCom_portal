@@ -122,7 +122,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                 <legend>Display configuration
                 <a href="./tutorial.php#help_color_selection"><img class="select_help" alt="Question mark" title="Colors to use for the map staining and heatmaps" src="./images/question-mark.png"></a>
                 </legend><br/><br/>
-                <table>
+                <table id="color_selection_table">
                     <tr>
                         <td><label for="high_color" class="colsel">Color for highest values:</label></td>
 
