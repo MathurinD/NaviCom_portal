@@ -135,6 +135,7 @@ function navicom_error(e, e2, error) {
     log("Error: " + error);
     if (error != "Gateway Time-out ") {
         log("<span style='color: red;'>Error: </span>" + e.responseText);
+        log("<span style='font-weight: bold; color: red'>An 'internal server error' may appear, please ignore it, the display should be available in NaviCell in a moment</span>", true);
     }
 }
 
@@ -191,7 +192,7 @@ function getData(one_more, url, session_id) {
 function displayData() {
     var form = document.getElementById("nc_config");
     $("#perform").attr("value", "display");
-    showSpinner('Displaying data...<br/>It will take from 30 seconds up to 10 minutes for big datasets')
+    showSpinner('Displaying data...<br/>It will take from 30 seconds up to 10 minutes for big datasets<br/>')
     $.ajax ("./cgi-bin/displayData.py", {
         async: true,
         cache: false,

@@ -11,7 +11,7 @@ def error(error_text):
 def return_error(error_text):
     print("Status: 500 Internal Server Error\n\n")
     print(error_text)
-    print("<a href='tutorial.html#help_errors'>(More informations)</a>")
+    print("<a href='tutorial.php#help_errors'>(More informations)</a>")
     sys.exit(0)
 
 def print_dl_headers(fname="data.txt"):

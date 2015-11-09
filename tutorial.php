@@ -14,7 +14,7 @@
 
     <section>
     <p>
-        This documentation has a <a href="tutorial.pdf">pdf version</a>.
+        This documentation also exists as a <a href="tutorial.pdf">pdf version</a> or a <a href="NaviCom_tutorial.docx">docx version</a>.
     </p>
     </section>
 
@@ -185,6 +185,31 @@
                 <strong>Gateway TimeOut</strong>: wait a few minutes and try again<br/>
                 <span class="meaning">the requested data were not cached yet, and were too big to be downloaded in less than 5 minutes.</span>
             </p>
+
+            <h3>Application examples</h3>
+
+            <center>
+                <img img src="images/tutorial/Adrenocortical_Carcinoma_92_samples_CellCycle_Expression_mutations.png" alt="Organisation of the NaviCom service" width='50%'/>
+            </center>
+            <center>
+                <img img src="images/tutorial/Adrenocortical_Carcinoma_92_samples_CellCycle_Expression_mutations_zoom.png" alt="Organisation of the NaviCom service" width='30%'/>
+            </center>
+            <center>
+                Adrenocortical Carcinoma "Expression and mutations"<br/>
+                <em>expression-map staining / mutations-blue triangle</em>
+            </center>
+
+            <p>
+            </p>
+
+            <center>
+                <img img src="images/tutorial/Adrenocortical_Carcinoma_92_samples_CellCycle_triple.png" alt="Organisation of the NaviCom service" width='50%'/>
+            </center>
+            <center>
+                Adrenocortical Carcinoma "Mutations and genomic data"<br/>
+                <em>expression-map staining / copy number-heat map/ mutations-blue triangle</em>
+            </center>
+
         </section>
 
     <?php
