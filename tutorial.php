@@ -114,23 +114,23 @@
                     </tr>
                     <tr>
                         <td>Triple data display</td>
-                        <td>expression-map staining/ copy number-heat map/ mutations-glyph 1</td>
+                        <td>expression-map staining / copy number-heat map / mutations-glyph 1</td>
                     </tr>
                     <tr>
                         <td>Double data display	1</td>
-                        <td>expression-maps staining/ copy number-heat map</td>
+                        <td>expression-maps staining / copy number-heat map</td>
                     </tr>
                     <tr>
                         <td>Double data display 2</td>
-                        <td>expression-maps staining/ mutations-glyph 1</td>
+                        <td>expression-maps staining / mutations-glyph 1</td>
                     </tr>
                     <tr>
                         <td>Double data display 3</td>
-                        <td>expression-maps staining/ methylation-glyph 3</td>
+                        <td>expression-maps staining / methylation-glyph 3</td>
                     </tr>
                     <tr>
                         <td>Double data display 4</td>
-                        <td>expression-maps staining/ proteome-glyph 4</td>
+                        <td>expression-maps staining / proteome-glyph 4</td>
                     </tr>
                     <tr>
                         <td>Single display</td>
