@@ -52,7 +52,11 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                     $name = str_replace("_", " ", $line[0]);
                     $name = preg_replace("/id=.*.txt$/", "", $name);
                     $methods = join(", ", array_slice($line, 3, count($line)) );
-                    echo ("<option value='${methods}|{$id}|{$nsamples}'>${name}</option>");
+                    if (preg_match("/Adrenocortical Carcinoma/", $name)) {
+                        echo ("<option value='${methods}|{$id}|{$nsamples}' selected>${name}</option>");
+                    } else {
+                        echo ("<option value='${methods}|{$id}|{$nsamples}'>${name}</option>");
+                    }
                 }
                 ?>
             </select>
@@ -88,23 +92,20 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
             <br/>
             <input type="text" title="URL of a NaviCell map" id="map_url" placeholder="Alternative map URL (ex: https://navicell.curie.fr/navicell/maps/ewing/master/)"/>
             </fieldset>
-            <!-- TODO input fields to specify local data or another map -->
 
             <fieldset>
             <legend for="display_selection">Display modes
                 <a href="tutorial.php#help_display_mode"><img class="select_help" alt="Question mark" title="Method from navicom to use to display data" src="./images/question-mark.png"></a>
             </legend><br/>
             <select id="display_selection" name="display_selection">
-                <!--<option value="displayOmics" title="Display on omics data available in the dataset">Omics display</option>-->
                 <option value="completeExport" title="Export all data available for the dataset to  NaviCell"></option>
-                <option value="completeDisplay" title="A dense display with as many data as possible displayed on the map" selected>Complete display</option>
-                <!--<option value="displayMethylome" title="Display methylation data on top of RNA data">Focus on methylation and gene expression</option>-->
-                <!--<option value="displayMutations" title="Display mutations data as glyph on top of CNA data">Focus on mutations and copy number alteration</option>-->
+                <option value="completeDisplay" title="A dense display with as many data as possible displayed on the map">Complete display</option>
                 <option value="mutAndGenes" title="Display mutations as glyph with gene expression as map staining and copy number as heatmap">Mutations and genomic data</option>
+                <option value="mRNAandCNA" title="Display copy number as heatmap and gene expression as map staining">Expression and copy number</option>
                 <option value="mRNAandMut" title="Display mutations as glyph and gene expression as map staining" selected>Expression and mutations</option>
-                <option value="mRNAandProt" title="Display proteomics data as glyphs and gene expression as map staining">Expression and proteomics</option>
-                <option value="mRNAandmiRNA" title="Display miRNA data as glyphs and gene expression as map staining">Expression and miRNA</option>
                 <option value="mRNAandMeth" title="Display methylation data as glyphs and gene expression as map staining">Expression and methylation</option>
+                <option value="mRNAandmiRNA" title="Display miRNA data as glyphs and gene expression as map staining">Expression and miRNA</option>
+                <option value="mRNAandProt" title="Display proteomics data as glyphs and gene expression as map staining">Expression and proteomics</option>
                 <option value="mRNA" title="Display expression data as map stainnig">Expression</option>
             </select>
             <br/>
@@ -112,11 +113,6 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
             <br/>
             <button id="completeExport" type="button">Export the dataset to NaviCell</button> and perform the visualisation manually.
             </fieldset>
-
-            <!--<fieldset id="samples_selection">-->
-                <!--<legend></legend>-->
-                <!--Choose groups to display-->
-            <!--</fieldset>-->
 
             <fieldset>
                 <legend>Display configuration
