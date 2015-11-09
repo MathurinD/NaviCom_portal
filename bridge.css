@@ -74,10 +74,20 @@ footer a {
 
 .img {
     text-align: center;
-    margin: 5px;
+    margin: auto;
 }
 
 .img img {
+    width: 80%;
+}
+
+img.inline {
+    height: 2em;
+    position: relative;
+    margin-bottom: -0.5em;
+}
+
+img.img {
     width: 80%;
 }
 
@@ -158,6 +168,18 @@ fieldset {
 }
 
 table {
+    text-align: left;
+    width: 80%;
+    margin-left: 15%;
+}
+
+table.center {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+
+#color_selection_table {
     text-align: center;
     width: 60%;
     background: rgb(200, 200, 200);
@@ -234,4 +256,24 @@ legend {
 
 .small {
     font-size: 0.8em;
+}
+
+.note {
+    font-style: italic;
+}
+
+.note:before {
+    content: "NOTE: ";
+}
+
+.meaning {
+    font-style: italic;
+}
+
+.meaning:before {
+    content: "Meaning: ";
+}
+
+.center {
+    text-align: center;
 }
