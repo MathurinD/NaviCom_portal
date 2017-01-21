@@ -107,7 +107,9 @@ function completeFields() {
 
     // Selection of the NaviCell map
     log("Connecting to the NaviCell session");
-    var map = document.getElementById("map_selection").value;
+    var map = document.getElementById("map_selection");
+    var map_modules = map.options[map.selectedIndex].parentElement.label;
+    map = map.value;
     var map_navicell = document.getElementById("map_navicell").value;
     var map_bis = document.getElementById("map_url").value;
 
@@ -117,7 +119,11 @@ function completeFields() {
     } else if (map_navicell != "") {
         url = "https://navicell.curie.fr/navicell/maps/" + map_navicell + "/master/index.php"
     } else {
-        url = "https://acsn.curie.fr/navicell/maps/" + map + "/master/index.php";
+        if (map_modules != "" && map_modules != undefined) {
+            url = "https://acsn.curie.fr/navicell/maps/" + map_modules + "/" + map + "/index.php";
+        } else {
+            url = "https://acsn.curie.fr/navicell/maps/" + map + "/master/index.php";
+        }
     }
     url = url.replace(/\/$/, "/index.php");
     url = url.replace(/.html$/, ".php");
