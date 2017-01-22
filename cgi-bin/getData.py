@@ -66,6 +66,12 @@ else:
 
 log("Data generated")
 
+if ('patient' in form and form['patient'].value!=""):
+    patient = form['patient'].value
+    errors = str( subprocess.Popen(["./patient_data.R", study, patient, url_dir], stdout=os.devnull, stderr=subprocess.PIPE).communicate() )
+    log(errors)
+    study = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "_" + patient + "\.txt'").readlines()
+
 print_dl_headers(study)
 #print("FNAME: /scratch/navicom/" + study)
 print("FNAME: " + url_dir + study)

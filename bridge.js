@@ -57,6 +57,7 @@ function cbiolink() {
         for (var ii=0; ii < raw_methods.length; ii++) {
             met = raw_methods[ii].toLowerCase();
             if (met.search(/mirna/) != -1) {
+                methods.push("miRNA");
             } else if (met.search(/rna/) != -1) {
                 methods.push("Expression");
             } else if (met.search(/cna/) != -1 || met.search(/gistic/) != -1) {
@@ -72,6 +73,14 @@ function cbiolink() {
         methods = methods.filter(onlyUnique).join(", ");
 
         cbl.innerHTML = "<a href='http://www.cbioportal.org/index.do?cancer_study_list=" + id + "'>" + scbs.label + "</a> (" + nsamples + " samples) on cBioPortal<br/><strong>Data types available</strong>: " + methods;
+
+        var patients = ss[3].split(" ");
+        var cbp = document.getElementById("patient");
+        cbp.innerHTML = "<option value='' name=''></option>";
+        for (var pid=0; pid < patients.length; pid++) {
+            pp = patients[pid];
+            cbp.innerHTML += "<option value=" + pp + " name=" + pp + ">" + pp + "</option>";
+        }
     }
 }
 

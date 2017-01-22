@@ -52,16 +52,22 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                     $name = str_replace("_", " ", $line[0]);
                     $name = preg_replace("/id=.*.txt$/", "", $name);
                     $methods = join(", ", array_slice($line, 3, count($line)) );
+                    $ii++;
+                    $patients = $studies[$ii];
                     if (preg_match("/Adrenocortical Carcinoma/", $name)) {
-                        echo ("<option value='${methods}|{$id}|{$nsamples}' selected>${name}</option>");
+                    echo ("<option value='${methods}|{$id}|{$nsamples}|{$patients}' selected>${name}</option>");
                     } else {
-                        echo ("<option value='${methods}|{$id}|{$nsamples}'>${name}</option>");
+                        echo ("<option value='${methods}|{$id}|{$nsamples}|{$patients}'>${name}</option>");
                     }
                 }
                 ?>
             </select>
             <!--or <input type="file" id="study_file">-->
             <p id="cbiolink"></p>
+            Patients:
+            <select id="patient" name="patient">
+                <option value="" name=""></option>
+            </select>
             </fieldset>
 
             <fieldset>
@@ -75,71 +81,71 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                 <option value="emtcellmotility" title="Epithelial-to-mesenchymal transition and cell mobitility map">EMT and cell mobility map</option>
                 <option value="cellcycle" title="Cell cycle map" selected>Cell cycle map</option>
                 <option value="dnarepair" title="DNA repair map">DNA repair map</option>
-				<optgroup label="---- Modules ----">
-				<optgroup label="apoptosis">
-					<option value="AKT_MTOR">AKT_MTOR</option>
-					<option value="APOPTOSIS_GENES">APOPTOSIS_GENES</option>
-					<option value="CASPASES">CASPASES</option>
-					<option value="HIF1">HIF1</option>
-					<option value="MITOCH_METABOLISM">MITOCH_METABOLISM</option>
-					<option value="MOMP_REGULATION">MOMP_REGULATION</option>
-					<option value="TNF_RESPONSE">TNF_RESPONSE</option>
-				</optgroup>
-				<optgroup label="survival">
-					<option value="HEDGEHOG">HEDGEHOG</option>
-					<option value="MAPK">MAPK</option>
-					<option value="PI3K_AKT_MTOR">PI3K_AKT_MTOR</option>
-					<option value="WNT_CANONICAL">WNT_CANONICAL</option>
-					<option value="WNT_NON_CANONICAL">WNT_NON_CANONICAL</option>
-				</optgroup>
-				<optgroup label="emtcellmotility">
-					<option value="CELL_CELL_ADHESIONS">CELL_CELL_ADHESIONS</option>
-					<option value="ECM">ECM (Extra Cellular Matrix)</option>
-					<option value="CYTOSKELETON_POLARITY">CYTOSKELETON_POLARITY</option>
-					<option value="EMT_REGULATORS">EMT_REGULATORS</option>
-					<option value="CELL_MATRIX_ADHESIONS">CELL_MATRIX_ADHESIONS</option>
-					<option value="CELL_CELL_ADHESIONS">CELL_CELL_ADHESIONS</option>
-				</optgroup>
-				<optgroup label="cellcycle">
-					<option value="APC">APC</option>
-					<option value="APOPTOSIS_ENTRY">APOPTOSIS_ENTRY</option>
-					<option value="CDC25">CDC25</option>
-					<option value="CYCLINA">CYCLINA</option>
-					<option value="CYCLINB">CYCLINB</option>
-					<option value="CYCLINC">CYCLINC</option>
-					<option value="CYCLIND">CYCLIND</option>
-					<option value="CYCLINE">CYCLINE</option>
-					<option value="CYCLINH">CYCLINH</option>
-					<option value="E2F1">E2F1</option>
-					<option value="E2F4">E2F4</option>
-					<option value="E2F6">E2F6</option>
-					<option value="INK4">INK4</option>
-					<option value="P21CIP">P21CIP</option>
-					<option value="P27KIP">P27KIP</option>
-					<option value="RB">RB</option>
-					<option value="WEE">WEE</option>
-				</optgroup>
-				<optgroup label="dnarepair">
-					<option value="BER">BER (Base excision repair)</option>
-					<option value="DR">DR</option>
-					<option value="FANCONI">FANCONI</option>
-					<option value="G1_CC_PHASE">G1_CC_PHASE</option>
-					<option value="G1_S_CHECKPOINT">G1_S_CHECKPOINT</option>
-					<option value="G2_CC_PHASE">G2_CC_PHASE</option>
-					<option value="G2_M_CHECKPOINT">G2_M_CHECKPOINT</option>
-					<option value="HR">HR</option>
-					<option value="M_CC_PHASE">M_CC_PHASE</option>
-					<option value="MMEJ">MMEJ</option>
-					<option value="MMR">MMR</option>
-					<option value="NER">NER (Nucleotide excision repair)</option>
-					<option value="NHEJ">NHEJ</option>
-					<option value="S_CC_PHASE">S_CC_PHASE</option>
-					<option value="S_PHASE_CHECKPOINT">S_PHASE_CHECKPOINT</option>
-					<option value="SPINDLE_CHECKPOINT">SPINDLE_CHECKPOINT</option>
-					<option value="SSA">SSA (Single-strang annealing)</option>
-					<option value="TLS">TLS (Translesion synthesis)</option>
-				</optgroup>
-				</optgroup>
+                <optgroup label="---- Modules ----">
+                <optgroup label="apoptosis">
+                    <option value="AKT_MTOR">AKT_MTOR</option>
+                    <option value="APOPTOSIS_GENES">APOPTOSIS_GENES</option>
+                    <option value="CASPASES">CASPASES</option>
+                    <option value="HIF1">HIF1</option>
+                    <option value="MITOCH_METABOLISM">MITOCH_METABOLISM</option>
+                    <option value="MOMP_REGULATION">MOMP_REGULATION</option>
+                    <option value="TNF_RESPONSE">TNF_RESPONSE</option>
+                </optgroup>
+                <optgroup label="survival">
+                    <option value="HEDGEHOG">HEDGEHOG</option>
+                    <option value="MAPK">MAPK</option>
+                    <option value="PI3K_AKT_MTOR">PI3K_AKT_MTOR</option>
+                    <option value="WNT_CANONICAL">WNT_CANONICAL</option>
+                    <option value="WNT_NON_CANONICAL">WNT_NON_CANONICAL</option>
+                </optgroup>
+                <optgroup label="emtcellmotility">
+                    <option value="CELL_CELL_ADHESIONS">CELL_CELL_ADHESIONS</option>
+                    <option value="ECM">ECM (Extra Cellular Matrix)</option>
+                    <option value="CYTOSKELETON_POLARITY">CYTOSKELETON_POLARITY</option>
+                    <option value="EMT_REGULATORS">EMT_REGULATORS</option>
+                    <option value="CELL_MATRIX_ADHESIONS">CELL_MATRIX_ADHESIONS</option>
+                    <option value="CELL_CELL_ADHESIONS">CELL_CELL_ADHESIONS</option>
+                </optgroup>
+                <optgroup label="cellcycle">
+                    <option value="APC">APC</option>
+                    <option value="APOPTOSIS_ENTRY">APOPTOSIS_ENTRY</option>
+                    <option value="CDC25">CDC25</option>
+                    <option value="CYCLINA">CYCLINA</option>
+                    <option value="CYCLINB">CYCLINB</option>
+                    <option value="CYCLINC">CYCLINC</option>
+                    <option value="CYCLIND">CYCLIND</option>
+                    <option value="CYCLINE">CYCLINE</option>
+                    <option value="CYCLINH">CYCLINH</option>
+                    <option value="E2F1">E2F1</option>
+                    <option value="E2F4">E2F4</option>
+                    <option value="E2F6">E2F6</option>
+                    <option value="INK4">INK4</option>
+                    <option value="P21CIP">P21CIP</option>
+                    <option value="P27KIP">P27KIP</option>
+                    <option value="RB">RB</option>
+                    <option value="WEE">WEE</option>
+                </optgroup>
+                <optgroup label="dnarepair">
+                    <option value="BER">BER (Base excision repair)</option>
+                    <option value="DR">DR</option>
+                    <option value="FANCONI">FANCONI</option>
+                    <option value="G1_CC_PHASE">G1_CC_PHASE</option>
+                    <option value="G1_S_CHECKPOINT">G1_S_CHECKPOINT</option>
+                    <option value="G2_CC_PHASE">G2_CC_PHASE</option>
+                    <option value="G2_M_CHECKPOINT">G2_M_CHECKPOINT</option>
+                    <option value="HR">HR</option>
+                    <option value="M_CC_PHASE">M_CC_PHASE</option>
+                    <option value="MMEJ">MMEJ</option>
+                    <option value="MMR">MMR</option>
+                    <option value="NER">NER (Nucleotide excision repair)</option>
+                    <option value="NHEJ">NHEJ</option>
+                    <option value="S_CC_PHASE">S_CC_PHASE</option>
+                    <option value="S_PHASE_CHECKPOINT">S_PHASE_CHECKPOINT</option>
+                    <option value="SPINDLE_CHECKPOINT">SPINDLE_CHECKPOINT</option>
+                    <option value="SSA">SSA (Single-strang annealing)</option>
+                    <option value="TLS">TLS (Translesion synthesis)</option>
+                </optgroup>
+                </optgroup>
             </select>
             <br/>
             or
