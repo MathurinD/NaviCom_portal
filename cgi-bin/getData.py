@@ -71,7 +71,7 @@ if ('patient' in form and form['patient'].value!=""):
     with open(os.devnull, "a") as devnull:
     	errors = str( subprocess.Popen(["./patient_data.R", study, patient, url_dir], stdout=devnull, stderr=subprocess.PIPE).communicate() )
     log(errors)
-    study = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "_" + patient + "\.txt'").readlines()
+    study = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "_" + patient + "\.txt'").readlines()[0].strip()
 
 print_dl_headers(study)
 #print("FNAME: /scratch/navicom/" + study)
