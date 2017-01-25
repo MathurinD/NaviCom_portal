@@ -68,7 +68,8 @@ log("Data generated")
 
 if ('patient' in form and form['patient'].value!=""):
     patient = form['patient'].value
-    errors = str( subprocess.Popen(["./patient_data.R", study, patient, url_dir], stdout=os.devnull, stderr=subprocess.PIPE).communicate() )
+    with open(os.devnull, "a") as devnull:
+    	errors = str( subprocess.Popen(["./patient_data.R", study, patient, url_dir], stdout=devnull, stderr=subprocess.PIPE).communicate() )
     log(errors)
     study = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "_" + patient + "\.txt'").readlines()
 
