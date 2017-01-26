@@ -2,7 +2,7 @@
 #-*- coding:utf8 -*-
 options(width=1000)
 options("max.print"=1000)
-.libPaths("/bioinfo/pipelines/navicom/dev/html/lib/")
+.libPaths(c(.libPaths(), "/bioinfo/pipelines/navicom/dev/html/lib/"))
 
 library(cBioFetchR)
 

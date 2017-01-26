@@ -1,7 +1,8 @@
 #!/bioinfo/local/build/R/R-3.1.0/bin/Rscript
 #-*- coding:utf8 -*-
-.libPaths("/bioinfo/pipelines/navicom/dev/html/lib/")
+.libPaths(c(.libPaths(), "/bioinfo/pipelines/navicom/dev/html/lib/"))
 library(cBioFetchR)
+library(methods)
 
 arg = commandArgs(trailingOnly=T)
 if (length(arg) < 2) {
@@ -10,12 +11,12 @@ if (length(arg) < 2) {
 target_rep = "/scratch/navicom/"
 if (length(arg) >= 3) {
         target_rep = arg[3]
-        dir.create(target_rep)
+        suppressWarnings(dir.create(target_rep))
 }
 
-obj = importNCViz(arg[1])
+obj = importNCviz(paste0(target_rep, arg[1]))
 for (method in names(obj@nc_data)) {
-obj@nc_data = obj@nc_data[,arg[2], drop=FALSE]
+    obj@nc_data = obj@nc_data[[method]][,arg[2], drop=FALSE]
 }
 obj@annotations = obj@annotations[arg[2],,drop=FALSE]
 obj@cell_type = paste0(obj@cell_type, "_", arg[2])
