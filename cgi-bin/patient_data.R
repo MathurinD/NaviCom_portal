@@ -14,9 +14,9 @@ if (length(arg) >= 3) {
         suppressWarnings(dir.create(target_rep))
 }
 
-obj = importNCviz(paste0(target_rep, arg[1]))
+obj = importNCviz(paste0(target_rep, basename(arg[1])))
 for (method in names(obj@nc_data)) {
-    obj@nc_data = obj@nc_data[[method]][,arg[2], drop=FALSE]
+    obj@nc_data[[method]] = obj@nc_data[[method]][,arg[2], drop=FALSE]
 }
 obj@annotations = obj@annotations[arg[2],,drop=FALSE]
 obj@cell_type = paste0(obj@cell_type, "_", arg[2])

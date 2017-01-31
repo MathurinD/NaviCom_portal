@@ -58,8 +58,7 @@ else:
     log("gmt: " + str(gmt))
     
     with open(os.devnull, "a") as devnull:
-        errors = str( subprocess.Popen(["./getData.R", study_id, "id="+study_id, url_dir, gmt], stdout=devnull, stderr=subprocess.PIPE).communicate() )
-    log(errors)
+        errors = subprocess.Popen(["./getData.R", study_id, "id="+study_id, url_dir, gmt], stdout=devnull, stderr=subprocess.PIPE).communicate()
     study = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "\.txt'").readlines()
     log(study_id + " " + str(study))
     study = study[0].strip()
@@ -69,8 +68,9 @@ log("Data generated")
 if ('patient' in form and form['patient'].value!=""):
     patient = form['patient'].value
     with open(os.devnull, "a") as devnull:
-    	errors = str( subprocess.Popen(["./patient_data.R", study, patient, url_dir], stdout=devnull, stderr=subprocess.PIPE).communicate() )
-    log(errors)
+        errors = subprocess.Popen(["./patient_data.R", study, patient, url_dir], stdout=devnull, stderr=subprocess.PIPE).communicate()
+    if (len(errors[1]) > 0):
+        return_error(errors[1])
     study = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "_" + patient + "\.txt'").readlines()[0].strip()
 
 print_dl_headers(study)
