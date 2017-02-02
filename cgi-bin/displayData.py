@@ -28,6 +28,8 @@ else:
     error("'url' field is not specified\n")
 
 fname = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "\.txt'").readlines()[0].strip()
+if ('patient' in form and form['patient'].value!=""):
+    study = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "_" + patient + "\.txt'").readlines()[0].strip()
 
 print_headers()
 #log("Loading NaviCom")
