@@ -31,7 +31,7 @@ fname = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "\.txt'").readlin
 patient = ""
 if ('patient' in form and form['patient'].value!=""):
 	patient = form['patient'].value
-    study = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "_" + patient + "\.txt'").readlines()[0].strip()
+    fname = os.popen("ls " + rel_dir + " | grep 'id=" + study_id + "_" + patient + "\.txt'").readlines()[0].strip()
 
 print_headers()
 #log("Loading NaviCom")
