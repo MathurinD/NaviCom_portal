@@ -29,7 +29,7 @@ def log(log_entry):
 #        ff.write(str(log_entry) + "\r\n")
 
 def processURL(url):
-    if ( re.search("acsn.curie.fr/navicell/maps/(cellcycle|emtcellmobility|dnarepair|survival|apoptosis|acsn)", url) ):
+    if ( re.search("acsn.curie.fr", url) ):
         url_dir = 'acsn'
     else:
         url_dir = re.sub('/index.(php|html)$', '', url)
@@ -66,3 +66,5 @@ def attachNaviCell(nc, url, session_id):
     except:
         #error("Could not attach session with id " + str(session_id))
         return_error("Not a NaviCell map (Could not attach the map)")
+
+

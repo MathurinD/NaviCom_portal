@@ -141,6 +141,7 @@ function completeFields() {
     var session_id = "navicom" + String(Math.ceil(Math.random() * 1000000000));
     $("#url").attr("value", url);
     $("#id").attr("value", session_id);
+    log(url)
 
     return(url);
 }

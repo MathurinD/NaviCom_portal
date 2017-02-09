@@ -78,7 +78,7 @@ For more details, see the <a href="./tutorial.php">tutorial</a>.<br/>
                 <option value="acsn" title="The global map of ACSN">ACSN global map</option>
                 <option value="apoptosis" title="Apoptosis and mitochondria metabolism map">Apoptosis map</option>ewing
                 <option value="survival" title="Cell survival map">Cell survival map</option>
-                <option value="emtcellmotility" title="Epithelial-to-mesenchymal transition and cell mobitility map">EMT and cell mobility map</option>
+                <option value="emtcellmotility" title="Epithelial-to-mesenchymal transition and cell mobitility map">EMT and cell motility map</option>
                 <option value="cellcycle" title="Cell cycle map" selected>Cell cycle map</option>
                 <option value="dnarepair" title="DNA repair map">DNA repair map</option>
                 <optgroup label="---- Modules ----">
