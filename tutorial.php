@@ -80,6 +80,11 @@
                             <img src="images/tutorial/NaviCell_collection.png" alt="NaviCell collection map selection screenshot"/>
                         </td>
                     </tr>
+					<tr>
+						<td colspan="2">
+							<img src="images/tutorial/modules_collection.png" alt="Modules map selection screenshot"/>
+						</td>
+					</tr>
                 </table>
                 <span class="note">The NaviCell collection map will only be used if no alternative URL is provided, and the ACSN collection map will only be used if no alternative URL is provided an no NaviCell collection map is selected.</span>
             </p>
